@@ -153,6 +153,10 @@ const instructions_page3 = `
         In each trial, you will first see Option 1 and Option 2 in gray boxes.
         <br>
         <br>
+        <u>Note:</u> in this tutorial, you have to click the "Next" button to see the next bit of information, 
+        but outside of this tutorial, the experiment will automatically move between screens.
+        <br>
+        <br>
     </div>
 `
 

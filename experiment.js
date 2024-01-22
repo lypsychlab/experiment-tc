@@ -48,8 +48,9 @@ const dvs = [
 var score = 0
 var trial_counter = 0
 
-const subject_id = jsPsych.randomization.randomID(10);
-const filename = `${subject_id}.csv`;
+const PROLIFIC_PID = jsPsych.data.getURLVariable("PROLIFIC_PID")
+const subject_id = jsPsych.randomization.randomID(10)
+const filename = `${subject_id}.csv`
 
 jsPsych.data.addProperties({
     subject_id: subject_id
@@ -91,6 +92,7 @@ const prolific_id = {
         {
             prompt: "Please copy and paste your Prolific ID here.",
             name: "prolific_id",
+            placeholder: PROLIFIC_PID,
             required: true
         }
     ],
@@ -217,7 +219,7 @@ const incorrect_response = {
 // transition from instructions to trials
 const move_to_experiment = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: "You answered all comprehension questions correctly. Please click the button below to begin moving through the rounds.<br><br>",
+    stimulus: `You answered all comprehension questions correctly. Please click the button below to begin moving through the rounds.<br><br><u>Reminder:</u> in the tutorial, you had to click the "Next" button to see the next bit of information, but from now on, the experiment will automatically move between screens.<br><br>`,
     choices: ["Begin"],
     data: {
         type_of_trial: "move_to_experiment"
@@ -493,6 +495,12 @@ const debrief = {
     button_html: `<button class="jspsych-btn" onclick="window.open('https://prolific.com', '_blank')">%choice%</button>`,
     data: {
         type_of_trial: "debrief"
+    },
+    on_load: function () {
+        style_jspsych()
+    },
+    on_finish: function (data) {
+        unstyle_jspsych()
     }
 }
 
