@@ -1,0 +1,740 @@
+"rt","stimulus","response","type_of_trial","trial_type","trial_index","time_elapsed","internal_node_id","subject_id","prolific_id","view_history","question_order","exact","round","truth","choice","spread","valence","consequence","truth_bn","truth_lk","choose_dif","age","gender","race_ethnicity","income","education","ses","party","politics","religiosity","understand","confusing","annoying","issues","other_feedback","result","success"
+"1974","
+    <p style=""text-align:left;"">
+        You are being asked to participate in a research study titled 
+        ""Truth in Games."" You were selected to participate in 
+        this project because you are an adult over age 18. This study is sponsored by 
+        Boston College and the John Templeton Foundation.
+    </p>
+    <p style=""text-align: left;"">
+        The purpose of this study is to understand how we weigh information what other people say. 
+        This study will be conducted through this online survey. The survey 
+        should take you XX minutes to complete. There are no direct 
+        benefits to you, but you may feel gratified knowing that you helped further 
+        the scholarly work in this research area, and you will be compensated $X.XX for your 
+        participation. There are no costs to you associated with your participation.
+    </p>
+    <p style=""text-align: left;"">
+        The researchers do not believe participation would entail any risks or 
+        discomforts beyond those ordinarily encountered in everyday life.
+    </p>
+    <p style=""text-align: left;"">
+        This Principal Investigator, Dr. Liane Young, will exert all reasonable efforts 
+        to keep your responses and your identity confidential. We will not maintain 
+        within our research data any information that uniquely identifies you, such as 
+        your name, location, or Internet Protocol (IP) address. In any report we 
+        publish, we will not include any information that will make it possible to 
+        identify a participant. Data that includes user-ID information will be collected 
+        and stored via third-party servers like Qualtrics or Pavlovia. Data collected 
+        from the experiment will be coded to remove your name or any other 
+        personal identifiers. All records will be secured in a locked cabinet in our lab. 
+        The Institutional Review Board at Boston College and internal Boston College 
+        auditors may review the research records. State or federal laws or court 
+        orders may also require that information from research study records be 
+        released. Otherwise, the researchers will not release to others any 
+        information that could indicate your identity unless you give your permission, 
+        or unless the researchers become legally required to do so.
+    </p>
+    <p style=""text-align: left;"">
+        Although the survey will not prompt you directly to identify yourself by 
+        name, email address or the like, the survey will include several demographic 
+        items that would prompt you to provide certain demographic information, 
+        such as your age, gender, ethnicity, education level and the like. In 
+        combination, responses to such questions could suggest your identity. 
+        Regardless, please know that the researchers will make no purposeful effort 
+        to discern your identity based on such information. Additionally, please note 
+        that you may opt to leave any such questions blank.
+    </p>
+    <p style=""text-align: left;"">
+        Your participation is voluntary. If you choose not to participate it will not 
+        affect your relations with Boston College. Some questions on the survey, 
+        such as comprehension questions, may be required in order to complete the 
+        survey and receive compensation. However, you may still choose to end 
+        your participation in the study at any time. If you have questions or concerns 
+        concerning this research you may contact the Principal Investigator at 
+        <a href=""tel:16175520240"">+1 (617) 552-0240</a>
+        or <a href=""mailto:liane.young@bc.edu"">liane.young@bc.edu</a>. If you have 
+        questions about your rights as a research participant, you may contact the
+        Office for Research Protections, Boston College, at 
+        <a href=""tel:16175524778"">+1 (617) 552-4778</a> or
+        <a href=""mailto:irb@bc.edu"">irb@bc.edu</a>.
+    </p>
+    <p style=""text-align: left;"">
+        If you agree to the statements above and agree to participate in this study,
+        please select the ""Consent given"" button below to continue.
+    </p>
+","1","consent","html-button-response","0","1976","0.0-0.0","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"1802","","{""prolific_id"":""a""}","prolific","survey-text","1","3779","0.0-1.0-0.0","l1aku5fx25","a","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"3001","","","instructions","instructions","2","6780","0.0-1.0-1.0","l1aku5fx25","","[{""page_index"":0,""viewing_time"":746},{""page_index"":1,""viewing_time"":142},{""page_index"":2,""viewing_time"":627},{""page_index"":3,""viewing_time"":143},{""page_index"":4,""viewing_time"":134},{""page_index"":5,""viewing_time"":582},{""page_index"":6,""viewing_time"":626}]","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"4613","","{""Q0"":""One exact amount of money and one approximate amount of money."",""Q1"":""Yes"",""Q2"":""For each round, a different random participant provided an approximate value of the exact amount."",""Q3"":""The amount the previous player gained based on their choice.""}","comprehension","survey-multi-choice","3","11395","0.0-1.0-2.0","l1aku5fx25","","","[0,1,2,3]","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"710","You answered all comprehension questions correctly. Please click the button below to begin moving through the rounds.<br><br>","0","move_to_experiment","html-button-response","4","12110","0.0-2.0","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"741","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 77 coins
+            </div>
+            <div id=""payment-2"" class=""payment"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","claims","html-keyboard-response","5","12853","0.0-3.0-0.0","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"148","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 77 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","choice","html-keyboard-response","6","13001","0.0-3.0-1.0","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"141","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 77 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+    "," ","payouts","html-keyboard-response","7","13144","0.0-3.0-2.0","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"140","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 77 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+        <div id=""outcome-wrapper"" class=""wrapper"">
+            The chosen option made you <span style=""background-color: lightgreen""> 11 more coins</span> than the other option would have made you.
+            <br>
+            <br>
+            Your score: 0 coins <span style=""font-weight: bold""> &rarr; </span> 88 coins
+        </div>
+    "," ","report","html-keyboard-response","8","13285","0.0-3.0-3.0","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"4261","","{""Q0"":""True"",""Q1"":""Completely false"",""Q2"":""No""}","measures","survey-multi-choice","9","17548","0.0-3.0-4.0","l1aku5fx25","","","[0,1,2]","77","100","88","round","11","1","0","1","0","0","","","","","","","","","","","","","","","",""
+"","","","attention","survey-multi-choice","10","17552","0.0-3.0-5.0","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"744","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 99 coins
+            </div>
+            <div id=""payment-2"" class=""payment"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","claims","html-keyboard-response","11","18297","0.0-3.0-0.1","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"137","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 99 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","choice","html-keyboard-response","12","18435","0.0-3.0-1.1","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"135","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 99 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+    "," ","payouts","html-keyboard-response","13","18571","0.0-3.0-2.1","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"126","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 99 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+        <div id=""outcome-wrapper"" class=""wrapper"">
+            The chosen option made you <span style=""background-color: tomato""> 11 fewer coins</span> than the other option would have made you.
+            <br>
+            <br>
+            Your score: 88 coins <span style=""font-weight: bold""> &rarr; </span> 176 coins
+        </div>
+    "," ","report","html-keyboard-response","14","18696","0.0-3.0-3.1","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"3210","","{""Q0"":""True"",""Q1"":""Completely false"",""Q2"":""No""}","measures","survey-multi-choice","15","21908","0.0-3.0-4.1","l1aku5fx25","","","[0,1,2]","99","100","88","round","-11","-1","-11","1","0","0","","","","","","","","","","","","","","","",""
+"","","","attention","survey-multi-choice","16","21911","0.0-3.0-5.1","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"311","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 973 coins
+            </div>
+            <div id=""payment-2"" class=""payment"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+            </div>
+        </div>
+    "," ","claims","html-keyboard-response","17","22223","0.0-3.0-0.2","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"149","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment chosen"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 973 coins
+            </div>
+            <div id=""payment-2"" class=""payment "">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+            </div>
+        </div>
+    "," ","choice","html-keyboard-response","18","22373","0.0-3.0-1.2","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"136","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment chosen"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 973 coins
+            </div>
+            <div id=""payment-2"" class=""payment "">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+                <br>
+                <br>
+                EXACT VALUE: 958 coins
+            </div>
+        </div>
+    "," ","payouts","html-keyboard-response","19","22510","0.0-3.0-2.2","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"146","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment chosen"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 973 coins
+            </div>
+            <div id=""payment-2"" class=""payment "">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+                <br>
+                <br>
+                EXACT VALUE: 958 coins
+            </div>
+        </div>
+        <div id=""outcome-wrapper"" class=""wrapper"">
+            The chosen option made you <span style=""background-color: lightgreen""> 15 more coins</span> than the other option would have made you.
+            <br>
+            <br>
+            Your score: 176 coins <span style=""font-weight: bold""> &rarr; </span> 1149 coins
+        </div>
+    "," ","report","html-keyboard-response","20","22656","0.0-3.0-3.2","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"3235","","{""Q0"":""True"",""Q1"":""Completely false"",""Q2"":""No""}","measures","survey-multi-choice","21","25893","0.0-3.0-4.2","l1aku5fx25","","","[0,1,2]","973","1000","958","exact","-15","-1","0","1","0","0","","","","","","","","","","","","","","","",""
+"","","","attention","survey-multi-choice","22","25897","0.0-3.0-5.2","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"354","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 995 coins
+            </div>
+            <div id=""payment-2"" class=""payment"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+            </div>
+        </div>
+    "," ","claims","html-keyboard-response","23","26252","0.0-3.0-0.3","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"139","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment chosen"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 995 coins
+            </div>
+            <div id=""payment-2"" class=""payment "">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+            </div>
+        </div>
+    "," ","choice","html-keyboard-response","24","26391","0.0-3.0-1.3","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"143","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment chosen"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 995 coins
+            </div>
+            <div id=""payment-2"" class=""payment "">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+                <br>
+                <br>
+                EXACT VALUE: 958 coins
+            </div>
+        </div>
+    "," ","payouts","html-keyboard-response","25","26535","0.0-3.0-2.3","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"132","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment chosen"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 995 coins
+            </div>
+            <div id=""payment-2"" class=""payment "">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+                <br>
+                <br>
+                EXACT VALUE: 958 coins
+            </div>
+        </div>
+        <div id=""outcome-wrapper"" class=""wrapper"">
+            The chosen option made you <span style=""background-color: lightgreen""> 37 more coins</span> than the other option would have made you.
+            <br>
+            <br>
+            Your score: 1149 coins <span style=""font-weight: bold""> &rarr; </span> 2144 coins
+        </div>
+    "," ","report","html-keyboard-response","26","26668","0.0-3.0-3.3","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"3574","","{""Q0"":""True"",""Q1"":""Mostly false"",""Q2"":""Yes""}","measures","survey-multi-choice","27","30244","0.0-3.0-4.3","l1aku5fx25","","","[0,1,2]","995","1000","958","exact","-37","-1","0","1","1","1","","","","","","","","","","","","","","","",""
+"","","","attention","survey-multi-choice","28","30248","0.0-3.0-5.3","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"258","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 94 coins
+            </div>
+            <div id=""payment-2"" class=""payment"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","claims","html-keyboard-response","29","30507","0.0-3.0-0.4","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"141","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 94 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","choice","html-keyboard-response","30","30649","0.0-3.0-1.4","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"144","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 94 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+    "," ","payouts","html-keyboard-response","31","30793","0.0-3.0-2.4","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"135","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 94 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+        <div id=""outcome-wrapper"" class=""wrapper"">
+            The chosen option made you <span style=""background-color: tomato""> 6 fewer coins</span> than the other option would have made you.
+            <br>
+            <br>
+            Your score: 2144 coins <span style=""font-weight: bold""> &rarr; </span> 2232 coins
+        </div>
+    "," ","report","html-keyboard-response","32","30930","0.0-3.0-3.4","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"3655","","{""Q0"":""True"",""Q1"":""Completely true"",""Q2"":""Yes""}","measures","survey-multi-choice","33","34587","0.0-3.0-4.4","l1aku5fx25","","","[0,1,2]","94","100","88","round","-6","-1","-6","1","6","1","","","","","","","","","","","","","","","",""
+"3618","","Somewhat false","attention","survey-multi-choice","34","38208","0.0-3.0-5.4","l1aku5fx25","","","[0]","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"356","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 91 coins
+            </div>
+            <div id=""payment-2"" class=""payment"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","claims","html-keyboard-response","35","38568","0.0-3.0-0.5","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"286","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 91 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","choice","html-keyboard-response","36","38855","0.0-3.0-1.5","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"139","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 91 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+    "," ","payouts","html-keyboard-response","37","38994","0.0-3.0-2.5","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"475","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 91 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+        <div id=""outcome-wrapper"" class=""wrapper"">
+            The chosen option made you <span style=""background-color: tomato""> 3 fewer coins</span> than the other option would have made you.
+            <br>
+            <br>
+            Your score: 2232 coins <span style=""font-weight: bold""> &rarr; </span> 2320 coins
+        </div>
+    "," ","report","html-keyboard-response","38","39470","0.0-3.0-3.5","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"3294","","{""Q0"":""True"",""Q1"":""Completely false"",""Q2"":""No""}","measures","survey-multi-choice","39","42767","0.0-3.0-4.5","l1aku5fx25","","","[0,1,2]","91","100","88","round","-3","-1","-3","1","0","0","","","","","","","","","","","","","","","",""
+"","","","attention","survey-multi-choice","40","42770","0.0-3.0-5.5","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"221","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 979 coins
+            </div>
+            <div id=""payment-2"" class=""payment"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+            </div>
+        </div>
+    "," ","claims","html-keyboard-response","41","42994","0.0-3.0-0.6","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"145","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment chosen"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 979 coins
+            </div>
+            <div id=""payment-2"" class=""payment "">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+            </div>
+        </div>
+    "," ","choice","html-keyboard-response","42","43140","0.0-3.0-1.6","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"131","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment chosen"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 979 coins
+            </div>
+            <div id=""payment-2"" class=""payment "">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+                <br>
+                <br>
+                EXACT VALUE: 958 coins
+            </div>
+        </div>
+    "," ","payouts","html-keyboard-response","43","43272","0.0-3.0-2.6","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"145","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment chosen"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 979 coins
+            </div>
+            <div id=""payment-2"" class=""payment "">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 1000 coins
+                <br>
+                <br>
+                EXACT VALUE: 958 coins
+            </div>
+        </div>
+        <div id=""outcome-wrapper"" class=""wrapper"">
+            The chosen option made you <span style=""background-color: lightgreen""> 21 more coins</span> than the other option would have made you.
+            <br>
+            <br>
+            Your score: 2320 coins <span style=""font-weight: bold""> &rarr; </span> 3299 coins
+        </div>
+    "," ","report","html-keyboard-response","44","43418","0.0-3.0-3.6","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"3849","","{""Q0"":""True"",""Q1"":""Completely false"",""Q2"":""No""}","measures","survey-multi-choice","45","47269","0.0-3.0-4.6","l1aku5fx25","","","[0,1,2]","979","1000","958","exact","-21","-1","0","1","0","0","","","","","","","","","","","","","","","",""
+"","","","attention","survey-multi-choice","46","47272","0.0-3.0-5.6","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"232","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 82 coins
+            </div>
+            <div id=""payment-2"" class=""payment"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","claims","html-keyboard-response","47","47505","0.0-3.0-0.7","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"165","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 82 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","choice","html-keyboard-response","48","47673","0.0-3.0-1.7","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"144","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 82 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+    "," ","payouts","html-keyboard-response","49","47817","0.0-3.0-2.7","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"146","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 82 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+        <div id=""outcome-wrapper"" class=""wrapper"">
+            The chosen option made you <span style=""background-color: lightgreen""> 6 more coins</span> than the other option would have made you.
+            <br>
+            <br>
+            Your score: 3299 coins <span style=""font-weight: bold""> &rarr; </span> 3387 coins
+        </div>
+    "," ","report","html-keyboard-response","50","47964","0.0-3.0-3.7","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"3488","","{""Q0"":""True"",""Q1"":""Completely false"",""Q2"":""No""}","measures","survey-multi-choice","51","51452","0.0-3.0-4.7","l1aku5fx25","","","[0,1,2]","82","100","88","round","6","1","0","1","0","0","","","","","","","","","","","","","","","",""
+"","","","attention","survey-multi-choice","52","51456","0.0-3.0-5.7","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"254","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment"">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 85 coins
+            </div>
+            <div id=""payment-2"" class=""payment"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","claims","html-keyboard-response","53","51711","0.0-3.0-0.8","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"146","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 85 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+            </div>
+        </div>
+    "," ","choice","html-keyboard-response","54","51856","0.0-3.0-1.8","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"145","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 85 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+    "," ","payouts","html-keyboard-response","55","52003","0.0-3.0-2.8","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"152","
+        <div id=""payments-wrapper"" class=""wrapper"">
+            <div id=""payment-1"" class=""payment "">
+                <u>Option 1</u>
+                <br>
+                EXACT VALUE: 85 coins
+            </div>
+            <div id=""payment-2"" class=""payment chosen"">
+                <u>Option 2</u>
+                <br>
+                <i class=""fa-solid fa-comment-dots""></i> APPROXIMATE VALUE: 100 coins
+                <br>
+                <br>
+                EXACT VALUE: 88 coins
+            </div>
+        </div>
+        <div id=""outcome-wrapper"" class=""wrapper"">
+            The chosen option made you <span style=""background-color: lightgreen""> 3 more coins</span> than the other option would have made you.
+            <br>
+            <br>
+            Your score: 3387 coins <span style=""font-weight: bold""> &rarr; </span> 3475 coins
+        </div>
+    "," ","report","html-keyboard-response","56","52155","0.0-3.0-3.8","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"3035","","{""Q0"":""True"",""Q1"":""Completely false"",""Q2"":""Yes""}","measures","survey-multi-choice","57","55192","0.0-3.0-4.8","l1aku5fx25","","","[0,1,2]","85","100","88","round","3","1","0","1","0","1","","","","","","","","","","","","","","","",""
+"","","","attention","survey-multi-choice","58","55197","0.0-3.0-5.8","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
+"26872","","{""age"":""23"",""gender"":""man"",""unlisted_gender"":"""",""white"":""on"",""other_race_ethnicity"":""on"",""other_race_ethnicity_text"":""test"",""income"":""30000"",""education"":""4"",""ses"":""8"",""party"":""dem"",""other_party_text"":"""",""politics"":""0"",""religiosity"":""0""}","demographics","survey-html-form","59","82072","0.0-4.0","l1aku5fx25","","","","","","","","","","","","","","23","man","[""white"",""other_race_ethnicity"",""test""]","30000","4","8","dem","0","0","","","","","","",""
+"10299","","{""understandable"":""0"",""confusing"":"" no"",""annoying"":""no "",""issues"":""no "",""other_feedback"":""it was great ""}","feedback","survey-html-form","60","92374","0.0-5.0-0.0","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","0"," no","no ","no ","it was great ","",""
+"","","","save_data","pipe","61","93308","0.0-5.0-1.0","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","{""error"":""DATA_COLLECTION_NOT_ACTIVE"",""message"":""Data collection is not active for this experiment""}","false"
+"1828","
+<div style=""text-align: left; width: 60%; margin: auto"">
+    <strong>What was this study about?</strong>
+    <br>
+    Our research lab is broadly interested in moral psychologyâ€”that is, what motivates people to engage in prosocial and ethical behavior. 
+    Below are some of the specific questions we are currently exploring:
+    <ul>
+        <li>What determines whether an ambiguous claim is true or false?</li>
+        <li>How can we motivate people to engage in gender affirming practices?</li>
+        <li>What makes people curious to know about morally bad agents</li>
+        <li>How can we motivate people to act in ways that help future generations?</li>
+    </ul>
+    <br>
+    <strong>Why does it matter?</strong>
+    <br>
+    Your participation helps us answer these questions, which in turn has implications for public figures, policy, and law. 
+    For instance, our lab has collaborated with legal scholars to work to minimize the role of implicit bias in criminal justice proceedings.
+    We are committed to sharing our research findings in ways that are accessible and relevant to the public.
+    <br>
+    <br>    
+    <strong>How to contact us:</strong>
+    <br>
+    Feel free to visit our <a href=""https://moralitylab.bc.edu/"" target=""_blank"">website</a> to learn more about our research.
+    If you have any concerns or questions about the study you just completed, please reach out to the lab at lypsychlab@gmail.com.
+    <br>
+    <br>
+    <strong>To learn more about your rights as a research participant:</strong>
+    <br>
+    If you have any concerns about research-related ethics or harm, or would like to learn more about the ethical constraints under which this study was conducted, 
+    please contact the Boston College Office for Research Protections at irb@bc.edu or 617-552-4778.
+    <br>
+    <br>
+    <i>Thank you for your participation!</i>
+    <br>
+    <br>
+</div>
+","0","debrief","html-button-response","62","95140","0.0-5.0-2.0","l1aku5fx25","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
