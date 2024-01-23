@@ -35,9 +35,7 @@ const consent_html = `
         within our research data any information that uniquely identifies you, such as 
         your name, location, or Internet Protocol (IP) address. In any report we 
         publish, we will not include any information that will make it possible to 
-        identify a participant. Data that includes user-ID information will be collected 
-        and stored via third-party servers like Qualtrics or Pavlovia. Data collected 
-        from the experiment will be coded to remove your name or any other 
+        identify a participant. Data collected from the experiment will be coded to remove your name and any other 
         personal identifiers. All records will be secured in a locked cabinet in our lab. 
         The Institutional Review Board at Boston College and internal Boston College 
         auditors may review the research records. State or federal laws or court 
@@ -780,6 +778,8 @@ const demographics_questions = `
         The higher up you are on this ladder, the closer you are to the people at the very top. 
         The lower you are, the closer you are to the people at the very bottom.
         <img src="Macarthur_subjective_SES" alt="Socio-economic ladder">
+        <br>
+        Please indicate below where you would place yourself on this ladder.
         <div>
             <input name="ses" type="radio" id="1" value="1" />
             <label for="1">1 (bottom rung)</label>
@@ -946,19 +946,21 @@ const debrief_html = `
 <div style="text-align: left; width: 60%; margin: auto">
     <strong>What was this study about?</strong>
     <br>
-    Our research lab is broadly interested in moral psychology—that is, what motivates people to engage in prosocial and ethical behavior. 
-    Below are some of the specific questions we are currently exploring:
-    <ul>
-        <li>What determines whether an ambiguous claim is true or false?</li>
-        <li>How can we motivate people to engage in gender affirming practices?</li>
-        <li>What makes people curious to know about morally bad agents</li>
-        <li>How can we motivate people to act in ways that help future generations?</li>
-    </ul>
+    In this study, we were trying to better understand how people decide what information should qualify as true or false.
+    <br>
+    <br>
+    It's important to note that the decisions you saw from a "previous player" were not in fact from a previous player. 
+    We chose which option was selected in each round that you observed. We also determined what the approximate amount shown in Option 2 was. 
+    These approximations were not in fact determined by previous participants.
+    <br>
+    <br>
+    We said that these two features were determined by previous participants because we're interested in how people evaluate the truth of information in real-world scenarios.
+    We wanted our participants in this study to believe that they were seeing approximations that real people had created and the downstream decisions that real people made based on those approximations.
+    <br>
     <br>
     <strong>Why does it matter?</strong>
     <br>
-    Your participation helps us answer these questions, which in turn has implications for public figures, policy, and law. 
-    For instance, our lab has collaborated with legal scholars to work to minimize the role of implicit bias in criminal justice proceedings.
+    Your participation helps us answer research questions, which in turn has implications for public figures, policy, and law.
     We are committed to sharing our research findings in ways that are accessible and relevant to the public.
     <br>
     <br>    

@@ -3,7 +3,6 @@ const jsPsych = initJsPsych(
     {
         on_finish: function() {
             jsPsych.data.displayData()
-            jsPsych.data.get().localSave('csv','last_data.csv');
         }
     }
 )
@@ -48,9 +47,7 @@ const dvs = [
 var score = 0
 var trial_counter = 0
 
-const PROLIFIC_PID = jsPsych.data.getURLVariable("PROLIFIC_PID")
 const subject_id = jsPsych.randomization.randomID(10)
-const filename = `${subject_id}.csv`
 
 jsPsych.data.addProperties({
     subject_id: subject_id
@@ -64,7 +61,7 @@ const consent = {
     stimulus: consent_html,
     choices: ["Consent not given", "Consent given"],
     button_html: [
-        `<button class="jspsych-btn" onclick="window.open('https://prolific.com', '_blank')">%choice%</button>`,
+        `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=C3CL8FM2', '_blank')">%choice%</button>`,
         `<button class="jspsych-btn">%choice%</button>`
     ],
     on_load: function() {
@@ -76,7 +73,7 @@ const consent = {
         // if no consent, send back to prolific with no consent code
         if (data.response == 0) {
             jsPsych.endExperiment(
-                "You chose not to consent to participate. <br>If you were not automatically directed back to Prolific, please go back and enter the completion code XXXXXX."
+                "You chose not to consent to participate.<br>If you were not automatically directed back to Prolific, please go back and enter the completion code C3CL8FM2."
             )
         }
     },
@@ -92,7 +89,6 @@ const prolific_id = {
         {
             prompt: "Please copy and paste your Prolific ID here.",
             name: "prolific_id",
-            placeholder: PROLIFIC_PID,
             required: true
         }
     ],
@@ -232,7 +228,7 @@ const trial_claims = {
     stimulus: function() {
         return claims_stimulus(jsPsych.timelineVariable("exact"), jsPsych.timelineVariable("round"))
     },
-    choices: [" "],
+    choices: "NO_KEYS",
     trial_duration: 3000,
     on_load: function() {
         style_jspsych()
@@ -250,7 +246,7 @@ const trial_outcome_choice = {
     stimulus: function() {
         return outcome_stimulus_choice(jsPsych.timelineVariable("exact"), jsPsych.timelineVariable("round"), jsPsych.timelineVariable("choice"))
     },
-    choices: [" "],
+    choices: "NO_KEYS",
     trial_duration: 3000,
     on_load: function() {
         style_jspsych()
@@ -268,7 +264,7 @@ const trial_outcome_payouts = {
     stimulus: function() {
         return outcome_stimulus_payouts(jsPsych.timelineVariable("exact"), jsPsych.timelineVariable("round"), jsPsych.timelineVariable("truth"), jsPsych.timelineVariable("choice"))
     },
-    choices: [" "],
+    choices: "NO_KEYS",
     trial_duration: 3000,
     on_load: function() {
         style_jspsych()
@@ -286,7 +282,7 @@ const trial_outcome_report = {
     stimulus: function() {
         return outcome_stimulus_report(jsPsych.timelineVariable("exact"), jsPsych.timelineVariable("round"), jsPsych.timelineVariable("truth"), jsPsych.timelineVariable("choice"))
     },
-    choices: [" "],
+    choices: "NO_KEYS",
     trial_duration: 3000,
     on_load: function() {
         style_jspsych()
@@ -412,6 +408,9 @@ const demographics = {
     html: function() {
         return demographics_questions
     },
+    data: {
+        type_of_trial: "demographics"
+    },
     on_load: function() {
         style_jspsych()
     },
@@ -443,9 +442,6 @@ const demographics = {
 
         data.politics = data.response.politics
         data.religiosity = data.response.religiosity
-    },
-    data: {
-        type_of_trial: "demographics"
     }
 }
 
@@ -475,11 +471,33 @@ const feedback = {
     }
 }
 
-const save_data = {
+const save_data_trials = {
     type: jsPsychPipe,
     action: "save",
     experiment_id: "u9KgpAqC5lYb",
-    filename: filename,
+    filename: `${subject_id}_0.csv`,
+    data_string: () => jsPsych.data.get().csv(),
+    data: {
+        type_of_trial: "save_data"
+    }
+}
+
+const save_data_demo = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "u9KgpAqC5lYb",
+    filename: `${subject_id}_1.csv`,
+    data_string: () => jsPsych.data.get().csv(),
+    data: {
+        type_of_trial: "save_data"
+    }
+}
+
+const save_data_final = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "u9KgpAqC5lYb",
+    filename: `${subject_id}_2.csv`,
     data_string: () => jsPsych.data.get().csv(),
     data: {
         type_of_trial: "save_data"
@@ -491,21 +509,26 @@ const debrief = {
     stimulus: function() {
         return debrief_html
     },
-    choices: ["Back to Prolific"],
-    button_html: `<button class="jspsych-btn" onclick="window.open('https://prolific.com', '_blank')">%choice%</button>`,
+    choices: ["Continue"],
     data: {
         type_of_trial: "debrief"
     },
     on_load: function () {
-        style_jspsych()
+        document.getElementById("jspsych-content").style.margin = "50px auto"
     },
-    on_finish: function (data) {
-        unstyle_jspsych()
+    on_finish: function () {
+        document.getElementById("jspsych-content").style.margin = "auto"
     }
 }
 
-const outro = {
-    timeline: [feedback, save_data, debrief]
+const back_to_prolific = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: "Thank you for participating in this study. Your response has been recorded.<br><br>If the button below does not automatically enter your completion code, please copy and paste this code into Prolific: C1NCJLU4.<br><br>",
+    choices: ["Back to Prolific"],
+    button_html: `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=C1NCJLU4', '_blank')">%choice%</button>`,
+    data: {
+        type_of_trial: "back_to_prolific"
+    }
 }
 
 // define and run the experiment
@@ -516,8 +539,13 @@ experiment.push(
     intro,                  // prolific id, instructions, comprehension
     move_to_experiment,
     trials,
+    save_data_trials,
     demographics,
-    outro                   // feedback, save_data, debrief screen
+    save_data_demo,
+    debrief,
+    feedback,
+    save_data_final,
+    back_to_prolific
 )
 
 jsPsych.run(experiment)
