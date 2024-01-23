@@ -50,7 +50,8 @@ var trial_counter = 0
 const subject_id = jsPsych.randomization.randomID(10)
 
 jsPsych.data.addProperties({
-    subject_id: subject_id
+    subject_id: subject_id,
+    list: which_list
 })
 
 /* INDIVIDUAL PAGES */
@@ -112,7 +113,8 @@ const instructions = {
             instructions_page4,
             instructions_page5,
             instructions_page6,
-            instructions_page7
+            instructions_page7,
+            instructions_page8
             )
 
         return instructions_pages
@@ -215,7 +217,7 @@ const incorrect_response = {
 // transition from instructions to trials
 const move_to_experiment = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: `You answered all comprehension questions correctly. Please click the button below to begin moving through the rounds.<br><br><u>Reminder:</u> in the tutorial, you had to click the "Next" button to see the next bit of information, but from now on, the experiment will automatically move between screens.<br><br>`,
+    stimulus: `You answered all comprehension questions correctly. Please click the button below to begin moving through the rounds.<br><br><u>Reminder:</u> in the tutorial, you had to click the "Next" button to see the next bit of information, <br>but from now on, the screen will automatically update to show you what the player chose.<br><br>`,
     choices: ["Begin"],
     data: {
         type_of_trial: "move_to_experiment"
