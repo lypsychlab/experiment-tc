@@ -1,11 +1,5 @@
 // initialize jsPsych
-const jsPsych = initJsPsych(
-    {
-        on_finish: function() {
-            jsPsych.data.displayData()
-        }
-    }
-)
+const jsPsych = initJsPsych({})
 
 // data pipe variables
 const subject_id = jsPsych.randomization.randomID(10);
