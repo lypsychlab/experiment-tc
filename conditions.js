@@ -1,192 +1,131 @@
-const list1 = [
-  {
-    "choice": "round",
-    "round": 100,
-    "truth": 88,
-    "exact": 94,
-    "spread": -6,
-    "valence": -1,
-    "consequential": 1,
-    "consequence": -6
-  },
-  {
-    "choice": "round",
-    "round": 100,
-    "truth": 88,
-    "exact": 99,
-    "spread": -11,
-    "valence": -1,
-    "consequential": 1,
-    "consequence": -11
-  },
-  {
-    "choice": "round",
-    "round": 100,
-    "truth": 88,
-    "exact": 91,
-    "spread": -3,
-    "valence": -1,
-    "consequential": 1,
-    "consequence": -3
-  },
-  {
-    "choice": "exact",
-    "round": 1000,
-    "truth": 958,
-    "exact": 995,
-    "spread": -37,
-    "valence": -1,
-    "consequential": 0,
-    "consequence": 0
-  },
-  {
-    "choice": "exact",
-    "round": 1000,
-    "truth": 958,
-    "exact": 979,
-    "spread": -21,
-    "valence": -1,
-    "consequential": 0,
-    "consequence": 0
-  },
-  {
-    "choice": "exact",
-    "round": 1000,
-    "truth": 958,
-    "exact": 973,
-    "spread": -15,
-    "valence": -1,
-    "consequential": 0,
-    "consequence": 0
-  },
-  {
-    "choice": "round",
-    "round": 100,
-    "truth": 88,
-    "exact": 82,
-    "spread": 6,
-    "valence": 1,
-    "consequential": 0,
-    "consequence": 0
-  },
-  {
-    "choice": "round",
-    "round": 100,
-    "truth": 88,
-    "exact": 77,
-    "spread": 11,
-    "valence": 1,
-    "consequential": 0,
-    "consequence": 0
-  },
-  {
-    "choice": "round",
-    "round": 100,
-    "truth": 88,
-    "exact": 85,
-    "spread": 3,
-    "valence": 1,
-    "consequential": 0,
-    "consequence": 0
-  }
+// REPORTER
+const reporter_conditions = [
+    {
+        "percent": 31
+    },
+    {
+        "percent": 35
+    },
+    {
+        "percent": 46
+    },
+    {
+        "percent": 50
+    },
+    {
+        "percent": 54
+    },
+    {
+        "percent": 61
+    },
+    {
+        "percent": 64
+    },
+    {
+        "percent": 69
+    }
 ]
 
-const list2 = [
-  {
-    "choice": "exact",
-    "round": 100,
-    "truth": 88,
-    "exact": 94,
-    "spread": -6,
-    "valence": -1,
-    "consequential": 0,
-    "consequence": 0
-  },
-  {
-    "choice": "exact",
-    "round": 100,
-    "truth": 88,
-    "exact": 99,
-    "spread": -11,
-    "valence": -1,
-    "consequential": 0,
-    "consequence": 0
-  },
-  {
-    "choice": "exact",
-    "round": 100,
-    "truth": 88,
-    "exact": 91,
-    "spread": -3,
-    "valence": -1,
-    "consequential": 0,
-    "consequence": 0
-  },
-  {
-    "choice": "round",
-    "round": 1000,
-    "truth": 958,
-    "exact": 995,
-    "spread": -37,
-    "valence": -1,
-    "consequential": 1,
-    "consequence": -37
-  },
-  {
-    "choice": "round",
-    "round": 1000,
-    "truth": 958,
-    "exact": 979,
-    "spread": -21,
-    "valence": -1,
-    "consequential": 1,
-    "consequence": -21
-  },
-  {
-    "choice": "round",
-    "round": 1000,
-    "truth": 958,
-    "exact": 973,
-    "spread": -15,
-    "valence": -1,
-    "consequential": 1,
-    "consequence": -15
-  },
-  {
-    "choice": "round",
-    "round": 1000,
-    "truth": 958,
-    "exact": 921,
-    "spread": 37,
-    "valence": 1,
-    "consequential": 0,
-    "consequence": 0
-  },
-  {
-    "choice": "round",
-    "round": 1000,
-    "truth": 958,
-    "exact": 937,
-    "spread": 21,
-    "valence": 1,
-    "consequential": 0,
-    "consequence": 0
-  },
-  {
-    "choice": "round",
-    "round": 1000,
-    "truth": 958,
-    "exact": 943,
-    "spread": 15,
-    "valence": 1,
-    "consequential": 0,
-    "consequence": 0
-  }
+// DECIDER
+var decider_conditions = [
+    {
+        "bet": 0,
+        "outcome": 0,
+        "cons": 0,
+        "valence": "neutral",
+        "gainloss": 0,
+        "error": 6
+    },
+    {
+        "bet": 0,
+        "outcome": 0,
+        "cons": 1,
+        "valence": "positive",
+        "gainloss": 0,
+        "error": 4
+    },
+    {
+        "bet": 0,
+        "outcome": 1,
+        "cons": 0,
+        "valence": "neutral",
+        "gainloss": 0,
+        "error": 4
+    },
+    {
+        "bet": 0,
+        "outcome": 1,
+        "cons": 1,
+        "valence": "negative",
+        "gainloss": 0,
+        "error": 6
+    },
+    {
+        "bet": 1,
+        "outcome": 0,
+        "cons": 0,
+        "valence": "neutral",
+        "gainloss": -1,
+        "error": 6
+    },
+    {
+        "bet": 1,
+        "outcome": 0,
+        "cons": 1,
+        "valence": "negative",
+        "gainloss": -1,
+        "error": 4
+    },
+    {
+        "bet": 1,
+        "outcome": 1,
+        "cons": 0,
+        "valence": "neutral",
+        "gainloss": 1,
+        "error": 4
+    },
+    {
+        "bet": 1,
+        "outcome": 1,
+        "cons": 1,
+        "valence": "positive",
+        "gainloss": 1,
+        "error": 6
+    }
 ]
 
-const lists = [list1, list2]
-const ratios = [0.02, 0.01]
+const ranges = {
+    s: {
+        min: 1,
+        max: 10
+    },
+    m: {
+        min: 11,
+        max: 20
+    },
+    l: {
+        min: 21,
+        max: 30
+    }
+}
 
-const which_list = Math.floor(Math.random() * 2)
+var range_array = ["s", "s", "s", "m", "m", "l", "l", "l"]
 
-const conditions = lists[which_list]
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1))
+        let temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+    }
+    return array
+}
+
+shuffleArray(range_array)
+
+for (let i = 0; i < decider_conditions.length; i++) {
+    let condition = decider_conditions[i]
+    condition.range = range_array[i]
+    condition.buyin = Math.floor(Math.random() * (ranges[condition.range].max - ranges[condition.range].min + 1)) + ranges[condition.range].min
+}
+

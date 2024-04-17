@@ -7,54 +7,58 @@ const jsPsych = initJsPsych(
     }
 )
 
-// define experiment variables
-const correct_responses = {
-    Q0: "One exact amount of money and one approximate amount of money.",
-    Q1: "Yes",
-    Q2: "For each round, a different random participant provided an approximate value of the exact amount.",
-    Q3: "The amount the previous player gained based on their choice."
-}
+// data pipe variables
+const subject_id = jsPsych.randomization.randomID(10);
 
-var last_answers = [null, null, null, null]
-var last_answers_correct = [null, null, null, null]
+// experiment variables
+var earnings = 0
+const estimate_earnings = [5, 4, 3, 2, 1]
 
-const dvs = [
-    {
-        options: [
-            "False",
-            "True"
-        ]
-    },
-    {
-        options: [
-            "Completely false",
-            "Mostly false",
-            "Somewhat false",
-            "Neither true nor false",
-            "Somewhat true",
-            "Mostly true",
-            "Completely true"
-        ]
-    },
-    {
-        options: [
-            "No",
-            "Yes"
-        ]
-    }
+const num_spins = 5
+var pot = 100
+var last_answers = [null, null, null]
+var last_answers_correct = [null, null, null]
+const correct_responses = [
+    "Estimate the percentage of the wheel that is green",
+    "Decide what percentage of the wheel needs to be green in order for the bet to go through",
+    "Only when the Reporter's estimate is greater than or equal to the number the Decider enters"
+]
+const options = [
+    [
+        "Estimate the percentage of the wheel that is black",
+        "Guess what number the Decider will enter",
+        "Estimate the percentage of the wheel that is green",
+        "Guess whether the bet will go through or not"
+    ],
+    [
+        "Decide which color to bet on",
+        "Decide what percentage of the wheel needs to be green in order for the bet to go through",
+        "Decide whether or not the wheel will be spun",
+        "Decide the amount of money at stake for each round"
+    ],
+    [
+        "Every round, regardless of what numbers the Decider and the Reporter enter",
+        "On randomly chosen rounds, regardless of what numbers the Decider and the Reporter enter",
+        "Only when the Reporter's estimate is lower than the number the Decider enters",
+        "Only when the Reporter's estimate is greater than or equal to the number the Decider enters"
+    ]
 ]
 
-var score = 0
-var trial_counter = 0
+var current_minimum
+var current_truth
+var current_report
+var current_rotation
+var current_estimate
+var current_distance
+var reporter_count = 6
 
-const subject_id = jsPsych.randomization.randomID(10)
+const dvs = {
+    manip_check: ["No", "Yes"],
+    truth_bn: ["False", "True"],
+    truth_lk: ["Completely false", "Mostly false", "Somewhat false", "Neither true nor false", "Somewhat true", "Mostly true", "Completely true"],
+}
 
-jsPsych.data.addProperties({
-    subject_id: subject_id,
-    list: which_list
-})
-
-/* INDIVIDUAL PAGES */
+// trials
 
 // consent form
 const consent = {
@@ -62,28 +66,26 @@ const consent = {
     stimulus: consent_html,
     choices: ["Consent not given", "Consent given"],
     button_html: [
-        `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=C3CL8FM2', '_blank')">%choice%</button>`,
+        `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=C1CE3BQK', '_blank')">%choice%</button>`,
         `<button class="jspsych-btn">%choice%</button>`
     ],
-    on_load: function() {
-        style_jspsych()
-    },
     on_finish: function(data) {
-        unstyle_jspsych()
-
         // if no consent, send back to prolific with no consent code
         if (data.response == 0) {
+            document.getElementById("jspsych-content").style.margin = "auto"
+
             jsPsych.endExperiment(
-                "You chose not to consent to participate.<br>If you were not automatically directed back to Prolific, please go back and enter the completion code C3CL8FM2."
+                "You chose not to consent to participate.<br>If you were not automatically directed back to Prolific, please go back and enter the completion code C1CE3BQK."
             )
         }
     },
     data: {
-        type_of_trial: "consent"
+        type_of_trial: "consent",
+        subject_id: subject_id
     }
 }
 
-// prolific id, instructions and comprehension check
+// prolific id, instructions
 const prolific_id = {
     type: jsPsychSurveyText,
     questions: [
@@ -94,106 +96,126 @@ const prolific_id = {
         }
     ],
     data: {
-        type_of_trial: "prolific"
+        type_of_trial: "prolific",
+        subject_id: subject_id
+    },
+    on_load: function() {
+        document.getElementById("jspsych-content").style.margin = "auto"
     },
     on_finish: function(data) {
+        document.getElementById("jspsych-content").style.margin = "50px auto"
+
         data.prolific_id = data.response["prolific_id"]
     }
 }
 
-const instructions = {
+const first_instructions = {
     type: jsPsychInstructions,
     pages: function() {
         var instructions_pages = []
 
         instructions_pages.push(
-            instructions_page1, 
-            instructions_page2, 
+            instructions_page1,
+            instructions_page2,
             instructions_page3,
             instructions_page4,
             instructions_page5,
             instructions_page6,
             instructions_page7,
-            instructions_page8
-            )
+            instructions_page8,
+            instructions_page9,
+            instructions_page10,
+            instructions_page11,
+            instructions_page12
+        )
 
         return instructions_pages
     },
     allow_keys: false,
     show_clickable_nav: true,
-    on_load: function() {
-        style_jspsych()
-    },
-    on_finish: function() {
-        unstyle_jspsych()
-    },
     data: {
-        type_of_trial: "instructions"
+        type_of_trial: "instructions",
+        subject_id: subject_id
+    }
+}
+
+const second_instructions = {
+    type: jsPsychInstructions,
+    pages: function() {
+        var instructions_pages = []
+
+        instructions_pages.push(
+            instructions_page13
+        )
+
+        return instructions_pages
+    },
+    allow_keys: false,
+    show_clickable_nav: true,
+    data: {
+        type_of_trial: "instructions",
+        subject_id: subject_id
+    },
+    on_load: function() {
+        document.getElementById("jspsych-content").style.margin = "50px auto"
     }
 }
 
 const comprehension = {
     type: jsPsychSurveyMultiChoice,
-    preamble: "We know there were a lot of instructions for this study. To make sure you remember all of the details, please complete the following questions:",
+    preamble: `
+        We know there were a lot of rules for this game. 
+        To make sure you remember them, please answer the following questions. 
+        If you need to reference the rules, you can find them <a href="instructions.html" target="_blank">here</a>.
+    `,
     questions: [
         {
-            prompt: "In each round, the previous player had to choose between:",
+            prompt: "What is the Reporter trying to do?",
             options: [
-                "Two approximate amounts of money.",
-                "One exact amount of money and one approximate amount of money.",
-                "One approximate amount of money and the chance to double their money in the next round.",
+                "Estimate the percentage of the wheel that is black",
+                "Guess what number the Decider will enter",
+                "Estimate the percentage of the wheel that is green",
+                "Guess whether the bet will go through or not"
             ],
             required: true
         },
         {
-            prompt: "Did the previous player know which option was exact and which option was approximate?",
+            prompt: "What is the Decider trying to do?",
             options: [
-                "Yes",
-                "No",
+                "Decide which color to bet on",
+                "Decide what percentage of the wheel needs to be green in order for the bet to go through",
+                "Decide whether or not the wheel will be spun",
+                "Decide the amount of money at stake for each round"
             ],
             required: true
         },
         {
-            prompt: "How was the approximate amount of money displayed in each round calculated?",
+            prompt: "When will a bet go through?",
             options: [
-                "The exact amount for each round was rounded to the nearest multiple of ten.",
-                "For each round, a different random participant provided an approximate value of the exact amount.",
-                "It was chosen by a random number generator."
-            ],
-            required: true
-        },
-        {
-            prompt: "Each round, your bonus will increase in proportion to:",
-            options: [
-                "The choices you make.",
-                "An amount chosen by a random number generator.",
-                "The amount the previous player gained based on their choice."
+                "Every round, regardless of what numbers the Decider and the Reporter enter",
+                "On randomly chosen rounds, regardless of what numbers the Decider and the Reporter enter",
+                "Only when the Reporter's estimate is lower than the number the Decider enters",
+                "Only when the Reporter's estimate is greater than or equal to the number the Decider enters"
             ],
             required: true
         }
     ],
-    on_load: function() {
-        style_jspsych()
-    },
     on_finish: function(data) {
-        unstyle_jspsych()
-
-        if (data.response.Q0 == correct_responses.Q0 && data.response.Q1 == correct_responses.Q1 && data.response.Q2 == correct_responses.Q2 && data.response.Q3 == correct_responses.Q3) {
+        if (data.response.Q0 == correct_responses[0] && data.response.Q1 == correct_responses[1] && data.response.Q2 == correct_responses[2]) {
             jsPsych.endCurrentTimeline()
         } else {
             last_answers[0] = data.response.Q0
             last_answers[1] = data.response.Q1
             last_answers[2] = data.response.Q2
-            last_answers[3] = data.response.Q3
 
-            last_answers_correct[0] = data.response.Q0 == correct_responses.Q0
-            last_answers_correct[1] = data.response.Q1 == correct_responses.Q1
-            last_answers_correct[2] = data.response.Q2 == correct_responses.Q2
-            last_answers_correct[3] = data.response.Q3 == correct_responses.Q3
+            last_answers_correct[0] = data.response.Q0 == correct_responses[0]
+            last_answers_correct[1] = data.response.Q1 == correct_responses[1]
+            last_answers_correct[2] = data.response.Q2 == correct_responses[2]
         }
     },
     data: {
-        type_of_trial: "comprehension"
+        type_of_trial: "comprehension",
+        subject_id: subject_id
     }
 }
 
@@ -202,154 +224,200 @@ const incorrect_response = {
     stimulus: function() {
         return incorrect_response_stimulus()
     },
-    choices: ["Back to instructions"],
-    on_load: function() {
-        style_jspsych()
-    },
-    on_finish: function() {
-        unstyle_jspsych()
-    },
+    choices: ["Answer the questions again"],
     data: {
-        type_of_trial: "incorrect_response"
+        type_of_trial: "incorrect_response",
+        subject_id: subject_id
     }
 }
 
-// transition from instructions to trials
-const move_to_experiment = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: `You answered all comprehension questions correctly. Please click the button below to begin moving through the rounds.<br><br><u>Reminder:</u> in the tutorial, you had to click the "Next" button to see the next bit of information, <br>but from now on, the screen will automatically update to show you what the player chose.<br><br>`,
-    choices: ["Begin"],
-    data: {
-        type_of_trial: "move_to_experiment"
-    }
+var comprehension_timeline = []
+
+for (let i = 0; i < 100; i++) {
+    comprehension_timeline.push(comprehension, incorrect_response)
 }
 
-// main trial
-const trial_claims = {
+const comprehension_loop = {
+    timeline: comprehension_timeline
+}
+
+// REPORTER TASK
+const move_to_experiment_reporter = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: function() {
-        return claims_stimulus(jsPsych.timelineVariable("exact"), jsPsych.timelineVariable("round"))
-    },
-    choices: "NO_KEYS",
-    trial_duration: 3000,
+    choices: " ",
+    stimulus: `
+        You answered all the questions correctly.
+        <br>
+        <br>
+        You will now play as the Reporter for 8 rounds.
+        <br>
+        <br>
+        When you are ready, press space to begin.
+    `,
     on_load: function() {
-        style_jspsych()
-    },
-    on_finish: function() {
-        unstyle_jspsych()
+        document.getElementById("jspsych-content").style.margin = "auto"
+
+        reporter_count = 0
     },
     data: {
-        type_of_trial: "claims"
+        type_of_trial: "begin_reporter",
+        subject_id: subject_id
     }
+
 }
 
-const trial_outcome_choice = {
+const begin_reporter = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: function() {
-        return outcome_stimulus_choice(jsPsych.timelineVariable("exact"), jsPsych.timelineVariable("round"), jsPsych.timelineVariable("choice"))
-    },
-    choices: "NO_KEYS",
-    trial_duration: 3000,
+    choices: " ",
+    stimulus: `Press the space bar to see the first wheel.`,
     on_load: function() {
-        style_jspsych()
-    },
-    on_finish: function() {
-        unstyle_jspsych()
+        document.getElementById("jspsych-content").style.margin = "auto"
     },
     data: {
-        type_of_trial: "choice"
+        type_of_trial: "begin_reporter",
+        subject_id: subject_id
     }
 }
 
-const trial_outcome_payouts = {
+const fixation = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: function() {
-        return outcome_stimulus_payouts(jsPsych.timelineVariable("exact"), jsPsych.timelineVariable("round"), jsPsych.timelineVariable("truth"), jsPsych.timelineVariable("choice"))
-    },
     choices: "NO_KEYS",
-    trial_duration: 3000,
+    trial_duration: 1000,
+    stimulus: `
+        <div style="font-size: 30px;">
+            +
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+    `,
     on_load: function() {
-        style_jspsych()
-    },
-    on_finish: function() {
-        unstyle_jspsych()
+        document.getElementById("jspsych-content").style.margin = "auto"
     },
     data: {
-        type_of_trial: "payouts"
+        type_of_trial: "fixation",
+        subject_id: subject_id
     }
 }
 
-const trial_outcome_report = {
+const show_wheel = {
     type: jsPsychHtmlKeyboardResponse,
+    choices: " ",
+    trial_duration: 1000,
     stimulus: function() {
-        return outcome_stimulus_report(jsPsych.timelineVariable("exact"), jsPsych.timelineVariable("round"), jsPsych.timelineVariable("truth"), jsPsych.timelineVariable("choice"))
-    },
-    choices: "NO_KEYS",
-    trial_duration: 3000,
-    on_load: function() {
-        style_jspsych()
-    },
-    on_finish: function() {
-        unstyle_jspsych()
+        return show_wheel_stimulus(jsPsych.timelineVariable("percent"))
     },
     data: {
-        type_of_trial: "report"
+        type_of_trial: "show_wheel",
+        subject_id: subject_id
     }
 }
 
-const trial_outcome_questions = {
-    type: jsPsychSurveyMultiChoice,
-    preamble: function() {
-        let string = outcome_stimulus_report(jsPsych.timelineVariable("exact"), jsPsych.timelineVariable("round"), jsPsych.timelineVariable("truth"), jsPsych.timelineVariable("choice"))
-        string += "<br><hr>"
-
-        return string
-    },
-    questions: function() {
-        return outcome_questions(jsPsych.timelineVariable("round"), jsPsych.timelineVariable("truth"))
-    },
-    on_load: function() {
-        // set jspsych-content styling
-        style_jspsych()
-    },
+const estimate_wheel = {
+    type: jsPsychSurveyHtmlForm,
+    html: `
+        What percentage of the wheel you just saw was green?
+        <br>
+        <br>
+        <input id="estimate" class="percentage-enter" name="estimate" type="number" max="75" min="25" required="true"/>
+        <br>
+        <br>
+    `,
+    autofocus: "estimate",
     on_finish: function(data) {
-        // restore jspsych-content styling
-        unstyle_jspsych()
+        current_estimate = data.response.estimate
+        current_distance = Math.abs(current_estimate - parseInt(jsPsych.timelineVariable("percent")))
 
-        // populate data columns
-        data.truth_bn = dvs[0].options.indexOf(data.response.Q0)
-        data.truth_lk = dvs[1].options.indexOf(data.response.Q1)
-        data.choose_dif = dvs[2].options.indexOf(data.response.Q2)
-
-        // update score
-        let earnings = 0 
-
-        if (jsPsych.timelineVariable("choice") == "round") {
-            earnings = parseInt(jsPsych.timelineVariable("truth"))
-        } else {
-            earnings = parseInt(jsPsych.timelineVariable("exact"))
+        if (current_distance < 5) {
+            earnings += estimate_earnings[current_distance]
         }
 
-        score += earnings
+        data.estimate = data.response.estimate
+        data.distance = current_distance
     },
     data: {
-        type_of_trial: "measures",
-        exact: jsPsych.timelineVariable("exact"),
-        round: jsPsych.timelineVariable("round"),
-        truth: jsPsych.timelineVariable("truth"),
-        choice: jsPsych.timelineVariable("choice"),
-        spread: jsPsych.timelineVariable("spread"),
-        valence: jsPsych.timelineVariable("valence"),
-        consequence: jsPsych.timelineVariable("consequence")
+        type_of_trial: "estimate_wheel",
+        percent: jsPsych.timelineVariable("percent"),
+        subject_id: subject_id
     }
 }
 
+const reporter_feedback = {
+    type: jsPsychHtmlKeyboardResponse,
+    choices: " ",
+    stimulus: function() {
+        return reporter_feedback_stimulus(jsPsych.timelineVariable("percent"))
+    },
+    on_finish: function() {
+        document.getElementById("jspsych-content").style.margin = "50px auto"
+
+        reporter_count += 1
+    },
+    data: {
+        type_of_trial: "reporter_feedback",
+        subject_id: subject_id
+    }
+}
+
+const reporter_task = {
+    timeline: [fixation, show_wheel, estimate_wheel, reporter_feedback],
+    timeline_variables: reporter_conditions,
+    randomize_order: true
+}
+
+const estimate_wheel_prac = {
+    type: jsPsychSurveyHtmlForm,
+    html: `
+        What percentage of the wheel you just saw was green?
+        <br>
+        <br>
+        <input id="estimate" class="percentage-enter" name="estimate" type="number" max="75" min="25" required="true"/>
+        <br>
+        <br>
+    `,
+    autofocus: "estimate",
+    on_finish: function(data) {
+        current_estimate = data.response.estimate
+        current_distance = Math.abs(current_estimate - parseInt(jsPsych.timelineVariable("percent")))
+
+        data.estimate = data.response.estimate
+        data.distance = current_distance
+    },
+    data: {
+        type_of_trial: "estimate_wheel_prac",
+        percent: jsPsych.timelineVariable("percent"),
+        subject_id: subject_id
+    }
+}
+
+const reporter_task_prac = {
+    timeline: [fixation, show_wheel, estimate_wheel_prac, reporter_feedback],
+    timeline_variables: [
+        {
+            "percent": 46
+        },
+        {
+            "percent": 58
+        }
+    ],
+    randomize_order: true
+}
+
+// ATTENTION CHECK
 const attention = {
     type: jsPsychSurveyMultiChoice,
-    preamble: "Sometimes respondents to our surveys are bots rather than real people. We need to remove those responses from our data to make sure our research findings are valid. To help us know who is actually a real person, please ignore the question wording below and select 'Somewhat false.' This is not intended to trick you and will not affect your payment. Thank you!",
+    preamble: `
+        Sometimes respondents to our surveys are bots rather than real people. 
+        We need to remove those responses from our data to make sure our research findings are valid. 
+        To help us know who is actually a real person, please ignore the question wording below and select 'Mostly false.' 
+        This is not intended to trick you and will not affect your payment. Thank you!
+    `,
     questions: [
         {
-            prompt: "How true or false is it to say that 56 is approximately 100?",
+            prompt: "How true or false is it to say that 48 is approximately 50?",
             options: [
                 "Completely false",
                 "Mostly false",
@@ -362,48 +430,211 @@ const attention = {
             required: true
         }
     ],
-    on_load: function() {
-        style_jspsych()
-
-        trial_counter += 1
-        if (trial_counter != 5) {
-            jsPsych.finishTrial()
-        }
-    },
     on_finish: function(data) {
-        unstyle_jspsych()
-
-        // populate data
-        if (typeof data.response != "undefined") {
-            data.response = data.response.Q0
-        }
+        data.response = data.response.Q0
     },
     data: {
-        type_of_trial: "attention"
+        type_of_trial: "attention",
+        subject_id: subject_id
     }
 }
 
-/* MAIN BLOCKS */ 
+// DECIDER TASK
+const move_to_experiment_decider = {
+    type: jsPsychHtmlKeyboardResponse,
+    choices: " ",
+    stimulus: function() {
+        return move_to_decider_stimulus()
+    },
+    on_load: function() {
+        document.getElementById("jspsych-content").style.margin = "auto"
+    },
+    on_finish: function() {
+        document.getElementById("jspsych-content").style.margin = "50px auto"
+        pot = 100
+    },
+    data: {
+        type_of_trial: "begin_reporter",
+        subject_id: subject_id
+    }
 
-// instructions + comprehension check loop
-var intro_timeline = [prolific_id]
-
-for (let i = 0; i < 100; i++) {
-    intro_timeline.push(instructions, comprehension, incorrect_response)
 }
 
-const intro = {
-    timeline: intro_timeline
+const enter_minimum = {
+    type: jsPsychSurveyHtmlForm,
+    html: function() {
+        return minimum_stimulus(jsPsych.timelineVariable("buyin"))
+    },
+    autofocus: "minimum",
+    on_finish: function(data) {
+        current_minimum = parseInt(data.response.minimum)
+        set_global_vars(current_minimum, jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"), jsPsych.timelineVariable("cons"), jsPsych.timelineVariable("error"))
+    },
+    data: {
+        type_of_trial: "enter_minimum",
+        subject_id: subject_id
+    }
 }
 
-// define main trial loop
-const trials = {
-    timeline: [trial_claims, trial_outcome_choice, trial_outcome_payouts, trial_outcome_report, trial_outcome_questions, attention],
-    timeline_variables: conditions,
+const see_report = {
+    type: jsPsychHtmlButtonResponse,
+    choices: ["See this round's wheel"],
+    stimulus: function() {
+        return see_report_stimulus(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"))
+    },
+    data: {
+        type_of_trial: "see_report",
+        subject_id: subject_id
+    }
+}
+
+const see_wheel = {
+    type: jsPsychHtmlButtonResponse,
+    choices: ["Spin the Wheel"],
+    stimulus: function() {
+        return see_wheel_stimulus(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"))
+    },
+    data: {
+        type_of_trial: "see_wheel",
+        subject_id: subject_id
+    }
+}
+
+const spin_wheel = {
+    type: jsPsychHtmlKeyboardResponse,
+    choices: " ",
+    stimulus: function() {
+        return spin_stimulus(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"))
+    },
+    trial_duration: 4500,
+    on_load: function() {
+        setTimeout(function() {
+            document.getElementById("wheel").style.transition = "rotate 4000ms ease-out"
+            document.getElementById("wheel").style.rotate = `${num_spins * 360 + current_rotation}deg`
+        }, 1)
+    },
+    data: {
+        type_of_trial: "spin_wheel",
+        subject_id: subject_id
+    }
+}
+
+const see_outcome = {
+    type: jsPsychSurveyMultiChoice,
+    preamble: function() {
+        return outcome_stimulus(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"))
+    },
+    questions: function() {
+        return outcome_questions()
+    },
+    on_finish: function(data) {
+        update_pot(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"))
+
+        data.manip_check = dvs.manip_check.indexOf(data.response.manip_check)
+        data.truth_bn = dvs.truth_bn.indexOf(data.response.truth_bn)
+        data.truth_lk = dvs.truth_lk.indexOf(data.response.truth_lk)
+        data.minimum = current_minimum
+        data.report = current_report
+        data.truth = current_truth
+    },
+    data: {
+        type_of_trial: "measures",
+        buyin: jsPsych.timelineVariable("buyin"),
+        bet: jsPsych.timelineVariable("bet"),
+        outcome: jsPsych.timelineVariable("outcome"),
+        cons: jsPsych.timelineVariable("cons"),
+        valence: jsPsych.timelineVariable("valence"),
+        error: jsPsych.timelineVariable("error"),
+        gain_loss: jsPsych.timelineVariable("gainloss"),
+        subject_id: subject_id
+    }
+}
+
+const decider_task = {
+    timeline: [enter_minimum, see_report, see_wheel, spin_wheel, see_outcome],
+    timeline_variables: decider_conditions,
     randomize_order: true
 }
 
-// demographics questions
+const see_outcome_prac = {
+    type: jsPsychSurveyMultiChoice,
+    preamble: function() {
+        return outcome_stimulus(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"))
+    },
+    questions: function() {
+        return outcome_questions()
+    },
+    on_finish: function(data) {
+        update_pot(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"))
+
+        data.manip_check = dvs.manip_check.indexOf(data.response.manip_check)
+        data.truth_bn = dvs.truth_bn.indexOf(data.response.truth_bn)
+        data.truth_lk = dvs.truth_lk.indexOf(data.response.truth_lk)
+        data.minimum = current_minimum
+        data.report = current_report
+        data.truth = current_truth
+    },
+    data: {
+        type_of_trial: "measures_prac",
+        buyin: jsPsych.timelineVariable("buyin"),
+        bet: jsPsych.timelineVariable("bet"),
+        outcome: jsPsych.timelineVariable("outcome"),
+        cons: jsPsych.timelineVariable("cons"),
+        valence: jsPsych.timelineVariable("valence"),
+        error: jsPsych.timelineVariable("error"),
+        gain_loss: jsPsych.timelineVariable("gainloss"),
+        subject_id: subject_id
+    }
+}
+
+const decider_task_prac = {
+    timeline: [enter_minimum, see_report, see_wheel, spin_wheel, see_outcome_prac],
+    timeline_variables: [
+        {
+            "bet": 0,
+            "outcome": 0,
+            "cons": 1,
+            "valence": "positive",
+            "gainloss": 0,
+            "error": 4,
+            "buyin": 17
+        },
+        {
+            "bet": 1,
+            "outcome": 1,
+            "cons": 0,
+            "valence": "neutral",
+            "gainloss": 1,
+            "error": 6,
+            "buyin": 9
+        }
+    ],
+    randomize_order: true
+}
+
+// DEMOGRAPHICS, DEBRIEF, FINAL ITEMS
+const bonus_report = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: function() {
+        return bonus_report_stimulus()
+    },
+    choices: ["Ok"],
+    on_load: function() {
+        document.getElementById("jspsych-content").style.margin = "auto"
+    },
+    on_finish: function(data) {
+        document.getElementById("jspsych-content").style.margin = "50px auto"
+
+        data.earnings = earnings
+        data.wallet = pot
+        data.bonus = pot + earnings
+    },
+    data: {
+        type_of_trial: "bonus_report",
+        subject_id: subject_id
+    }
+}
+
 const demographics = {
     type: jsPsychSurveyHtmlForm,
     preamble: "The following questions are optional, but should be answered thruthfully.",
@@ -411,14 +642,10 @@ const demographics = {
         return demographics_questions
     },
     data: {
-        type_of_trial: "demographics"
-    },
-    on_load: function() {
-        style_jspsych()
+        type_of_trial: "demographics",
+        subject_id: subject_id
     },
     on_finish: function(data) {
-        unstyle_jspsych()
-
         // populate data
         data.age = data.response.age
 
@@ -447,7 +674,17 @@ const demographics = {
     }
 }
 
-// outro
+const debrief = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: function() {
+        return debrief_html
+    },
+    choices: ["Continue"],
+    data: {
+        type_of_trial: "debrief",
+        subject_id: subject_id
+    }
+}
 
 const feedback = {
     type: jsPsychSurveyHtmlForm,
@@ -455,11 +692,7 @@ const feedback = {
     html: function() {
         return feedback_questions
     },
-    on_load: function() {
-        style_jspsych()
-    },
     on_finish: function(data) {
-        unstyle_jspsych()
 
         // populate data
         data.understand = data.response.understandable
@@ -469,67 +702,69 @@ const feedback = {
         data.other_feedback = data.response.other_feedback
     },
     data: {
-        type_of_trial: "feedback"
+        type_of_trial: "feedback",
+        subject_id: subject_id
     }
 }
 
-const save_data_trials = {
-    type: jsPsychPipe,
-    action: "save",
-    experiment_id: "u9KgpAqC5lYb",
-    filename: `${subject_id}_0.csv`,
-    data_string: () => jsPsych.data.get().csv(),
+const back_to_prolific = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+        Thank you for participating in this study. Your response has been recorded.
+        <br>
+        <br>
+        If the button below does not automatically enter your completion code, please copy and paste this code into Prolific: CS3EJJ9B.
+        <br>
+        <br>
+    `,
+    choices: ["Back to Prolific"],
+    button_html: `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=CS3EJJ9B', '_blank')">%choice%</button>`,
+    on_load: function() {
+        document.getElementById("jspsych-content").style.margin = "auto"
+    },
+    on_finish: function() {
+        document.getElementById("jspsych-content").style.margin = "50px auto"
+    },
     data: {
-        type_of_trial: "save_data"
+        type_of_trial: "back_to_prolific",
+        subject_id: subject_id
     }
 }
 
-const save_data_demo = {
+// data pipe
+const save_data_reporter = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "u9KgpAqC5lYb",
-    filename: `${subject_id}_1.csv`,
+    experiment_id: "rfsrsV424H3F",
+    filename: `${subject_id}_reporter.csv`,
     data_string: () => jsPsych.data.get().csv(),
     data: {
-        type_of_trial: "save_data"
+        type_of_trial: "data_pipe",
+        subject_id: subject_id
+    }
+}
+
+const save_data_decider = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "rfsrsV424H3F",
+    filename: `${subject_id}_decider.csv`,
+    data_string: () => jsPsych.data.get().csv(),
+    data: {
+        type_of_trial: "data_pipe",
+        subject_id: subject_id
     }
 }
 
 const save_data_final = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "u9KgpAqC5lYb",
-    filename: `${subject_id}_2.csv`,
+    experiment_id: "rfsrsV424H3F",
+    filename: `${subject_id}_final.csv`,
     data_string: () => jsPsych.data.get().csv(),
     data: {
-        type_of_trial: "save_data"
-    }
-}
-
-const debrief = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: function() {
-        return debrief_html
-    },
-    choices: ["Continue"],
-    data: {
-        type_of_trial: "debrief"
-    },
-    on_load: function () {
-        document.getElementById("jspsych-content").style.margin = "50px auto"
-    },
-    on_finish: function () {
-        document.getElementById("jspsych-content").style.margin = "auto"
-    }
-}
-
-const back_to_prolific = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: "Thank you for participating in this study. Your response has been recorded.<br><br>If the button below does not automatically enter your completion code, please copy and paste this code into Prolific: C1NCJLU4.<br><br>",
-    choices: ["Back to Prolific"],
-    button_html: `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=C1NCJLU4', '_blank')">%choice%</button>`,
-    data: {
-        type_of_trial: "back_to_prolific"
+        type_of_trial: "data_pipe",
+        subject_id: subject_id
     }
 }
 
@@ -538,12 +773,23 @@ var experiment = []
 
 experiment.push(
     consent,
-    intro,                  // prolific id, instructions, comprehension
-    move_to_experiment,
-    trials,
-    save_data_trials,
+    prolific_id,
+    first_instructions,
+    begin_reporter,
+    reporter_task_prac,
+    second_instructions,
+    decider_task_prac,
+    comprehension_loop,
+    move_to_experiment_reporter,
+    begin_reporter,
+    reporter_task,
+    attention,
+    save_data_reporter,
+    move_to_experiment_decider,
+    decider_task,
+    save_data_decider,
+    bonus_report,
     demographics,
-    save_data_demo,
     debrief,
     feedback,
     save_data_final,

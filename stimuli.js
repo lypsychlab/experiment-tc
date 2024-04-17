@@ -1,349 +1,513 @@
-// custom jspsych styling
-function style_jspsych() {
-    document.getElementById("jspsych-content").style.margin = "50px auto"
-    document.getElementById("jspsych-content").style.width = "900px"
-}
-
-function unstyle_jspsych() {
-    document.getElementById("jspsych-content").style.margin = "auto"
-    document.getElementById("jspsych-content").style.width = null
-}
-
-// consent
 const consent_html = `
     <p style="text-align:left;">
-        You are being asked to participate in a research study titled 
-        "Truth in Games." You were selected to participate in 
-        this project because you are an adult over age 18. This study is sponsored by 
-        Boston College and the John Templeton Foundation.
+        You are being asked to participate in a research study titled "Truth in Games." 
+        You were selected to participate in this project because you are an adult over age 18. 
+        This study is sponsored by Boston College and the John Templeton Foundation.
     </p>
     <p style="text-align: left;">
         The purpose of this study is to understand how we weigh information what other people say. 
-        This study will be conducted through this online survey. The survey 
-        should take you 10 minutes to complete. There are no direct 
-        benefits to you, but you may feel gratified knowing that you helped further 
-        the scholarly work in this research area, and you will be compensated $2.00 for your 
-        participation. There are no costs to you associated with your participation.
+        This study will be conducted through this online survey. 
+        The survey should take you about 15 minutes to complete. 
+        There are no direct benefits to you, 
+        but you may feel gratified knowing that you helped further the scholarly work in this research area, 
+        and you will be compensated $2.58 (with up to $1.98 bonus available as well) for your participation. 
+        There are no costs to you associated with your participation.
     </p>
     <p style="text-align: left;">
-        The researchers do not believe participation would entail any risks or 
-        discomforts beyond those ordinarily encountered in everyday life.
+        The researchers do not believe participation would entail any risks or discomforts beyond those ordinarily encountered in everyday life.
     </p>
     <p style="text-align: left;">
-        This Principal Investigator, Dr. Liane Young, will exert all reasonable efforts 
-        to keep your responses and your identity confidential. We will not maintain 
-        within our research data any information that uniquely identifies you, such as 
-        your name, location, or Internet Protocol (IP) address. In any report we 
-        publish, we will not include any information that will make it possible to 
-        identify a participant. Data collected from the experiment will be coded to remove your name and any other 
-        personal identifiers. All records will be secured in a locked cabinet in our lab. 
-        The Institutional Review Board at Boston College and internal Boston College 
-        auditors may review the research records. State or federal laws or court 
-        orders may also require that information from research study records be 
-        released. Otherwise, the researchers will not release to others any 
-        information that could indicate your identity unless you give your permission, 
+        This Principal Investigator, Dr. Liane Young, will exert all reasonable efforts to keep your responses and your identity confidential. 
+        We will not maintain within our research data any information that uniquely identifies you, such as your name, location, or Internet Protocol (IP) address. 
+        In any report we publish, we will not include any information that will make it possible to identify a participant. 
+        Data collected from the experiment will be coded to remove your name and any other personal identifiers. 
+        All records will be secured in a locked cabinet in our lab. 
+        The Institutional Review Board at Boston College and internal Boston College auditors may review the research records. 
+        State or federal laws or court orders may also require that information from research study records be released. 
+        Otherwise, the researchers will not release to others any information that could indicate your identity unless you give your permission, 
         or unless the researchers become legally required to do so.
     </p>
     <p style="text-align: left;">
-        Although the survey will not prompt you directly to identify yourself by 
-        name, email address or the like, the survey will include several demographic 
-        items that would prompt you to provide certain demographic information, 
-        such as your age, gender, ethnicity, education level and the like. In 
-        combination, responses to such questions could suggest your identity. 
-        Regardless, please know that the researchers will make no purposeful effort 
-        to discern your identity based on such information. Additionally, please note 
-        that you may opt to leave any such questions blank.
+        Although the survey will not prompt you directly to identify yourself by name, email address or the like, 
+        the survey will include several items that would prompt you to provide certain demographic information, 
+        such as your age, gender, ethnicity, education level and the like. 
+        In combination, responses to such questions could suggest your identity. 
+        Regardless, please know that the researchers will make no purposeful effort to discern your identity based on such information. 
+        Additionally, please note that you may opt to leave any such questions blank.
     </p>
     <p style="text-align: left;">
-        Your participation is voluntary. If you choose not to participate it will not 
-        affect your relations with Boston College. Some questions on the survey, 
-        such as comprehension questions, may be required in order to complete the 
-        survey and receive compensation. However, you may still choose to end 
-        your participation in the study at any time. If you have questions or concerns 
-        concerning this research you may contact the Principal Investigator at 
-        <a href="tel:16175520240">+1 (617) 552-0240</a>
-        or <a href="mailto:liane.young@bc.edu">liane.young@bc.edu</a>. If you have 
-        questions about your rights as a research participant, you may contact the
-        Office for Research Protections, Boston College, at 
-        <a href="tel:16175524778">+1 (617) 552-4778</a> or
-        <a href="mailto:irb@bc.edu">irb@bc.edu</a>.
+        Your participation is voluntary. If you choose not to participate it will not affect your relations with Boston College. 
+        Some questions on the survey, such as comprehension questions, may be required in order to complete the survey and receive compensation. 
+        However, you may still choose to end your participation in the study at any time. 
+        If you have questions or concerns concerning this research you may contact the Principal Investigator at 
+        <a href="tel:16175520240">+1 (617) 552-0240</a> or <a href="mailto:liane.young@bc.edu">liane.young@bc.edu</a>. 
+        If you have questions about your rights as a research participant, you may contact the Office for Research Protections, Boston College, at 
+        <a href="tel:16175524778">+1 (617) 552-4778</a> or <a href="mailto:irb@bc.edu">irb@bc.edu</a>.
     </p>
     <p style="text-align: left;">
-        If you agree to the statements above and agree to participate in this study,
-        please select the "Consent given" button below to continue.
+        If you agree to the statements above and agree to participate in this study, please select the "Consent given" button below to continue.
     </p>
 `
 
-// instructions html
 const instructions_page1 = `
-    <p style="text-align: left">
-        <strong>Overview:</strong>
-        <br>
-        In this experiment, you will observe and evaluate a player's actions in a decision-making game.
-        Specifically, you will see decisions made by a player from a previous experiment and evaluate the information that the player was working with at the time.
-        <br>
-        <br>
-        <strong>Basic rules of the game:</strong>
-        <br>
-        The player started with a score of 0 coins. Their goal was to gain as many coins as they could by collecting payments. 
-        Each round, they chose between two options. Option 1 was labeled with the exact amount of coins that it would award, 
-        but Option 2 was labeled with a rough approximation of the amount of coins it would award.
-        <br>
-        <br>
-        So, if the player chose Option 1, they were guaranteed to gain the amount of coins displayed.
-        But if they chose Option 2, they only knew that they would gain somewhere near the amount of coins displayed.
-        <br>
-        <br>
+    <div class="instructions-box">
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        In this study you will be playing a betting game with another research participant. 
+        You will not be playing live with the other participant. 
+        They have already made their decisions in the game, and you will make decisions that affect a future participant.
     </p>
 `
 
 const instructions_page2 = `
-    <p style="text-align: left">
-        <strong>What you will do:</strong>
-        <br>
-        In this experiment, you will go through each round that a previous player played. 
-        First, you will see the exact value of Option 1 and the approximate value of Option 2. Then, you will see which option the previous player chose. 
-        Finally, you will see the exact value of Option 2, which the previous player <u>did not see, even after making their choice</u>.
-        <br>
-        <br>
-        Once you have all the information, you will be asked some questions about the round. After you answer them, the next round will begin.
-        <br>
-        <br>
-        Finally, to make the game more interesting for you, your bonus for this experiment will grow as the previous player collects payments. 
-        Specifically, for every in-game coin that the previous player gained, your bonus will increase by ${ratios[which_list]} cents. 
-        For example, if the previous player's final score was 2500 coins, your bonus will be $${(2500 * ratios[which_list] / 100).toFixed(2)}.
-        The experiment will keep track of your score throughout, and the final value will be converted to a bonus.
-        <br>
-        <br>
-        Click "Next" to see an example round of the game.
-        <br>
-        <br>
+    <div class="instructions-box">
+        <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+        <div id="wheel" style="background-image: conic-gradient(lightgreen 55%, black 0);"></div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        In each round, a wheel made up of two colors will be spun. 
+        Players can win or lose money depending on whether the wheel lands on green.
     </p>
 `
 
 const instructions_page3 = `
-    <p>
-        <u>EXAMPLE ROUND</u>
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="reporter-avatar" class="avatar">
+            <div class="head"></div>
+            <div class="shoulders">
+                <br>
+                <br>
+                Reporter
+            </div>
+        </div>
+        <div id="decider-avatar" class="avatar">
+            <div class="head"></div>
+            <div class="shoulders">
+                <br>
+                <br>
+                Decider
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        There are two roles in the game: the Reporter and the Decider. 
+        You will first play the role of the Reporter and then the role of the Decider. 
     </p>
-    <div id="payments-wrapper" class="wrapper">
-        <div id="payment-1" class="payment">
-            <u>Option 1</u>
-            <br>
-            EXACT VALUE: 979 coins
-        </div>
-        <div id="payment-2" class="payment">
-            <u>Option 2</u>
-            <br>
-            <i class="fa-solid fa-comment-dots"></i> APPROXIMATE VALUE: 1000 coins
-        </div>
-    </div>
-    <div id="outcome-wrapper" class="wrapper">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <hr>
-        <br>
-        In each trial, you will first see Option 1 and Option 2 in gray boxes.
-        <br>
-        <br>
-        <u>Note:</u> in this tutorial, you have to click the "Next" button to see the next bit of information, 
-        but outside of this tutorial, the screen will automatically update.
-        <br>
-        <br>
-    </div>
 `
 
 const instructions_page4 = `
-    <p>
-        <u>EXAMPLE ROUND</u>
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="reporter-inst-wheel-container">
+            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0);"></div>
+        </div>
+        <div class="reporter-inst-spacer"></div>
+        <div class="reporter-inst-arrow">
+            &rarr;
+        </div>
+        <div class="reporter-inst-spacer"></div>
+        <div class="reporter-inst-text-container">
+            What percentage of the wheel you just saw was green?
+        </div>
+        <br>
+        <div style="display: inline-block; width: 250px; text-align: center;">
+            1 second
+        </div>
+        <div style="display: inline-block; width: 50px;"></div>
+        <div style="display: inline-block; width: 50px;"></div>
+        <div style="display: inline-block; width: 50px;"></div>
+        <div style="display: inline-block; width: 250px; text-align: center;"></div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        When you're the Reporter, you get to see the wheel for 1 second. 
+        After 1 second, the wheel disappears and you need to estimate what percentage of the wheel was green. 
+        We will call this number the "% Green" of the wheel for short. 
+        <br>
+        <br>
+        Every wheel is at least 25% Green and no more than 75% Green.
+        You will be given a bonus depending on how accurate your estimate is. 
+        The estimations that you make as a Reporter will be used in another participant's Decider rounds. 
     </p>
-    <div id="payments-wrapper" class="wrapper">
-        <div id="payment-1" class="payment">
-            <u>Option 1</u>
-            <br>
-            EXACT VALUE: 979 coins
-        </div>
-        <div id="payment-2" class="payment chosen">
-            <u>Option 2</u>
-            <br>
-            <i class="fa-solid fa-comment-dots"></i> APPROXIMATE VALUE: 1000 coins
-        </div>
-    </div>
-    <div id="outcome-wrapper" class="wrapper">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <hr>
-        <br>
-        Then, the option that the previous player chose will be highlighted in blue.
-        <br>
-        <br>
-    </div>
 `
 
 const instructions_page5 = `
-    <p>
-        <u>EXAMPLE ROUND</u>
+    <div class="instructions-box">
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> 15&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> 100&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+            </div>
+            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % Green
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel">???</div>
+            <br>
+            <br>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        When you're the Decider, you start with a wallet that has 100&#162; in it, and each round you try to grow the amount of money in your wallet by making bets that the wheel will land on green. 
+        <br>
+        <br>
+        At the beginning of each round, a new "amount at stake" is set and a wheel with random percentages of green and black is chosen. 
+        However, unlike the Reporter, you won't get to see the wheel immediately. 
+        <br>
+        <br>
+        Instead, your job is to decide what percentage of the wheel has to be green in order for you to be willing to bet the amount at stake for that round. 
+        This is called your "threshold." Your threshold must be between 25% and 75%.
+        <br>
+        <br>
+        As shown in the example above, if the amount at stake is 15&#162; and you set your threshold to 53%, 
+        that means that you are okay with betting 15&#162; from your wallet as long as the wheel is at least 53% green 
+        (giving you at least a 53% chance of winning the bet).
     </p>
-    <div id="payments-wrapper" class="wrapper">
-        <div id="payment-1" class="payment">
-            <u>Option 1</u>
-            <br>
-            EXACT VALUE: 979 coins
-        </div>
-        <div id="payment-2" class="payment chosen">
-            <u>Option 2</u>
-            <br>
-            <i class="fa-solid fa-comment-dots"></i> APPROXIMATE VALUE: 1000 coins
-            <br>
-            <br>
-            EXACT VALUE: 958 coins
-        </div>
-    </div>
-    <div id="outcome-wrapper" class="wrapper">
-        <br>
-        <br>
-        <br>
-        <br>
-        <hr>
-        <br>
-        Then, the exact value of Option 2 will be revealed to you.
-        <br>
-        <br>
-    </div>
 `
 
 const instructions_page6 = `
-    <p>
-        <u>EXAMPLE ROUND</u>
+    <div class="instructions-box">
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> 15&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> 100&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+            </div>
+            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % Green
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> 56% Green
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>BET WENT THROUGH</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>higher</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel">???</div>
+            <br>
+            <br>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        Once you enter your threshold, you will learn two new pieces of information. 
+        <br>
+        <br>
+        First, you will see a previous Reporter's estimate of the % Green of the wheel.
+        This estimate will determine whether the bet goes through or not.
+        <br>
+        <br>
+        Specifically, if the Reporter's estimate is greater than or equal to your threshold (as in the example above), the bet will go through. 
+        If the Reporter's estimate is lower, the bet will not go through.
+        <br>
+        <br>
+        Below the Reporter's estimate, you will see text indicating whether the bet went through or not.
     </p>
-    <div id="payments-wrapper" class="wrapper">
-        <div id="payment-1" class="payment">
-            <u>Option 1</u>
-            <br>
-            EXACT VALUE: 979 coins
-        </div>
-        <div id="payment-2" class="payment chosen">
-            <u>Option 2</u>
-            <br>
-            <i class="fa-solid fa-comment-dots"></i> APPROXIMATE VALUE: 1000 coins
-            <br>
-            <br>
-            EXACT VALUE: 958 coins
-        </div>
-    </div>
-    <div id="outcome-wrapper" class="wrapper">
-        The chosen option made you <span style="background-color: tomato"> 21 fewer coins</span> than the other option would have made you.
-        <br>
-        <br>
-        Your score: 0 coins <span style="font-weight: bold"> &rarr; </span> 958 coins
-        <br>
-        <br>
-        <hr>
-        <br>
-        Finally, you will see a summary of how well you fared relative to the unchosen option, and your score will be updated.
-        <br>
-        <br>
-    </div>
 `
 
 const instructions_page7 = `
-    <p>
-        <u>EXAMPLE ROUND</u>
+    <div class="instructions-box">
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> 15&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> 100&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+            </div>
+            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % Green
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> 56% Green
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>BET WENT THROUGH</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>higher</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" style="background-image: conic-gradient(lightgreen 52%, black 0);"></div>
+            <div id="true-value"><strong>Exact % Green:</strong> 52</div>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        Second, the exact % Green of the wheel being used for the round will be revealed. 
+        You will see the wheel alongside the exact % Green written out as a number.
     </p>
-    <div id="payments-wrapper" class="wrapper">
-        <div id="payment-1" class="payment">
-            <u>Option 1</u>
-            <br>
-            EXACT VALUE: 979 coins
-        </div>
-        <div id="payment-2" class="payment chosen">
-            <u>Option 2</u>
-            <br>
-            <i class="fa-solid fa-comment-dots"></i> APPROXIMATE VALUE: 1000 coins
-            <br>
-            <br>
-            EXACT VALUE: 958 coins
-        </div>
-    </div>
-    <div id="outcome-wrapper" class="wrapper">
-        The chosen option made you <span style="background-color: tomato"> 21 fewer coins</span> than the other option would have made you.
-        <br>
-        <br>
-        Your score: 0 coins <span style="font-weight: bold"> &rarr; </span> 958 coins
-        <br>
-        <br>
-        <hr>
-        <br>
-        In the above example, the player could either choose Option 1 for exactly 979 coins or Option 2 for approximately 1000 coins.
-        They chose Option 2, hoping for something close to 1000 coins, but it turned out that the exact value of Option 2 was only 958 coins.
-        So, the player (and you) gained <span style="background-color: tomato">21 fewer coins</span> than the unchosen option would have given them.
-        <br>
-        <br>
-    </div>
 `
 
 const instructions_page8 = `
-    <p>
-        <u>EXAMPLE ROUND</u>
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div style="font-size: 30px;">Bet goes through</div>
+        <br>
+        <div class="bet-exp-wheel-container">
+            <div class="small-pointer">&darr;</div>
+            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 340deg;"></div>
+            <br>
+            Win the amount at stake
+        </div>
+        <div class="bet-exp-vline-container"></div>
+        <div class="bet-exp-wheel-container">
+            <div class="small-pointer">&darr;</div>
+            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 20deg;"></div>
+            <br>
+            Lose the amount at stake
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        If the bet goes through, the wheel will be spun. 
+        You will win the amount at stake if the wheel comes to rest with the arrow on green, 
+        but you will lose the amount at stake if the wheel comes to rest with the arrow on black. 
     </p>
-    <div id="payments-wrapper" class="wrapper">
-        <div id="payment-1" class="payment">
-            <u>Option 1</u>
+`
+
+const instructions_page9 = `
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div style="font-size: 30px;">Bet does not go through</div>
+        <br>
+        <div class="bet-exp-wheel-container">
+            <div class="small-pointer">&darr;</div>
+            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 340deg;"></div>
             <br>
-            EXACT VALUE: 979 coins
+            No change to wallet
         </div>
-        <div id="payment-2" class="payment chosen">
-            <u>Option 2</u>
+        <div class="bet-exp-vline-container"></div>
+        <div class="bet-exp-wheel-container">
+            <div class="small-pointer">&darr;</div>
+            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 20deg;"></div>
             <br>
-            <i class="fa-solid fa-comment-dots"></i> APPROXIMATE VALUE: 1000 coins
-            <br>
-            <br>
-            EXACT VALUE: 958 coins
+            No change to wallet
         </div>
     </div>
-    <div id="outcome-wrapper" class="wrapper">
-        The chosen option made you <span style="background-color: tomato"> 21 fewer coins</span> than the other option would have made you.
+    <hr>
+    <p style="text-align: left;">
+        If the bet doesn't go through, the amount of money in your wallet won't change, 
+        but the wheel will still be spun so that you can see how much you would have gained or lost if the bet had gone through.
+    </p>
+`
+
+const instructions_page10 = `
+    <div class="instructions-box">
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> 15&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> 100&#162; <span style="font-weight: bold"> &rarr; </span> 115&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+            </div>
+            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % Green
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> 56% Green
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>BET WENT THROUGH</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>higher</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" style="background-image: conic-gradient(lightgreen 52%, black 0);"></div>
+            <div id="true-value"><strong>Exact % Green:</strong> 52</div>
+        </div>
         <br>
         <br>
-        Your score: 0 coins <span style="font-weight: bold"> &rarr; </span> 958 coins
+        The bet <u>went through</u>, so you <u>won</u> the 15&#162; at stake.
         <br>
         <br>
-        <hr>
+        <strong>Your Wallet: </strong> 100&#162; <span style="font-weight: bold"> &rarr; </span> 115&#162;
         <br>
-        <p style="text-align: left">
-            <strong>How were the approximations calculated?</strong>
-            <br>
-            In each round, the approximation of Option 2 was generated by a random other participant (<u>NOT</u> the player who was choosing between Option 1 and Option 2).
-            <br>
-            <br>
-            These participants were shown the exact values for the options, and they were asked to write down approximations of them.
-            We did not specify how they were supposed to approximate the values.
-            So, while one participant might approximate an exact value of 86 to 90, another participant might approximate it to 85, 100, or another number they thought was reasonable.
-            <br>
-            <br>
-            Click "Next" to answer a few short questions about the rules of the game in order to make sure the explanation was clear.
-            <br>
-            <br>
-        </p>
+        <br>
+        <div class="number-line">
+            <div class="point-number middle">53</div>
+            <div class="point-number" style="left: 65%;">56</div>
+            <div class="point-number" style="left: 45%;">52</div>
+        </div>
+        <div class="number-line">
+            <div class="point middle"></div>
+            <div class="point" style="left: 65%;"></div>
+            <div class="point" style="left: 45%;"></div>
+        </div>
+        <div class="number-line">
+            <div class="point-label" style="left: calc(50% - 90px); rotate: 315deg;"><span style="font-weight: bold">Your Threshold</span></div>
+            <div class="point-label" style="left: calc(65% - 90px); rotate: 315deg;">Reporter's Estimate</div>
+            <div class="point-label" style="left: calc(45% - 90px); rotate: 315deg;">Exact % Green</div>
+        </div>
+        <div class="number-line-visual"></div>
     </div>
+    <hr>
+    <p style="text-align: left;">
+        When the wheel comes to rest, you will see a summary of the round and a number line comparing your threshold, the Reporter's Estimate, and the Exact % Green of the wheel.
+        <br>
+        <br>
+        Then, you will be asked three questions about the round.
+    </p>
+`
+
+const instructions_page11 = `
+    <div class="instructions-box">
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        At the end of all the rounds, however much money is in your wallet will be awarded to you as a bonus.
+    </p>
+`
+
+const instructions_page12 = `
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="reporter-avatar" class="avatar">
+            <div class="head"></div>
+            <div class="shoulders">
+                <br>
+                <br>
+                Reporter
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        Let's do two practice rounds where you play the role of the Reporter.
+    </p>
+`
+
+const instructions_page13 = `
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="decider-avatar" class="avatar">
+            <div class="head"></div>
+            <div class="shoulders">
+                <br>
+                <br>
+                Decider
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        Now let's do two practice rounds where you play the role of the Decider. 
+        <br>
+        <br>
+        If you forget any of the rules or find something confusing, try hovering over the &#9432; icons on the left side of the screen.
+        These contain short explanations of each term to remind you how the game works.
+    </p>
 `
 
 function incorrect_response_stimulus() {
-    let checked = [["", "", ""], ["", ""], ["", "", ""], ["", "", ""]]
-    let correct = ["black", "black", "black", "black"]
+    let checked = [["", "", "", ""], ["", "", "", ""], ["", "", "", ""]]
+    let colors = ["black", "black", "black"]
 
-    for (let i = 0; i < 4; i++) {
-        checked[i][comprehension.questions[i].options.indexOf(last_answers[i])] = "checked"
+    for (let i = 0; i < 3; i++) {
+        checked[i][options[i].indexOf(last_answers[i])] = "checked"
 
         if (!last_answers_correct[i]) {
-            correct[i] = "firebrick"
+            colors[i] = "firebrick"
         }
     }
 
@@ -352,86 +516,89 @@ function incorrect_response_stimulus() {
             You answered at least one question incorrectly. 
             In order to make sure our data is valid, we need to know that you understand the game.
             The questions that you answered incorrectly are highlighted below in red. 
-            Please look back through the instructions to find the answers to those questions.
+            Please look back through the instructions <a href="instructions.html" target="_blank">here</a> to find the answers to those questions.
             Thank you for your cooperation!
             <br>
             <br>
             <form autocomplete="off">
-                <div style="color: ${correct[0]}">
-                    <p>In each round, the previous player had to choose between:</p>
+                <div style="color: ${colors[0]}">
+                    <p>What is the Reporter trying to do?</p>
                     <div>
                         <label>
-                            <input ${checked[0][0]} disabled type="radio" name="jspsych-survey-multi-choice-response-0" id="jspsych-survey-multi-choice-response-0-0" value="Two approximate amounts of money." required="">
-                            Two approximate amounts of money.
+                            <input ${checked[0][0]} disabled type="radio">
+                            Estimate the percentage of the wheel that is black
                         </label>
                     </div>
                     <div>
                         <label>
-                            <input ${checked[0][1]} disabled type="radio" name="jspsych-survey-multi-choice-response-0" id="jspsych-survey-multi-choice-response-0-1" value="One exact amount of money and one approximate amount of money." required="">
-                            One exact amount of money and one approximate amount of money.
+                            <input ${checked[0][1]} disabled type="radio">
+                            Guess what number the Decider will enter
                         </label>
                     </div>
                     <div>
                         <label>
-                            <input ${checked[0][2]} disabled type="radio" name="jspsych-survey-multi-choice-response-0" id="jspsych-survey-multi-choice-response-0-2" value="One approximate amount of money and the chance to double their money in the next round." required="">
-                            One approximate amount of money and the chance to double their money in the next round.
+                            <input ${checked[0][2]} disabled type="radio">
+                            Estimate the percentage of the wheel that is green
                         </label>
                     </div>
-                </div>
-                <div style="color: ${correct[1]}">
-                    <p>Did the previous player know which option was exact and which option was approximate?</p>
                     <div>
                         <label>
-                            <input ${checked[1][0]} disabled type="radio" name="jspsych-survey-multi-choice-response-1" id="jspsych-survey-multi-choice-response-1-0" value="Yes" required="">
-                            Yes
-                        </label>
-                    </div>
-                    <div id="jspsych-survey-multi-choice-option-1-1" class="jspsych-survey-multi-choice-option">
-                        <label class="jspsych-survey-multi-choice-text" for="jspsych-survey-multi-choice-response-1-1">
-                            <input ${checked[1][1]} disabled type="radio" name="jspsych-survey-multi-choice-response-1" id="jspsych-survey-multi-choice-response-1-1" value="No" required="">
-                            No
+                            <input ${checked[0][3]} disabled type="radio">
+                            Guess whether the bet will go through or not
                         </label>
                     </div>
                 </div>
-                <div style="color: ${correct[2]}">
-                    <p>How was the approximate amount of money displayed in each round calculated?</p>
+                <div style="color: ${colors[1]}">
+                    <p>What is the Decider trying to do?</p>
                     <div>
                         <label>
-                            <input ${checked[2][0]} disabled type="radio" name="jspsych-survey-multi-choice-response-2" id="jspsych-survey-multi-choice-response-2-0" value="The exact amount for each round was rounded to the nearest multiple of ten." required="">
-                            The exact amount for each round was rounded to the nearest multiple of ten.
+                            <input ${checked[1][0]} disabled type="radio">
+                            Decide which color to bet on
                         </label>
                     </div>
                     <div>
                         <label>
-                            <input ${checked[2][1]} disabled type="radio" name="jspsych-survey-multi-choice-response-2" id="jspsych-survey-multi-choice-response-2-1" value="For each round, a different random participant provided an approximate value of the exact amount." required="">
-                            For each round, a different random participant provided an approximate value of the exact amount.
+                            <input ${checked[1][1]} disabled type="radio">
+                            Decide what percentage of the wheel needs to be green in order for the bet to go through
                         </label>
                     </div>
                     <div>
                         <label>
-                            <input ${checked[2][2]} disabled type="radio" name="jspsych-survey-multi-choice-response-2" id="jspsych-survey-multi-choice-response-2-2" value="It was chosen by a random number generator." required="">
-                            It was chosen by a random number generator.
+                            <input ${checked[1][2]} disabled type="radio">
+                            Decide whether or not the wheel will be spun
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input ${checked[1][3]} disabled type="radio">
+                            Decide the amount of money at stake for each round
                         </label>
                     </div>
                 </div>
-                <div style="color: ${correct[3]}">
-                    <p>Each round, your bonus will increase in proportion to:</p>
+                <div style="color: ${colors[2]}">
+                    <p>When will a bet go through?</p>
                     <div>
                         <label>
-                            <input ${checked[3][0]} disabled type="radio" name="jspsych-survey-multi-choice-response-3" id="jspsych-survey-multi-choice-response-3-0" value="The choices you make." required="">
-                            The choices you make.
+                            <input ${checked[2][0]} disabled type="radio">
+                            Every round, regardless of what numbers the Decider and the Reporter enter
                         </label>
                     </div>
                     <div>
                         <label>
-                            <input ${checked[3][1]} disabled type="radio" name="jspsych-survey-multi-choice-response-3" id="jspsych-survey-multi-choice-response-3-1" value="An amount chosen by a random number generator." required="">
-                            An amount chosen by a random number generator.
+                            <input ${checked[2][1]} disabled type="radio">
+                            On randomly chosen rounds, regardless of what numbers the Decider and the Reporter enter
                         </label>
                     </div>
                     <div>
                         <label>
-                            <input ${checked[3][2]} disabled type="radio" name="jspsych-survey-multi-choice-response-3" id="jspsych-survey-multi-choice-response-3-2" value="The amount the previous player gained based on their choice." required="">
-                            The amount the previous player gained based on their choice.
+                            <input ${checked[2][2]} disabled type="radio">
+                            Only when the Reporter's estimate is lower than the number the Decider enters
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input ${checked[2][3]} disabled type="radio">
+                            Only when the Reporter's estimate is greater than or equal to the number the Decider enters
                         </label>
                     </div>
                 </div>
@@ -444,161 +611,404 @@ function incorrect_response_stimulus() {
     return string
 }
 
-// stimulus for trial_claims
-function claims_stimulus(exact, round) {
-    // convert variables to usable format
-    exact = parseInt(exact)
-    round = parseInt(round)
-
+function show_wheel_stimulus(percent) {
     let string = `
-        <div id="payments-wrapper" class="wrapper">
-            <div id="payment-1" class="payment">
-                <u>Option 1</u>
-                <br>
-                EXACT VALUE: ${exact} coins
-            </div>
-            <div id="payment-2" class="payment">
-                <u>Option 2</u>
-                <br>
-                <i class="fa-solid fa-comment-dots"></i> APPROXIMATE VALUE: ${round} coins
-            </div>
-        </div>
-    `
-
-    return string
-}
-
-// stimulus for trial_outcome
-function outcome_stimulus_choice(exact, round, choice) {
-    // convert variables to usable format
-    exact = parseInt(exact)
-    round = parseInt(round)
-
-    let choices = ["", ""]
-    if (choice == "exact") {
-        choices[0] = "chosen"
-    } else {
-        choices[1] = "chosen"
-    }
-
-    let string = `
-        <div id="payments-wrapper" class="wrapper">
-            <div id="payment-1" class="payment ${choices[0]}">
-                <u>Option 1</u>
-                <br>
-                EXACT VALUE: ${exact} coins
-            </div>
-            <div id="payment-2" class="payment ${choices[1]}">
-                <u>Option 2</u>
-                <br>
-                <i class="fa-solid fa-comment-dots"></i> APPROXIMATE VALUE: ${round} coins
-            </div>
-        </div>
-    `
-
-    return string
-}
-
-function outcome_stimulus_payouts(exact, round, truth, choice) {
-    // convert variables to usable format
-    exact = parseInt(exact)
-    round = parseInt(round)
-    truth = parseInt(truth)
-
-    let choices = ["", ""]
-    if (choice == "exact") {
-        choices[0] = "chosen"
-    } else {
-        choices[1] = "chosen"
-    }
-
-    let string = `
-        <div id="payments-wrapper" class="wrapper">
-            <div id="payment-1" class="payment ${choices[0]}">
-                <u>Option 1</u>
-                <br>
-                EXACT VALUE: ${exact} coins
-            </div>
-            <div id="payment-2" class="payment ${choices[1]}">
-                <u>Option 2</u>
-                <br>
-                <i class="fa-solid fa-comment-dots"></i> APPROXIMATE VALUE: ${round} coins
-                <br>
-                <br>
-                EXACT VALUE: ${truth} coins
-            </div>
-        </div>
-    `
-
-    return string
-}
-
-function outcome_stimulus_report(exact, round, truth, choice) {
-    // convert variables to usable format
-    exact = parseInt(exact)
-    round = parseInt(round)
-    truth = parseInt(truth)
-
-    let report_number = Math.abs(exact - truth)
-    let report_text = "more"
-    let report_highlight = "lightgreen"
-    let report_payout = truth
-
-    if ((choice == "exact" & exact < truth) || (choice == "round" & truth < exact)) {
-        report_text = "fewer"
-        report_highlight = "tomato"
-    }
-
-    let choices = ["", ""]
-    if (choice == "exact") {
-        choices[0] = "chosen"
-        report_payout = exact
-    } else {
-        choices[1] = "chosen"
-    }
-
-    let string = `
-        <div id="payments-wrapper" class="wrapper">
-            <div id="payment-1" class="payment ${choices[0]}">
-                <u>Option 1</u>
-                <br>
-                EXACT VALUE: ${exact} coins
-            </div>
-            <div id="payment-2" class="payment ${choices[1]}">
-                <u>Option 2</u>
-                <br>
-                <i class="fa-solid fa-comment-dots"></i> APPROXIMATE VALUE: ${round} coins
-                <br>
-                <br>
-                EXACT VALUE: ${truth} coins
-            </div>
-        </div>
-        <div id="outcome-wrapper" class="wrapper">
-            The chosen option made you <span style="background-color: ${report_highlight}"> ${report_number} ${report_text} coins</span> than the other option would have made you.
+        <div id="wheel" style="background-image: conic-gradient(lightgreen ${percent}%, black 0);"></div>
+        <div>
             <br>
             <br>
-            Your score: ${score} coins <span style="font-weight: bold"> &rarr; </span> ${score + report_payout} coins
+            <br>
+            <br>
+            <br>
         </div>
     `
 
     return string
 }
 
-function outcome_questions(round, truth) {
-    round = parseInt(round)
-    truth = parseInt(truth)
+function reporter_feedback_stimulus(percent) {
+    let progress_text = ["see the next wheel", "finish"]
 
-    questions = [
+    let string = `
+        <div id="wheel" style="background-image: conic-gradient(lightgreen ${percent}%, black 0);"></div>
+        <div>
+            <br>
+            <strong>Exact % Green:</strong> ${percent}
+            <br>
+            <strong>Your Estimate:</strong> ${current_estimate} (${current_distance} away)
+            <br>
+            <br>
+            Press space to ${progress_text[Math.floor(reporter_count / 7)]}.
+        </div>
+    `
+
+    return string
+}
+
+function move_to_decider_stimulus() {
+    let string = `
+        You have finished playing as the Reporter. Overall, you earned ${earnings}&#162; for the accuracy of your estimates.
+        <br>
+        <br>
+        Next, you will play as the Decider for 8 rounds.
+        <br>
+        <br>
+        If you forget any of the rules or find something confusing, try hovering over the &#9432; icons on the left side of the screen.
+        These contain short explanations of each term to remind you how the game works.
+        <br>
+        <br>
+        When you are ready, press space to begin playing as the Decider.
+    `
+
+    return string
+}
+
+function set_global_vars(minimum, bet, outcome, cons, error) {
+    bet = Boolean(bet)
+    outcome = Boolean(outcome)
+    cons = Boolean(cons)
+
+    let report_diff = Math.floor(Math.random() * 3) + 1
+
+    if (bet) {
+        current_report = minimum + report_diff
+        if (cons) {
+            current_truth = current_report - error
+        } else {
+            current_truth = current_report + error
+        }
+    } else {
+        current_report = minimum - report_diff
+        if (cons) {
+            current_truth = current_report + error
+        } else {
+            current_truth = current_report - error
+        }
+    }
+
+    // set rotation using truth and outcome
+    let spin_padding = 2
+
+    if (outcome) {
+        current_rotation = (Math.floor(Math.random() * (current_truth - 2 * spin_padding)) + 100 - current_truth + spin_padding) * 3.6
+    } else {
+        current_rotation = (Math.floor(Math.random() * (100 - current_truth - 2 * spin_padding)) + spin_padding) * 3.6
+    }
+}
+
+function minimum_stimulus(buyin) {
+    let string = `
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> ${buyin}&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> ${pot}&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+            </div>
+            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" required="true"/> % Green
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel">???</div>
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+    `
+
+    return string
+}
+
+function see_report_stimulus(buyin, bet) {
+    bet = parseInt(bet)
+
+    let go_thru = ["DID NOT GO", "WENT"]
+    let low_high = ["lower", "higher"]
+
+    let string = `
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> ${buyin}&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> ${pot}&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+            </div>
+            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % Green
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> ${current_report}% Green
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>BET ${go_thru[bet]} THROUGH</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>${low_high[bet]}</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel">???</div>
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+    `
+
+    return string
+}
+
+function see_wheel_stimulus(buyin, bet) {
+    bet = parseInt(bet)
+
+    let go_thru = ["DID NOT GO", "WENT"]
+    let low_high = ["lower", "higher"]
+
+    let string = `
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> ${buyin}&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> ${pot}&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+            </div>
+            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % Green
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> ${current_report}% Green
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>BET ${go_thru[bet]} THROUGH</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>${low_high[bet]}</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" style="background-image: conic-gradient(lightgreen ${current_truth}%, black 0);"></div>
+            <div id="true-value"><strong>Exact % Green:</strong> ${current_truth}</div>
+        </div>
+        <br>
+        <br>
+    `
+
+    return string
+}
+
+function spin_stimulus(buyin, bet) {
+    bet = parseInt(bet)
+
+    let go_thru = ["DID NOT GO", "WENT"]
+    let low_high = ["lower", "higher"]
+
+    let string = `
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> ${buyin}&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> ${pot}&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+            </div>
+            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % Green
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> ${current_report}% Green
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>BET ${go_thru[bet]} THROUGH</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>${low_high[bet]}</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" style="background-image: conic-gradient(lightgreen ${current_truth}%, black 0);"></div>
+            <div id="true-value"><strong>Exact % Green:</strong> ${current_truth}</div>
+        </div>
+        <br>
+        <br>
+    `
+
+    return string
+}
+
+function outcome_stimulus(buyin, bet, outcome) {
+    bet = parseInt(bet)
+    outcome = parseInt(outcome)
+
+    let go_thru = ["DID NOT GO", "WENT"]
+    let low_high = ["lower", "higher"]
+    let result = [["did not lose", "did not win"], ["lost", "won"]]
+
+    let cents = "cent"
+    if (buyin > 1) {
+        cents += "s"
+    }
+
+    let string = `
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> ${buyin}&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> ${pot}&#162; <span style="font-weight: bold"> &rarr; </span> ${pot + buyin * bet * (outcome * 2 - 1)}&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+            </div>
+            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % Green
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> ${current_report}% Green
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>BET ${go_thru[bet]} THROUGH</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>${low_high[bet]}</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" style="background-image: conic-gradient(lightgreen ${current_truth}%, black 0); rotate: ${current_rotation}deg"></div>
+            <div id="true-value"><strong>Exact % Green:</strong> ${current_truth}</div>
+        </div>
+        <br>
+        <br>
+        The bet <u>${go_thru[bet].toLowerCase()} through</u>, so you <u>${result[bet][outcome]}</u> the ${buyin}&#162; at stake.
+        <br>
+        <br>
+        <strong>Your Wallet: </strong> ${pot}&#162; <span style="font-weight: bold"> &rarr; </span> ${pot + buyin * bet * (outcome * 2 - 1)}&#162;
+        <br>
+        <hr>
+        <div class="number-line">
+            <div class="point-number middle">${current_minimum}</div>
+            <div class="point-number" style="left: ${50 - 5 * (current_minimum - current_report)}%;">${current_report}</div>
+            <div class="point-number" style="left: ${50 - 5 * (current_minimum - current_truth)}%;">${current_truth}</div>
+        </div>
+        <div class="number-line">
+            <div class="point middle"></div>
+            <div class="point" style="left: ${50 - 5 * (current_minimum - current_report)}%;"></div>
+            <div class="point" style="left: ${50 - 5 * (current_minimum - current_truth)}%;"></div>
+        </div>
+        <div class="number-line">
+            <div class="point-label" style="left: calc(50% - 90px); rotate: 315deg;"><span style="font-weight: bold">Your Threshold</span></div>
+            <div class="point-label" style="left: calc(${50 - 5 * (current_minimum - current_report)}% - 90px); rotate: 315deg;">Reporter's Estimate</div>
+            <div class="point-label" style="left: calc(${50 - 5 * (current_minimum - current_truth)}% - 90px); rotate: 315deg;">Exact % Green</div>
+        </div>
+        <div class="number-line-visual"></div>
+    `
+
+    return string
+}
+
+function update_pot(buyin, bet, outcome) {
+    bet = parseInt(bet)
+    outcome = parseInt(outcome)
+    
+    pot += buyin * bet * (outcome * 2 - 1)
+}
+
+function outcome_questions() {
+    let questions = [
         {
-            prompt: `<strong>A previous participant approximated the exact value of Option 2 from ${truth} to ${round}.</strong> <br> <br> Would you consider the information provided by the previous participant to be true or false?`,
+            prompt: `
+                If the reporter's estimate had been the Exact % Green (${current_truth}%), would the bet have gone through?
+            `,
+            options: [
+                "No",
+                "Yes"
+            ],
+            name: "manip_check",
+            required: true
+        },
+        {
+            prompt: `Would you consider the information provided by the reporter to be true or false?`,
             options: [
                 "False",
                 "True"
             ],
+            name: "truth_bn",
             required: true
         },
         {
-            prompt: `How true or false would you consider the information provided by the previous participant to be?`,
+            prompt: `How true or false would you consider the information provided by the reporter to be?`,
             options: [
                 "Completely false",
                 "Mostly false",
@@ -608,19 +1018,25 @@ function outcome_questions(round, truth) {
                 "Mostly true",
                 "Completely true"
             ],
-            required: true
-        },
-        {
-            prompt: `Do you think the player would have chosen differently if they had known the exact value of Option 2 instead?`,
-            options: [
-                "No",
-                "Yes"
-            ],
+            name: "truth_lk",
             required: true
         }
     ]
 
     return questions
+}
+
+function bonus_report_stimulus() {
+    let string = `
+        This concludes your Decider rounds. The final amount in your wallet was ${pot}&#162;.
+        <br>
+        <br>
+        Adding this to your Reporter score of ${earnings}&#162;, your bonus for this experiment will be ${pot + earnings}&#162;.
+        <br>
+        <br>
+    `
+
+    return string
 }
 
 const demographics_questions = `
@@ -984,19 +1400,18 @@ const feedback_questions = `
 `
 
 const debrief_html = `
-<div style="text-align: left; width: 60%; margin: auto">
+<div style="text-align: left;">
     <strong>What was this study about?</strong>
     <br>
     In this study, we were trying to better understand how people decide what information should qualify as true or false.
     <br>
     <br>
-    It's important to note that the decisions you saw from a "previous player" were not in fact from a previous player. 
-    We chose which option was selected in each round that you observed. We also determined what the approximate amount shown in Option 2 was. 
-    These approximations were not in fact determined by previous participants.
+    It's important to note that the estimations you saw from a "previous Reporter" were not in fact estimations made by a real person. 
+    In each round, we chose both the exact % Green of the wheel and the Reporter's estimate based off of the threshold you entered.  
     <br>
     <br>
-    We said that these two features were determined by previous participants because we're interested in how people evaluate the truth of information in real-world scenarios.
-    We wanted our participants in this study to believe that they were seeing approximations that real people had created and the downstream decisions that real people made based on those approximations.
+    We said that the estimations were determined by previous participants because we're interested in how people evaluate the truth of information in real-world scenarios.
+    We wanted our participants in this study to believe that they were seeing approximations that real people had created.
     <br>
     <br>
     <strong>Why does it matter?</strong>
