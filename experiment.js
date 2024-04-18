@@ -718,6 +718,10 @@ const back_to_prolific = {
     },
     on_finish: function() {
         document.getElementById("jspsych-content").style.margin = "50px auto"
+
+        jsPsych.endExperiment(
+            "Thank you for your participation!.<br>Your completion code is CS3EJJ9B."
+        )
     },
     data: {
         type_of_trial: "back_to_prolific",
