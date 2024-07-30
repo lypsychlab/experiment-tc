@@ -7,10 +7,10 @@ const consent_html = `
     <p style="text-align: left;">
         The purpose of this study is to understand how we weigh information what other people say. 
         This study will be conducted through this online survey. 
-        The survey should take you about <span style="font-weight: bold;">15 minutes</span> to complete. 
+        The survey should take you about <span style="font-weight: bold;">16 minutes</span> to complete. 
         There are no direct benefits to you, 
         but you may feel gratified knowing that you helped further the scholarly work in this research area, 
-        and you will be compensated <span style="font-weight: bold;">$2.58</span> (with up to <span style="font-weight: bold;">$1.98 bonus available</span> as well) for your participation. 
+        and you will be compensated <span style="font-weight: bold;">$3.00</span> (with up to <span style="font-weight: bold;">$1.98 bonus available</span> as well) for your participation. 
         There are no costs to you associated with your participation.
     </p>
     <p style="text-align: left;">
@@ -54,7 +54,7 @@ const instructions_page1 = `
     </div>
     <hr>
     <p style="text-align: left;">
-        In this study you will be playing a betting game with another research participant. 
+        In this study you will be playing a betting game with another research participant and answering questions about information from the game. 
         You will not be playing live with the other participant. 
         They have already made their decisions in the game, and you will make decisions that affect a future participant.
     </p>
@@ -63,12 +63,16 @@ const instructions_page1 = `
 const instructions_page2 = `
     <div class="instructions-box">
         <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-        <div id="wheel" style="background-image: conic-gradient(lightgreen 55%, black 0);"></div>
+        <div id="wheel" style="background-image: conic-gradient(lightgreen 60%, black 0);"></div>
     </div>
     <hr>
     <p style="text-align: left;">
-        In each round, a wheel made up of two colors will be spun. 
-        Players can win or lose money depending on whether the wheel lands on green.
+        The game involves spinning a wheel with black and green sections. 
+        Players win when the wheel lands with the arrow on green, but they lose when it lands with the arrow on black. 
+        <br>
+        <br>
+        So, the chance of winning is equal to the percentage of the wheel that is green. 
+        For example, if you spin a wheel that is 60% green and 40% black, the probability of you winning is 60%. 
     </p>
 `
 
@@ -100,7 +104,7 @@ const instructions_page3 = `
     <hr>
     <p style="text-align: left;">
         There are two roles in the game: the Reporter and the Decider. 
-        You will first play the role of the Reporter and then the role of the Decider. 
+        You will first play the role of the Reporter and then the role of the Decider.
     </p>
 `
 
@@ -121,7 +125,7 @@ const instructions_page4 = `
         </div>
         <div class="reporter-inst-spacer"></div>
         <div class="reporter-inst-text-container">
-            What percentage of the wheel you just saw was green?
+            What is the chance of winning with the wheel that you just saw?
         </div>
         <br>
         <div style="display: inline-block; width: 250px; text-align: center;">
@@ -135,321 +139,16 @@ const instructions_page4 = `
     <hr>
     <p style="text-align: left;">
         When you're the Reporter, you get to see the wheel for 1 second. 
-        After 1 second, the wheel disappears and you need to estimate what percentage of the wheel was green. 
-        We will call this number the "% Green" of the wheel for short. 
+        After 1 second, the wheel disappears and you need to estimate the chance of winning when that wheel is spun 
+        (remember, this is the same number as the percentage of the wheel that is green). 
         <br>
         <br>
-        Every wheel is at least 25% Green and no more than 75% Green.
         You will be given a bonus depending on how accurate your estimate is. 
-        The estimations that you make as a Reporter will be used in another participant's Decider rounds. 
+        The estimations that you make as a Reporter will be used in another participant's Decider rounds.
     </p>
 `
 
 const instructions_page5 = `
-    <div class="instructions-box">
-        <div id="text-container" class="container">
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
-            </div>
-            <strong>Amount at Stake: </strong> 15&#162;
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">This is how much money you currently have.</span>
-            </div>
-            <strong>Your Wallet: </strong> 100&#162;
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
-            </div>
-            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % Green
-        </div>
-        <div id="wheel-container" class="container">
-            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel">???</div>
-            <br>
-            <br>
-        </div>
-    </div>
-    <hr>
-    <p style="text-align: left;">
-        When you're the Decider, you start with a wallet that has 100&#162; in it, and each round you try to grow the amount of money in your wallet by making bets that the wheel will land on green. 
-        <br>
-        <br>
-        At the beginning of each round, a new "amount at stake" is set and a wheel with random percentages of green and black is chosen. 
-        However, unlike the Reporter, you won't get to see the wheel immediately. 
-        <br>
-        <br>
-        Instead, your job is to decide what percentage of the wheel has to be green in order for you to be willing to bet the amount at stake for that round. 
-        This is called your "threshold." Your threshold must be between 25% and 75%.
-        <br>
-        <br>
-        As shown in the example above, if the amount at stake is 15&#162; and you set your threshold to 53%, 
-        that means that you are okay with betting 15&#162; from your wallet as long as the wheel is at least 53% green 
-        (giving you at least a 53% chance of winning the bet).
-    </p>
-`
-
-const instructions_page6 = `
-    <div class="instructions-box">
-        <div id="text-container" class="container">
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
-            </div>
-            <strong>Amount at Stake: </strong> 15&#162;
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">This is how much money you currently have.</span>
-            </div>
-            <strong>Your Wallet: </strong> 100&#162;
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
-            </div>
-            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % Green
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
-            </div>
-            <strong>Reporter's Estimate: </strong> 56% Green
-            <div style="text-align: center;">
-                <br>
-                <br>
-                <strong><u>BET WENT THROUGH</u></strong>
-                <br>
-                <span style="font-size: 15px">Reporter's estimate was <u>higher</u> than your threshold</span>
-            </div>
-        </div>
-        <div id="wheel-container" class="container">
-            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel">???</div>
-            <br>
-            <br>
-        </div>
-    </div>
-    <hr>
-    <p style="text-align: left;">
-        Once you enter your threshold, you will learn two new pieces of information. 
-        <br>
-        <br>
-        First, you will see a previous Reporter's estimate of the % Green of the wheel.
-        This estimate will determine whether the bet goes through or not.
-        <br>
-        <br>
-        Specifically, if the Reporter's estimate is greater than or equal to your threshold (as in the example above), the bet will go through. 
-        If the Reporter's estimate is lower, the bet will not go through.
-        <br>
-        <br>
-        Below the Reporter's estimate, you will see text indicating whether the bet went through or not.
-    </p>
-`
-
-const instructions_page7 = `
-    <div class="instructions-box">
-        <div id="text-container" class="container">
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
-            </div>
-            <strong>Amount at Stake: </strong> 15&#162;
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">This is how much money you currently have.</span>
-            </div>
-            <strong>Your Wallet: </strong> 100&#162;
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
-            </div>
-            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % Green
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
-            </div>
-            <strong>Reporter's Estimate: </strong> 56% Green
-            <div style="text-align: center;">
-                <br>
-                <br>
-                <strong><u>BET WENT THROUGH</u></strong>
-                <br>
-                <span style="font-size: 15px">Reporter's estimate was <u>higher</u> than your threshold</span>
-            </div>
-        </div>
-        <div id="wheel-container" class="container">
-            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel" style="background-image: conic-gradient(lightgreen 52%, black 0);"></div>
-            <div id="true-value"><strong>Exact % Green:</strong> 52</div>
-        </div>
-    </div>
-    <hr>
-    <p style="text-align: left;">
-        Second, the exact % Green of the wheel being used for the round will be revealed. 
-        You will see the wheel alongside the exact % Green written out as a number.
-    </p>
-`
-
-const instructions_page8 = `
-    <div class="instructions-box">
-        <br>
-        <br>
-        <br>
-        <br>
-        <div style="font-size: 30px;">Bet goes through</div>
-        <br>
-        <div class="bet-exp-wheel-container">
-            <div class="small-pointer">&darr;</div>
-            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 340deg;"></div>
-            <br>
-            Win the amount at stake
-        </div>
-        <div class="bet-exp-vline-container"></div>
-        <div class="bet-exp-wheel-container">
-            <div class="small-pointer">&darr;</div>
-            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 20deg;"></div>
-            <br>
-            Lose the amount at stake
-        </div>
-    </div>
-    <hr>
-    <p style="text-align: left;">
-        If the bet goes through, the wheel will be spun. 
-        You will win the amount at stake if the wheel comes to rest with the arrow on green, 
-        but you will lose the amount at stake if the wheel comes to rest with the arrow on black. 
-    </p>
-`
-
-const instructions_page9 = `
-    <div class="instructions-box">
-        <br>
-        <br>
-        <br>
-        <br>
-        <div style="font-size: 30px;">Bet does not go through</div>
-        <br>
-        <div class="bet-exp-wheel-container">
-            <div class="small-pointer">&darr;</div>
-            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 340deg;"></div>
-            <br>
-            No change to wallet
-        </div>
-        <div class="bet-exp-vline-container"></div>
-        <div class="bet-exp-wheel-container">
-            <div class="small-pointer">&darr;</div>
-            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 20deg;"></div>
-            <br>
-            No change to wallet
-        </div>
-    </div>
-    <hr>
-    <p style="text-align: left;">
-        If the bet doesn't go through, the amount of money in your wallet won't change, 
-        but the wheel will still be spun so that you can see how much you would have gained or lost if the bet had gone through.
-    </p>
-`
-
-const instructions_page10 = `
-    <div class="instructions-box">
-        <div id="text-container" class="container">
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
-            </div>
-            <strong>Amount at Stake: </strong> 15&#162;
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">This is how much money you currently have.</span>
-            </div>
-            <strong>Your Wallet: </strong> 100&#162; <span style="font-weight: bold"> &rarr; </span> 115&#162;
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
-            </div>
-            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % Green
-            <br>
-            <br>
-            <div class="tooltip">
-                &#9432;
-                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
-            </div>
-            <strong>Reporter's Estimate: </strong> 56% Green
-            <div style="text-align: center;">
-                <br>
-                <br>
-                <strong><u>BET WENT THROUGH</u></strong>
-                <br>
-                <span style="font-size: 15px">Reporter's estimate was <u>higher</u> than your threshold</span>
-            </div>
-        </div>
-        <div id="wheel-container" class="container">
-            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel" style="background-image: conic-gradient(lightgreen 52%, black 0);"></div>
-            <div id="true-value"><strong>Exact % Green:</strong> 52</div>
-        </div>
-        <br>
-        <br>
-        The bet <u>went through</u>, so you <u>won</u> the 15&#162; at stake.
-        <br>
-        <br>
-        <strong>Your Wallet: </strong> 100&#162; <span style="font-weight: bold"> &rarr; </span> 115&#162;
-        <br>
-        <br>
-        <div class="number-line">
-            <div class="point-number middle">53</div>
-            <div class="point-number" style="left: 65%;">56</div>
-            <div class="point-number" style="left: 45%;">52</div>
-        </div>
-        <div class="number-line">
-            <div class="point middle"></div>
-            <div class="point" style="left: 65%;"></div>
-            <div class="point" style="left: 45%;"></div>
-        </div>
-        <div class="number-line">
-            <div class="point-label" style="left: calc(50% - 90px); rotate: 315deg;"><span style="font-weight: bold">Your Threshold</span></div>
-            <div class="point-label" style="left: calc(65% - 90px); rotate: 315deg;">Reporter's Estimate</div>
-            <div class="point-label" style="left: calc(45% - 90px); rotate: 315deg;">Exact % Green</div>
-        </div>
-        <div class="number-line-visual"></div>
-    </div>
-    <hr>
-    <p style="text-align: left;">
-        When the wheel comes to rest, you will see a summary of the round and a number line comparing your threshold, the Reporter's Estimate, and the Exact % Green of the wheel.
-        <br>
-        <br>
-        Then, you will be asked three questions about the round.
-    </p>
-`
-
-const instructions_page11 = `
-    <div class="instructions-box">
-    </div>
-    <hr>
-    <p style="text-align: left;">
-        At the end of all the rounds, however much money is in your wallet will be awarded to you as a bonus.
-    </p>
-`
-
-const instructions_page12 = `
     <div class="instructions-box">
         <br>
         <br>
@@ -472,7 +171,401 @@ const instructions_page12 = `
     </p>
 `
 
+const instructions_page6 = `
+<div class="instructions-box">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="decider-avatar" class="avatar">
+        <div class="head"></div>
+        <div class="shoulders">
+            <br>
+            <br>
+            Decider
+        </div>
+    </div>
+</div>
+<hr>
+<p style="text-align: left;">
+    This completes your practice Reporter rounds.
+    <br>
+    <br>
+    Now let's learn how to play the role of the Decider.
+</p>
+`
+
+const instructions_page7 = `
+    <div class="instructions-box">
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If money is on the line, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> 15&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> 100&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, money will be on the line.</span>
+            </div>
+            <strong>Your Threshold: </strong> <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % chance of winning
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" class="masked">???</div>
+            <br>
+            <br>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        When you're the Decider, you start with a wallet that has 100&#162; in it, 
+        and each round you have the opportunity to grow the amount of money in your wallet by betting on the spin of the wheel. 
+        <br>
+        <br>
+        At the beginning of each round, a new "amount at stake" is set and a wheel with a random chance of winning is chosen. 
+        However, unlike the Reporter, you won't get to see the wheel immediately. 
+        <br>
+        <br>
+        Instead, your job is to decide the smallest chance of winning where you would be willing to bet the amount at stake. 
+        In other words, you must complete the sentence, 
+        "I am willing to bet the amount at stake if my chances of winning are at least ___." 
+        This number is called your "threshold." 
+        <br>
+        <br>
+        <u>NOTE:</u> There is never a right or wrong answer for your threshold. 
+        It is simply about how much risk you are willing to take with the amount at stake for the round.
+        <br>
+        <br>
+        To keep it interesting, your threshold must be between 25% and 75%, 
+        but the wheel can give anywhere from a 0% to 100% chance of winning.
+    </p>
+`
+
+const instructions_page8 = `
+    <div class="instructions-box">
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If money is on the line, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> 15&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> 100&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, money will be on the line.</span>
+            </div>
+            <strong>Your Threshold: </strong> <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % chance of winning
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that the chance of winning was this %.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> 56% chance of winning
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>MONEY ON THE LINE</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>higher</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" class="masked">???</div>
+            <br>
+            <br>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        Once you enter your threshold, you will learn two new pieces of information. 
+        <br>
+        <br>
+        First, you will see a previous Reporter's estimate of the chance of winning. 
+        If the Reporter's estimate is greater than or equal to your threshold (as in the example above), 
+        the amount at stake will be on the line when the wheel is spun. This means that you will win or lose depending on the outcome of the spin.
+        <br>
+        <br>
+        If the Reporter's estimate is lower, no money will be on the line for the round. This means that you will not win or lose any money, regardless of the outcome of the spin.
+        <br>
+        <br>
+        Below the Reporter's estimate, you will see text indicating whether the amount at stake is on the line or not.
+    </p>
+`
+
+const instructions_page9 = `
+    <div class="instructions-box">
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If money is on the line, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> 15&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> 100&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, money will be on the line.</span>
+            </div>
+            <strong>Your Threshold: </strong> <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % chance of winning
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that the chance of winning was this %.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> 56% chance of winning
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>MONEY ON THE LINE</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>higher</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" style="background-image: conic-gradient(lightgreen 52%, black 0);"></div>
+            <div id="true-value"><strong>Exact chance of winning:</strong> 52%</div>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        Second, the exact chance of winning will be revealed. 
+        You will see both the wheel itself and the exact chance of winning written out as a number.
+    </p>
+`
+
+const instructions_page10 = `
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div style="font-size: 30px;">If money is on the line</div>
+        <br>
+        <div class="bet-exp-wheel-container">
+            <div class="small-pointer">&darr;</div>
+            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 340deg;"></div>
+            <br>
+            Win the amount at stake
+        </div>
+        <div class="bet-exp-vline-container"></div>
+        <div class="bet-exp-wheel-container">
+            <div class="small-pointer">&darr;</div>
+            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 20deg;"></div>
+            <br>
+            Lose the amount at stake
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        Next, the wheel will be spun. 
+        As a reminder, if the amount at stake is on the line, you will win that amount of money if the wheel lands on green, 
+        but lose that amount if the wheel lands on black.
+    </p>
+`
+
+const instructions_page11 = `
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div style="font-size: 30px;">If money is not on the line</div>
+        <br>
+        <div class="bet-exp-wheel-container">
+            <div class="small-pointer">&darr;</div>
+            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 340deg;"></div>
+            <br>
+            No change to wallet
+        </div>
+        <div class="bet-exp-vline-container"></div>
+        <div class="bet-exp-wheel-container">
+            <div class="small-pointer">&darr;</div>
+            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0); rotate: 20deg;"></div>
+            <br>
+            No change to wallet
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        If no money is on the line, you will not win or lose any money, regardless of the outcome of the spin.
+    </p>
+`
+
+const instructions_page12 = `
+    <div class="instructions-box">
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If money is on the line, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> 15&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> 100&#162; <span style="font-weight: bold"> &rarr; </span> 115&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, money will be on the line.</span>
+            </div>
+            <strong>Your Threshold: </strong> <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % chance of winning
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that the chance of winning was this %.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> 56% chance of winning
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>MONEY ON THE LINE</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>higher</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" style="background-image: conic-gradient(lightgreen 52%, black 0);"></div>
+            <div id="true-value"><strong>Exact chance of winning:</strong> 52%</div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        When the wheel comes to rest, you will see a summary of the round and a number line comparing your threshold, 
+        the Reporter's estimate of the chance of winning, and the exact chance of winning. 
+        <br>
+        <br>
+        Then, you will be asked three questions about the round.
+    </p>
+`
+
+const instructions_page12_full_box = `
+    <div class="instructions-box">
+        <div id="text-container" class="container">
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">If money is on the line, this is how much you will win or lose.</span>
+            </div>
+            <strong>Amount at Stake: </strong> 15&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is how much money you currently have.</span>
+            </div>
+            <strong>Your Wallet: </strong> 100&#162; <span style="font-weight: bold"> &rarr; </span> 115&#162;
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, money will be on the line.</span>
+            </div>
+            <strong>Your Threshold: </strong> <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="53" readonly="true"/> % chance of winning
+            <br>
+            <br>
+            <div class="tooltip">
+                &#9432;
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that the chance of winning was this %.</span>
+            </div>
+            <strong>Reporter's Estimate: </strong> 56% chance of winning
+            <div style="text-align: center;">
+                <br>
+                <br>
+                <strong><u>MONEY ON THE LINE</u></strong>
+                <br>
+                <span style="font-size: 15px">Reporter's estimate was <u>higher</u> than your threshold</span>
+            </div>
+        </div>
+        <div id="wheel-container" class="container">
+            <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" style="background-image: conic-gradient(lightgreen 52%, black 0); rotate: 340deg"></div>
+            <div id="true-value"><strong>Exact chance of winning:</strong> 52%</div>
+        </div>
+        <br>
+        <br>
+        Money was <u>on the line</u>, so you <u>won</u> the 15&#162; at stake.
+        <br>
+        <br>
+        <strong>Your Wallet: </strong> 100&#162; <span style="font-weight: bold"> &rarr; </span> 115&#162;
+        <br>
+        <br>
+        <div class="number-line">
+            <div class="point-number middle">53</div>
+            <div class="point-number" style="left: 65%;">56</div>
+            <div class="point-number" style="left: 45%;">52</div>
+        </div>
+        <div class="number-line">
+            <div class="point middle"></div>
+            <div class="point" style="left: 65%;"></div>
+            <div class="point" style="left: 45%;"></div>
+        </div>
+        <div class="number-line">
+            <div class="point-label" style="left: calc(50% - 105px); rotate: 315deg;"><span style="font-weight: bold">Your Threshold</span></div>
+            <div class="point-label" style="left: calc(65% - 105px); rotate: 315deg;">Reporter's Estimate</div>
+            <div class="point-label" style="left: calc(45% - 105px); rotate: 315deg;">Exact chance of winning</div>
+        </div>
+        <div class="number-line-visual"></div>
+    </div>
+`
+
 const instructions_page13 = `
+    <div class="instructions-box">
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        At the end of all the rounds, however much money is in your wallet will be awarded to you as a bonus.
+    </p>
+`
+
+const instructions_page14 = `
     <div class="instructions-box">
         <br>
         <br>
@@ -496,6 +589,10 @@ const instructions_page13 = `
         <br>
         If you forget any of the rules or find something confusing, try hovering over the &#9432; icons on the left side of the screen.
         These contain short explanations of each term to remind you how the game works.
+        <br>
+        <br>
+        <u>NOTE:</u> Remember that the chance of winning with a given wheel is the same as the percentage of that wheel that is green. 
+        As you move through the rounds, think of those numbers in whichever way feels more intuitive to you!
     </p>
 `
 
@@ -538,13 +635,13 @@ function incorrect_response_stimulus() {
                     <div>
                         <label>
                             <input ${checked[0][2]} disabled type="radio">
-                            Estimate the percentage of the wheel that is green
+                            Estimate the chance of winning
                         </label>
                     </div>
                     <div>
                         <label>
                             <input ${checked[0][3]} disabled type="radio">
-                            Guess whether the bet will go through or not
+                            Guess whether money will be on the line or not
                         </label>
                     </div>
                 </div>
@@ -559,7 +656,7 @@ function incorrect_response_stimulus() {
                     <div>
                         <label>
                             <input ${checked[1][1]} disabled type="radio">
-                            Decide what percentage of the wheel needs to be green in order for the bet to go through
+                            Decide the smallest chance of winning where they are willing to bet the amount at stake
                         </label>
                     </div>
                     <div>
@@ -633,9 +730,9 @@ function reporter_feedback_stimulus(percent) {
         <div id="wheel" style="background-image: conic-gradient(lightgreen ${percent}%, black 0);"></div>
         <div>
             <br>
-            <strong>Exact % Green:</strong> ${percent}
+            <strong>Exact chance of winning:</strong> ${percent}%
             <br>
-            <strong>Your Estimate:</strong> ${current_estimate} (${current_distance} away)
+            <strong>Your Estimate:</strong> ${current_estimate}% (${current_distance} away)
             <br>
             <br>
             Press space to ${progress_text[Math.floor(reporter_count / 7)]}.
@@ -701,7 +798,7 @@ function minimum_stimulus(buyin) {
         <div id="text-container" class="container">
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+                <span class="tooltiptext">If money is on the line, this is how much you will win or lose.</span>
             </div>
             <strong>Amount at Stake: </strong> ${buyin}&#162;
             <br>
@@ -715,13 +812,13 @@ function minimum_stimulus(buyin) {
             <br>
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, money will be on the line.</span>
             </div>
-            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" required="true"/> % Green
+            <strong>Your Threshold: </strong> <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" required="true"/> % chance of winning
         </div>
         <div id="wheel-container" class="container">
             <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel">???</div>
+            <div id="wheel" class="masked">???</div>
             <br>
             <br>
         </div>
@@ -735,14 +832,14 @@ function minimum_stimulus(buyin) {
 function see_report_stimulus(buyin, bet) {
     bet = parseInt(bet)
 
-    let go_thru = ["DID NOT GO", "WENT"]
+    let go_thru = ["NOT ", ""]
     let low_high = ["lower", "higher"]
 
     let string = `
         <div id="text-container" class="container">
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+                <span class="tooltiptext">If money is on the line, this is how much you will win or lose.</span>
             </div>
             <strong>Amount at Stake: </strong> ${buyin}&#162;
             <br>
@@ -756,27 +853,27 @@ function see_report_stimulus(buyin, bet) {
             <br>
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, money will be on the line.</span>
             </div>
-            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % Green
+            <strong>Your Threshold: </strong> <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % chance of winning
             <br>
             <br>
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that the chance of winning was this %.</span>
             </div>
-            <strong>Reporter's Estimate: </strong> ${current_report}% Green
+            <strong>Reporter's Estimate: </strong> ${current_report}% chance of winning
             <div style="text-align: center;">
                 <br>
                 <br>
-                <strong><u>BET ${go_thru[bet]} THROUGH</u></strong>
+                <strong><u>MONEY ${go_thru[bet]}ON THE LINE</u></strong>
                 <br>
                 <span style="font-size: 15px">Reporter's estimate was <u>${low_high[bet]}</u> than your threshold</span>
             </div>
         </div>
         <div id="wheel-container" class="container">
             <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel">???</div>
+            <div id="wheel" class="masked">???</div>
             <br>
             <br>
         </div>
@@ -790,14 +887,14 @@ function see_report_stimulus(buyin, bet) {
 function see_wheel_stimulus(buyin, bet) {
     bet = parseInt(bet)
 
-    let go_thru = ["DID NOT GO", "WENT"]
+    let go_thru = ["NOT ", ""]
     let low_high = ["lower", "higher"]
 
     let string = `
         <div id="text-container" class="container">
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+                <span class="tooltiptext">If money is on the line, this is how much you will win or lose.</span>
             </div>
             <strong>Amount at Stake: </strong> ${buyin}&#162;
             <br>
@@ -811,28 +908,28 @@ function see_wheel_stimulus(buyin, bet) {
             <br>
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, money will be on the line.</span>
             </div>
-            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % Green
+            <strong>Your Threshold: </strong> <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % chance of winning
             <br>
             <br>
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that the chance of winning was this %.</span>
             </div>
-            <strong>Reporter's Estimate: </strong> ${current_report}% Green
+            <strong>Reporter's Estimate: </strong> ${current_report}% chance of winning
             <div style="text-align: center;">
                 <br>
                 <br>
-                <strong><u>BET ${go_thru[bet]} THROUGH</u></strong>
+                <strong><u>MONEY ${go_thru[bet]}ON THE LINE</u></strong>
                 <br>
                 <span style="font-size: 15px">Reporter's estimate was <u>${low_high[bet]}</u> than your threshold</span>
             </div>
         </div>
         <div id="wheel-container" class="container">
             <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel" style="background-image: conic-gradient(lightgreen ${current_truth}%, black 0);"></div>
-            <div id="true-value"><strong>Exact % Green:</strong> ${current_truth}</div>
+            <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen ${current_truth}%, black 0);"><div id="pin"></div></div>
+            <div id="true-value"><strong>Exact chance of winning:</strong> ${current_truth}%</div>
         </div>
         <br>
         <br>
@@ -844,14 +941,14 @@ function see_wheel_stimulus(buyin, bet) {
 function spin_stimulus(buyin, bet) {
     bet = parseInt(bet)
 
-    let go_thru = ["DID NOT GO", "WENT"]
+    let go_thru = ["NOT ", ""]
     let low_high = ["lower", "higher"]
 
     let string = `
         <div id="text-container" class="container">
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+                <span class="tooltiptext">If money is on the line, this is how much you will win or lose.</span>
             </div>
             <strong>Amount at Stake: </strong> ${buyin}&#162;
             <br>
@@ -865,28 +962,28 @@ function spin_stimulus(buyin, bet) {
             <br>
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, money will be on the line.</span>
             </div>
-            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % Green
+            <strong>Your Threshold: </strong> <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % chance of winning
             <br>
             <br>
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that the chance of winning was this %.</span>
             </div>
-            <strong>Reporter's Estimate: </strong> ${current_report}% Green
+            <strong>Reporter's Estimate: </strong> ${current_report}% chance of winning
             <div style="text-align: center;">
                 <br>
                 <br>
-                <strong><u>BET ${go_thru[bet]} THROUGH</u></strong>
+                <strong><u>MONEY ${go_thru[bet]}ON THE LINE</u></strong>
                 <br>
                 <span style="font-size: 15px">Reporter's estimate was <u>${low_high[bet]}</u> than your threshold</span>
             </div>
         </div>
         <div id="wheel-container" class="container">
             <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel" style="background-image: conic-gradient(lightgreen ${current_truth}%, black 0);"></div>
-            <div id="true-value"><strong>Exact % Green:</strong> ${current_truth}</div>
+            <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen ${current_truth}%, black 0);"><div id="pin"></div></div>
+            <div id="true-value"><strong>Exact chance of winning:</strong> ${current_truth}%</div>
         </div>
         <br>
         <br>
@@ -899,7 +996,7 @@ function outcome_stimulus(buyin, bet, outcome) {
     bet = parseInt(bet)
     outcome = parseInt(outcome)
 
-    let go_thru = ["DID NOT GO", "WENT"]
+    let go_thru = ["NOT ", ""]
     let low_high = ["lower", "higher"]
     let result = [["did not lose", "did not win"], ["lost", "won"]]
 
@@ -912,7 +1009,7 @@ function outcome_stimulus(buyin, bet, outcome) {
         <div id="text-container" class="container">
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">If the bet goes through, this is how much you will win or lose.</span>
+                <span class="tooltiptext">If money is on the line, this is how much you will win or lose.</span>
             </div>
             <strong>Amount at Stake: </strong> ${buyin}&#162;
             <br>
@@ -926,32 +1023,32 @@ function outcome_stimulus(buyin, bet, outcome) {
             <br>
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, the bet will go through.</span>
+                <span class="tooltiptext">This is the smallest chance of winning you are willing to accept. If the reporter's estimate is higher than this, money will be on the line.</span>
             </div>
-            <strong>Your Threshold: </strong> at least <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % Green
+            <strong>Your Threshold: </strong> <input id="minimum" class="percentage-enter" name="minimum" type="number" max="75" min="25" placeholder="${current_minimum}" readonly="true"/> % chance of winning
             <br>
             <br>
             <div class="tooltip">
                 &#9432;
-                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that it was this % Green.</span>
+                <span class="tooltiptext">After seeing the wheel for one second, the reporter estimated that the chance of winning was this %.</span>
             </div>
-            <strong>Reporter's Estimate: </strong> ${current_report}% Green
+            <strong>Reporter's Estimate: </strong> ${current_report}% chance of winning
             <div style="text-align: center;">
                 <br>
                 <br>
-                <strong><u>BET ${go_thru[bet]} THROUGH</u></strong>
+                <strong><u>MONEY ${go_thru[bet]}ON THE LINE</u></strong>
                 <br>
                 <span style="font-size: 15px">Reporter's estimate was <u>${low_high[bet]}</u> than your threshold</span>
             </div>
         </div>
         <div id="wheel-container" class="container">
             <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel" style="background-image: conic-gradient(lightgreen ${current_truth}%, black 0); rotate: ${current_rotation}deg"></div>
-            <div id="true-value"><strong>Exact % Green:</strong> ${current_truth}</div>
+            <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen ${current_truth}%, black 0); rotate: ${current_rotation}deg"><div id="pin"></div></div>
+            <div id="true-value"><strong>Exact chance of winning:</strong> ${current_truth}%</div>
         </div>
         <br>
         <br>
-        The bet <u>${go_thru[bet].toLowerCase()} through</u>, so you <u>${result[bet][outcome]}</u> the ${buyin}&#162; at stake.
+        Money was <u>${go_thru[bet].toLowerCase()}on the line</u>, so you <u>${result[bet][outcome]}</u> the ${buyin}&#162; at stake.
         <br>
         <br>
         <strong>Your Wallet: </strong> ${pot}&#162; <span style="font-weight: bold"> &rarr; </span> ${pot + buyin * bet * (outcome * 2 - 1)}&#162;
@@ -968,9 +1065,9 @@ function outcome_stimulus(buyin, bet, outcome) {
             <div class="point" style="left: ${50 - 5 * (current_minimum - current_truth)}%;"></div>
         </div>
         <div class="number-line">
-            <div class="point-label" style="left: calc(50% - 90px); rotate: 315deg;"><span style="font-weight: bold">Your Threshold</span></div>
-            <div class="point-label" style="left: calc(${50 - 5 * (current_minimum - current_report)}% - 90px); rotate: 315deg;">Reporter's Estimate</div>
-            <div class="point-label" style="left: calc(${50 - 5 * (current_minimum - current_truth)}% - 90px); rotate: 315deg;">Exact % Green</div>
+            <div class="point-label" style="left: calc(50% - 105px); rotate: 315deg;"><span style="font-weight: bold">Your Threshold</span></div>
+            <div class="point-label" style="left: calc(${50 - 5 * (current_minimum - current_report)}% - 105px); rotate: 315deg;">Reporter's Estimate</div>
+            <div class="point-label" style="left: calc(${50 - 5 * (current_minimum - current_truth)}% - 105px); rotate: 315deg;">Exact chance of winning</div>
         </div>
         <div class="number-line-visual"></div>
     `
@@ -989,17 +1086,20 @@ function outcome_questions() {
     let questions = [
         {
             prompt: `
-                If the reporter's estimate had been the Exact % Green (${current_truth}%), would the bet have gone through?
+                Was the exact chance of winning lower or higher than your threshold?
             `,
             options: [
-                "No",
-                "Yes"
+                "Lower",
+                "They were equal",
+                "Higher"
             ],
             name: "manip_check",
             required: true
         },
         {
-            prompt: `Would you consider the information provided by the reporter to be true or false?`,
+            prompt: `
+                Would you consider the information provided by the reporter to be true or false?
+            `,
             options: [
                 "False",
                 "True"
@@ -1008,17 +1108,20 @@ function outcome_questions() {
             required: true
         },
         {
-            prompt: `How true or false would you consider the information provided by the reporter to be?`,
+            prompt: `
+                How true or false would you consider the information provided by the reporter to be?
+            `,
             options: [
-                "Completely false",
-                "Mostly false",
-                "Somewhat false",
-                "Neither true nor false",
-                "Somewhat true",
-                "Mostly true",
-                "Completely true"
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7"
             ],
             name: "truth_lk",
+            horizontal: true,
             required: true
         }
     ]
@@ -1038,6 +1141,174 @@ function bonus_report_stimulus() {
 
     return string
 }
+
+const less_than_half_questions = `
+    <div style="text-align: left; max-width: 800px">
+        <br>
+        When playing as the decider, we saw that you entered at least one threshold under 50%. Could you tell us why? 
+        <br>
+        <br>
+        <textarea name="low_thresholds" id="low_thresholds" rows="4" cols="100"> </textarea>
+        <br>
+        <br>
+    </div>
+`
+
+const truth_survey_general_questions = `
+    <div style="text-align: left; max-width: 800px">
+        <br>
+        Outside of the context of the game you just played, imagine some said something that was close to the truth, but was not perfectly accurate.
+        <br>
+        <br>
+        In general, if this inaccuracy changed the outcome of the situation, would that influence how <strong>you</strong> classify the truth of the person's statement?
+        <div>
+            <input name="self_cons" type="radio" value="0" id="self_more_true" required="true" />
+            <label for="self_more_true">Yes, I would be more likely to classify it as true</label>
+        </div>
+        <div>
+            <input name="self_cons" type="radio" value="1" id="self_more_false" />
+            <label for="self_more_false">Yes, I would be more likely to classify it as false</label>
+        </div>
+        <div>
+            <input name="self_cons" type="radio" value="2" id="self_unaffect" />
+            <label for="self_unaffect">No, it would not affect how I classify it</label>
+        </div>
+        <div>
+            <input name="self_cons" type="radio" value="3" id="self_unsure" />
+            <label for="self_unsure">Unsure</label>
+        </div>
+        <div>
+            <input name="self_cons" type="radio" value="4" id="self_not_understand" />
+            <label for="self_not_understand">I don't understand the question</label>
+        </div>
+        <br>
+        In general, if this inaccuracy changed the outcome of the situation, do you think that would influence how <strong>other people</strong> classify the truth of the person's statement?
+        <div>
+            <input name="others_cons" type="radio" value="0" id="others_more_true" required="true" />
+            <label for="others_more_true">Yes, others would be more likely to classify it as true</label>
+        </div>
+        <div>
+            <input name="others_cons" type="radio" value="1" id="others_more_false" />
+            <label for="others_more_false">Yes, others would be more likely to classify it as false</label>
+        </div>
+        <div>
+            <input name="others_cons" type="radio" value="2" id="others_unaffect" />
+            <label for="others_unaffect">No, it would not affect how others classify it</label>
+        </div>
+        <div>
+            <input name="others_cons" type="radio" value="3" id="others_unsure" />
+            <label for="others_unsure">Unsure</label>
+        </div>
+        <div>
+            <input name="others_cons" type="radio" value="4" id="others_not_understand" />
+            <label for="others_not_understand">I don't understand the question</label>
+        </div>
+        <br>
+        In general, if this inaccuracy changed the outcome of the situation, do you think that <strong>should</strong> (in an ideal world) influence how people classify the truth of the person's statement?
+        <div>
+            <input name="should_cons" type="radio" value="0" id="should_more_true" required="true" />
+            <label for="should_more_true">Yes, people should be more likely to classify it as true</label>
+        </div>
+        <div>
+            <input name="should_cons" type="radio" value="1" id="should_more_false" />
+            <label for="should_more_false">Yes, people should be more likely to classify it as false</label>
+        </div>
+        <div>
+            <input name="should_cons" type="radio" value="2" id="should_unaffect" />
+            <label for="should_unaffect">No, it should not affect how people classify it</label>
+        </div>
+        <div>
+            <input name="should_cons" type="radio" value="3" id="should_unsure" />
+            <label for="should_unsure">Unsure</label>
+        </div>
+        <div>
+            <input name="should_cons" type="radio" value="4" id="should_not_understand" />
+            <label for="should_not_understand">I don't understand the question</label>
+        </div>
+        <br>
+    </div>
+`
+
+const truth_survey_specific_questions = `
+<div style="text-align: left; max-width: 800px">
+    <br>
+    In the game you just played, the Reporter's estimate was often close to the correct number, but was not perfectly accurate. 
+    <br>
+    <br>
+    Sometimes this inaccuracy didn't change whether the money was put on the line, so it didn't change the outcome of the game. 
+    <br>
+    <br>
+    But other times, it did change the outcome. For example, the inaccuracy might have caused the money to be put on the line when, according to your threshold, it shouldn't have been.
+    <br>
+    <br>
+    Do you think that when the inaccuracy changed the outcome of the game, it influenced how <strong>you</strong> classified the truth of the Reporter's estimate?
+    <div>
+        <input name="self_cons" type="radio" value="0" id="self_more_true" required="true" />
+        <label for="self_more_true">Yes, I would be more likely to classify it as true</label>
+    </div>
+    <div>
+        <input name="self_cons" type="radio" value="1" id="self_more_false" />
+        <label for="self_more_false">Yes, I would be more likely to classify it as false</label>
+    </div>
+    <div>
+        <input name="self_cons" type="radio" value="2" id="self_unaffect" />
+        <label for="self_unaffect">No, it would not affect how I classify it</label>
+    </div>
+    <div>
+        <input name="self_cons" type="radio" value="3" id="self_unsure" />
+        <label for="self_unsure">Unsure</label>
+    </div>
+    <div>
+        <input name="self_cons" type="radio" value="4" id="self_not_understand" />
+        <label for="self_not_understand">I don't understand the question</label>
+    </div>
+    <br>
+    Do you think that when the inaccuracy changed the outcome of the game, it influenced how <strong>other people</strong> classified the truth of the Reporter's estimate?
+    <div>
+        <input name="others_cons" type="radio" value="0" id="others_more_true" required="true" />
+        <label for="others_more_true">Yes, others would be more likely to classify it as true</label>
+    </div>
+    <div>
+        <input name="others_cons" type="radio" value="1" id="others_more_false" />
+        <label for="others_more_false">Yes, others would be more likely to classify it as false</label>
+    </div>
+    <div>
+        <input name="others_cons" type="radio" value="2" id="others_unaffect" />
+        <label for="others_unaffect">No, it would not affect how others classify it</label>
+    </div>
+    <div>
+        <input name="others_cons" type="radio" value="3" id="others_unsure" />
+        <label for="others_unsure">Unsure</label>
+    </div>
+    <div>
+        <input name="others_cons" type="radio" value="4" id="others_not_understand" />
+        <label for="others_not_understand">I don't understand the question</label>
+    </div>
+    <br>
+    Do you think that when the inaccuracy changed the outcome of the game, it <strong>should</strong> (in an ideal world) influence how people classify the truth of the Reporter's estimate?
+    <div>
+        <input name="should_cons" type="radio" value="0" id="should_more_true" required="true" />
+        <label for="should_more_true">Yes, people should be more likely to classify it as true</label>
+    </div>
+    <div>
+        <input name="should_cons" type="radio" value="1" id="should_more_false" />
+        <label for="should_more_false">Yes, people should be more likely to classify it as false</label>
+    </div>
+    <div>
+        <input name="should_cons" type="radio" value="2" id="should_unaffect" />
+        <label for="should_unaffect">No, it should not affect how people classify it</label>
+    </div>
+    <div>
+        <input name="should_cons" type="radio" value="3" id="should_unsure" />
+        <label for="should_unsure">Unsure</label>
+    </div>
+    <div>
+        <input name="should_cons" type="radio" value="4" id="should_not_understand" />
+        <label for="should_not_understand">I don't understand the question</label>
+    </div>
+    <br>
+</div>
+`
 
 const demographics_questions = `
     <div style="text-align: left; max-width: 800px">
@@ -1348,13 +1619,14 @@ const demographics_questions = `
             <input name="religiosity" type="radio" id="unknown_rel" value="4" />
             <label for="unknown_rel">Don't know</label>
         </div>
+        <br>
     </div>
 `
 
 const feedback_questions = `
     <div style="text-align: left; max-width: 800px">
         <br>
-        How easy or hard was it to understand the game you observed in this study?
+        How easy or hard was it to understand the game you played in this study?
         <div>
             <input name="understandable" type="radio" value="0" id="easy" />
             <label for="easy">Easy</label>
@@ -1400,40 +1672,40 @@ const feedback_questions = `
 `
 
 const debrief_html = `
-<div style="text-align: left;">
-    <strong>What was this study about?</strong>
-    <br>
-    In this study, we were trying to better understand how people decide what information should qualify as true or false.
-    <br>
-    <br>
-    It's important to note that the estimations you saw from a "previous Reporter" were not in fact estimations made by a real person. 
-    In each round, we chose both the exact % Green of the wheel and the Reporter's estimate based off of the threshold you entered.  
-    <br>
-    <br>
-    We said that the estimations were determined by previous participants because we're interested in how people evaluate the truth of information in real-world scenarios.
-    We wanted our participants in this study to believe that they were seeing approximations that real people had created.
-    <br>
-    <br>
-    <strong>Why does it matter?</strong>
-    <br>
-    Your participation helps us answer research questions, which in turn has implications for public figures, policy, and law.
-    We are committed to sharing our research findings in ways that are accessible and relevant to the public.
-    <br>
-    <br>    
-    <strong>How to contact us:</strong>
-    <br>
-    Feel free to visit our <a href="https://moralitylab.bc.edu/" target="_blank">website</a> to learn more about our research.
-    If you have any concerns or questions about the study you just completed, please reach out to the lab at lypsychlab@gmail.com.
-    <br>
-    <br>
-    <strong>To learn more about your rights as a research participant:</strong>
-    <br>
-    If you have any concerns about research-related ethics or harm, or would like to learn more about the ethical constraints under which this study was conducted, 
-    please contact the Boston College Office for Research Protections at irb@bc.edu or 617-552-4778.
-    <br>
-    <br>
-    <i>Thank you for your participation!</i>
-    <br>
-    <br>
-</div>
+    <div style="text-align: left;">
+        <strong>What was this study about?</strong>
+        <br>
+        In this study, we were trying to better understand how people decide what information should qualify as true or false.
+        <br>
+        <br>
+        It's important to note that the estimations you saw from a "previous Reporter" were not in fact estimations made by a real person. 
+        In each round, we chose both the exact % chance of winning and the Reporter's estimate based off of the threshold you entered.  
+        <br>
+        <br>
+        We said that the estimations were determined by previous participants because we're interested in how people evaluate the truth of information in real-world scenarios.
+        We wanted our participants in this study to believe that they were seeing approximations that real people had created.
+        <br>
+        <br>
+        <strong>Why does it matter?</strong>
+        <br>
+        Your participation helps us answer research questions, which in turn has implications for public figures, policy, and law.
+        We are committed to sharing our research findings in ways that are accessible and relevant to the public.
+        <br>
+        <br>    
+        <strong>How to contact us:</strong>
+        <br>
+        Feel free to visit our <a href="https://moralitylab.bc.edu/" target="_blank">website</a> to learn more about our research.
+        If you have any concerns or questions about the study you just completed, please reach out to the lab at lypsychlab@gmail.com.
+        <br>
+        <br>
+        <strong>To learn more about your rights as a research participant:</strong>
+        <br>
+        If you have any concerns about research-related ethics or harm, or would like to learn more about the ethical constraints under which this study was conducted, 
+        please contact the Boston College Office for Research Protections at irb@bc.edu or 617-552-4778.
+        <br>
+        <br>
+        <i>Thank you for your participation!</i>
+        <br>
+        <br>
+    </div>
 `

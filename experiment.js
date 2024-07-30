@@ -13,20 +13,20 @@ var pot = 100
 var last_answers = [null, null, null]
 var last_answers_correct = [null, null, null]
 const correct_responses = [
-    "Estimate the percentage of the wheel that is green",
-    "Decide what percentage of the wheel needs to be green in order for the bet to go through",
+    "Estimate the chance of winning of the wheel",
+    "Decide the smallest chance of winning where they are willing to bet the amount at stake",
     "Only when the Reporter's estimate is greater than or equal to the number the Decider enters"
 ]
 const options = [
     [
         "Estimate the percentage of the wheel that is black",
         "Guess what number the Decider will enter",
-        "Estimate the percentage of the wheel that is green",
-        "Guess whether the bet will go through or not"
+        "Estimate the chance of winning of the wheel",
+        "Guess whether money will be on the line or not"
     ],
     [
         "Decide which color to bet on",
-        "Decide what percentage of the wheel needs to be green in order for the bet to go through",
+        "Decide the smallest chance of winning where they are willing to bet the amount at stake",
         "Decide whether or not the wheel will be spun",
         "Decide the amount of money at stake for each round"
     ],
@@ -37,6 +37,7 @@ const options = [
         "Only when the Reporter's estimate is greater than or equal to the number the Decider enters"
     ]
 ]
+var skip_less_than_half = true
 
 var current_minimum
 var current_truth
@@ -60,7 +61,7 @@ const consent = {
     stimulus: consent_html,
     choices: ["Consent not given", "Consent given"],
     button_html: [
-        `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=C1CE3BQK', '_blank')">%choice%</button>`,
+        `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=C1I9FHR3', '_blank')">%choice%</button>`,
         `<button class="jspsych-btn">%choice%</button>`
     ],
     on_finish: function(data) {
@@ -69,7 +70,7 @@ const consent = {
             document.getElementById("jspsych-content").style.margin = "auto"
 
             jsPsych.endExperiment(
-                "You chose not to consent to participate.<br>If you were not automatically directed back to Prolific, please go back and enter the completion code C1CE3BQK."
+                "You chose not to consent to participate.<br>If you were not automatically directed back to Prolific, please go back and enter the completion code C1I9FHR3"
             )
         }
     },
@@ -113,14 +114,7 @@ const first_instructions = {
             instructions_page2,
             instructions_page3,
             instructions_page4,
-            instructions_page5,
-            instructions_page6,
-            instructions_page7,
-            instructions_page8,
-            instructions_page9,
-            instructions_page10,
-            instructions_page11,
-            instructions_page12
+            instructions_page5
         )
 
         return instructions_pages
@@ -139,19 +133,63 @@ const second_instructions = {
         var instructions_pages = []
 
         instructions_pages.push(
-            instructions_page13
+            instructions_page6,
+            instructions_page7,
+            instructions_page8,
+            instructions_page9,
+            instructions_page10,
+            instructions_page11,
+            instructions_page12,
+            instructions_page13,
+            instructions_page14
         )
 
         return instructions_pages
     },
     allow_keys: false,
     show_clickable_nav: true,
+    show_page_number: true,
     data: {
         type_of_trial: "instructions",
         subject_id: subject_id
     },
     on_load: function() {
         document.getElementById("jspsych-content").style.margin = "50px auto"
+        
+        // Select the node that you want to observe
+        const targetNode = document.getElementById('jspsych-content')
+        
+        // Options for the observer (which mutations to observe)
+        const config = { attributes: true, childList: true, subtree: true, characterData: true }
+        
+        // Callback function to execute when mutations are observed
+        const callback = function(mutationsList, observer) {
+            if (document.querySelector(".jspsych-instructions-pagenum")) {
+                if (!(typeof change_inst_box === "undefined")) {
+                    clearTimeout(change_inst_box)
+                }
+
+                if (document.querySelector(".jspsych-instructions-pagenum").textContent == "Page 7/9" && !document.querySelector(".number-line")) {
+                    setTimeout(function() {
+                        document.getElementById("wheel").style.transition = "rotate 4000ms ease-out"
+                        document.getElementById("wheel").style.rotate = `${num_spins * 360 + 340}deg`
+                    }, 1)
+
+                    change_inst_box = setTimeout(function() {
+                        document.querySelector(".instructions-box").outerHTML = instructions_page12_full_box
+                    }, 4001)
+                }
+            } else {
+                // Stop observing
+                observer.disconnect()
+            }
+        }
+        
+        // Create an observer instance linked to the callback function
+        const observer = new MutationObserver(callback)
+        
+        // Start observing the target node for configured mutations
+        observer.observe(targetNode, config)
     }
 }
 
@@ -168,8 +206,8 @@ const comprehension = {
             options: [
                 "Estimate the percentage of the wheel that is black",
                 "Guess what number the Decider will enter",
-                "Estimate the percentage of the wheel that is green",
-                "Guess whether the bet will go through or not"
+                "Estimate the chance of winning of the wheel",
+                "Guess whether money will be on the line or not"
             ],
             required: true
         },
@@ -177,14 +215,14 @@ const comprehension = {
             prompt: "What is the Decider trying to do?",
             options: [
                 "Decide which color to bet on",
-                "Decide what percentage of the wheel needs to be green in order for the bet to go through",
+                "Decide the smallest chance of winning where they are willing to bet the amount at stake",
                 "Decide whether or not the wheel will be spun",
                 "Decide the amount of money at stake for each round"
             ],
             required: true
         },
         {
-            prompt: "When will a bet go through?",
+            prompt: "When will money be on the line?",
             options: [
                 "Every round, regardless of what numbers the Decider and the Reporter enter",
                 "On randomly chosen rounds, regardless of what numbers the Decider and the Reporter enter",
@@ -313,10 +351,10 @@ const show_wheel = {
 const estimate_wheel = {
     type: jsPsychSurveyHtmlForm,
     html: `
-        What percentage of the wheel you just saw was green?
+        What is the chance of winning of the wheel you just saw?
         <br>
         <br>
-        <input id="estimate" class="percentage-enter" name="estimate" type="number" max="75" min="25" required="true"/>
+        <input id="estimate" class="percentage-enter" name="estimate" type="number" max="85" min="15" required="true"/>
         <br>
         <br>
     `,
@@ -365,10 +403,10 @@ const reporter_task = {
 const estimate_wheel_prac = {
     type: jsPsychSurveyHtmlForm,
     html: `
-        What percentage of the wheel you just saw was green?
+        What is the chance of winning of the wheel you just saw?
         <br>
         <br>
-        <input id="estimate" class="percentage-enter" name="estimate" type="number" max="75" min="25" required="true"/>
+        <input id="estimate" class="percentage-enter" name="estimate" type="number" max="85" min="15" required="true"/>
         <br>
         <br>
     `,
@@ -463,6 +501,10 @@ const enter_minimum = {
     on_finish: function(data) {
         current_minimum = parseInt(data.response.minimum)
         set_global_vars(current_minimum, jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"), jsPsych.timelineVariable("cons"), jsPsych.timelineVariable("error"))
+
+        if (current_minimum < 50) {
+            skip_less_than_half = false
+        }
     },
     data: {
         type_of_trial: "enter_minimum",
@@ -521,6 +563,26 @@ const see_outcome = {
     questions: function() {
         return outcome_questions()
     },
+    on_start: function() {
+        setTimeout(() => {
+            for (let i = 0; i < 7; i ++) {
+                let label = document.querySelector("#jspsych-survey-multi-choice-option-2-" + i + " label")
+                let br = document.createElement("br")
+    
+                label.insertBefore(br, label.childNodes[1])
+
+                if (i == 0) {
+                    label.appendChild(document.createElement("br"))
+                    label.appendChild(document.createTextNode("Completely false"))
+                }
+
+                if (i == 6) {
+                    label.appendChild(document.createElement("br"))
+                    label.appendChild(document.createTextNode("Completely true"))
+                }
+            }
+        }, 1)
+    },
     on_finish: function(data) {
         update_pot(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"))
 
@@ -530,6 +592,7 @@ const see_outcome = {
         data.minimum = current_minimum
         data.report = current_report
         data.truth = current_truth
+        data.wallet = pot
     },
     data: {
         type_of_trial: "measures",
@@ -557,6 +620,26 @@ const see_outcome_prac = {
     },
     questions: function() {
         return outcome_questions()
+    },
+    on_start: function() {
+        setTimeout(() => {
+            for (let i = 0; i < 7; i ++) {
+                let label = document.querySelector("#jspsych-survey-multi-choice-option-2-" + i + " label")
+                let br = document.createElement("br")
+    
+                label.insertBefore(br, label.childNodes[1])
+
+                if (i == 0) {
+                    label.appendChild(document.createElement("br"))
+                    label.appendChild(document.createTextNode("Completely false"))
+                }
+
+                if (i == 6) {
+                    label.appendChild(document.createElement("br"))
+                    label.appendChild(document.createTextNode("Completely true"))
+                }
+            }
+        }, 1)
     },
     on_finish: function(data) {
         update_pot(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"))
@@ -683,11 +766,8 @@ const debrief = {
 const feedback = {
     type: jsPsychSurveyHtmlForm,
     preamble: "We are in the process of improving this study, and we would love any feedback you have about it.",
-    html: function() {
-        return feedback_questions
-    },
+    html: feedback_questions,
     on_finish: function(data) {
-
         // populate data
         data.understand = data.response.understandable
         data.confusing = data.response.confusing
@@ -701,26 +781,83 @@ const feedback = {
     }
 }
 
+// const truth_survey_general = {
+//     type: jsPsychSurveyHtmlForm,
+//     preamble: "Please answer the following questions honestly.",
+//     html: truth_survey_general_questions,
+//     on_finish: function(data) {
+//         // populate data
+//         data.gen_self_cons = data.response.self_cons
+//         data.gen_other_cons = data.response.other_cons
+//         data.gen_should_cons = data.response.should_cons
+//     },
+//     data: {
+//         type_of_trial: "truth_survey",
+//         subject_id: subject_id
+//     }
+// }
+
+const truth_survey_specific = {
+    type: jsPsychSurveyHtmlForm,
+    preamble: "Please answer the following questions honestly.",
+    html: truth_survey_specific_questions,
+    on_finish: function(data) {
+        // populate data
+        data.spec_self_cons = data.response.self_cons
+        data.spec_other_cons = data.response.other_cons
+        data.spec_should_cons = data.response.should_cons
+    },
+    data: {
+        type_of_trial: "truth_survey",
+        subject_id: subject_id
+    }
+}
+
+// const truth_survey = {
+//     timeline: Math.random() > 0.5 ? [truth_survey_specific, truth_survey_general] : [truth_survey_general, truth_survey_specific]
+// }
+
+const less_than_half = {
+    type: jsPsychSurveyHtmlForm,
+    preamble: "Please answer the following questions honestly.",
+    html: less_than_half_questions,
+    on_load: function() {
+        if (skip_less_than_half) {
+            jsPsych.finishTrial()
+        }
+    },
+    on_finish: function(data) {
+        // populate data
+        if (!skip_less_than_half) {
+            data.low_thresholds = data.response.low_thresholds
+        } else {
+            data.low_thresholds = ""
+        }
+    },
+    data: {
+        type_of_trial: "less_than_half",
+        subject_id: subject_id
+    }
+}
+
 const back_to_prolific = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `
         Thank you for participating in this study. Your response has been recorded.
         <br>
         <br>
-        If the button below does not automatically enter your completion code, please copy and paste this code into Prolific: CS3EJJ9B.
+        If the button below does not automatically enter your completion code, please copy and paste this code into Prolific: CS3EJJ9B
         <br>
         <br>
     `,
     choices: ["Back to Prolific"],
-    button_html: `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=CS3EJJ9B', '_blank')">%choice%</button>`,
+    button_html: `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=CCCYIGU3', '_blank')">%choice%</button>`,
     on_load: function() {
         document.getElementById("jspsych-content").style.margin = "auto"
     },
     on_finish: function() {
-        document.getElementById("jspsych-content").style.margin = "50px auto"
-
         jsPsych.endExperiment(
-            "Thank you for your participation!.<br>Your completion code is CS3EJJ9B."
+            "Thank you for your participation!.<br>Your completion code is CCCYIGU3"
         )
     },
     data: {
@@ -733,7 +870,7 @@ const back_to_prolific = {
 const save_data_reporter = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "rfsrsV424H3F",
+    experiment_id: "JcVrcc15Vyhc",
     filename: `${subject_id}_reporter.csv`,
     data_string: () => jsPsych.data.get().csv(),
     data: {
@@ -745,7 +882,7 @@ const save_data_reporter = {
 const save_data_decider = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "rfsrsV424H3F",
+    experiment_id: "JcVrcc15Vyhc",
     filename: `${subject_id}_decider.csv`,
     data_string: () => jsPsych.data.get().csv(),
     data: {
@@ -757,7 +894,7 @@ const save_data_decider = {
 const save_data_final = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "rfsrsV424H3F",
+    experiment_id: "JcVrcc15Vyhc",
     filename: `${subject_id}_final.csv`,
     data_string: () => jsPsych.data.get().csv(),
     data: {
@@ -787,6 +924,8 @@ experiment.push(
     decider_task,
     save_data_decider,
     bonus_report,
+    truth_survey_specific,
+    less_than_half,
     demographics,
     debrief,
     feedback,
