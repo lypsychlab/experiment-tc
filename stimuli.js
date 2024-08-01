@@ -63,7 +63,7 @@ const instructions_page1 = `
 const instructions_page2 = `
     <div class="instructions-box">
         <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-        <div id="wheel" style="background-image: conic-gradient(lightgreen 60%, black 0);"></div>
+            <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen 60%, black 0);"><div id="pin"></div></div>
     </div>
     <hr>
     <p style="text-align: left;">
@@ -352,7 +352,7 @@ const instructions_page9 = `
         </div>
         <div id="wheel-container" class="container">
             <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel" style="background-image: conic-gradient(lightgreen 52%, black 0);"></div>
+            <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen 52%, black 0);"><div id="pin"></div></div>
             <div id="true-value"><strong>Exact chance of winning:</strong> 52%</div>
         </div>
     </div>
@@ -460,7 +460,7 @@ const instructions_page12 = `
         </div>
         <div id="wheel-container" class="container">
             <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel" style="background-image: conic-gradient(lightgreen 52%, black 0);"></div>
+            <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen 52%, black 0);"><div id="pin"></div></div>
             <div id="true-value"><strong>Exact chance of winning:</strong> 52%</div>
         </div>
         <br>
@@ -526,7 +526,7 @@ const instructions_page12_full_box = `
         </div>
         <div id="wheel-container" class="container">
             <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
-            <div id="wheel" style="background-image: conic-gradient(lightgreen 52%, black 0); rotate: 340deg"></div>
+            <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen 52%, black 0); rotate: 340deg;"><div id="pin"></div></div>
             <div id="true-value"><strong>Exact chance of winning:</strong> 52%</div>
         </div>
         <br>
@@ -710,7 +710,7 @@ function incorrect_response_stimulus() {
 
 function show_wheel_stimulus(percent) {
     let string = `
-        <div id="wheel" style="background-image: conic-gradient(lightgreen ${percent}%, black 0);"></div>
+        <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen ${percent}%, black 0);"><div id="pin"></div></div>
         <div>
             <br>
             <br>
@@ -727,7 +727,7 @@ function reporter_feedback_stimulus(percent) {
     let progress_text = ["see the next wheel", "finish"]
 
     let string = `
-        <div id="wheel" style="background-image: conic-gradient(lightgreen ${percent}%, black 0);"></div>
+        <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen ${percent}%, black 0);"><div id="pin"></div></div>
         <div>
             <br>
             <strong>Exact chance of winning:</strong> ${percent}%
@@ -1244,15 +1244,15 @@ const truth_survey_specific_questions = `
     Do you think that when the inaccuracy changed the outcome of the game, it influenced how <strong>you</strong> classified the truth of the Reporter's estimate?
     <div>
         <input name="self_cons" type="radio" value="0" id="self_more_true" required="true" />
-        <label for="self_more_true">Yes, I would be more likely to classify it as true</label>
+        <label for="self_more_true">Yes, I was more likely to classify it as true</label>
     </div>
     <div>
         <input name="self_cons" type="radio" value="1" id="self_more_false" />
-        <label for="self_more_false">Yes, I would be more likely to classify it as false</label>
+        <label for="self_more_false">Yes, I was more likely to classify it as false</label>
     </div>
     <div>
         <input name="self_cons" type="radio" value="2" id="self_unaffect" />
-        <label for="self_unaffect">No, it would not affect how I classify it</label>
+        <label for="self_unaffect">No, it did not affect how I classified it</label>
     </div>
     <div>
         <input name="self_cons" type="radio" value="3" id="self_unsure" />
@@ -1263,7 +1263,7 @@ const truth_survey_specific_questions = `
         <label for="self_not_understand">I don't understand the question</label>
     </div>
     <br>
-    Do you think that when the inaccuracy changed the outcome of the game, it influenced how <strong>other people</strong> classified the truth of the Reporter's estimate?
+    Do you think that when the inaccuracy changed the outcome of the game, it would influence how <strong>other people</strong> classify the truth of the Reporter's estimate?
     <div>
         <input name="others_cons" type="radio" value="0" id="others_more_true" required="true" />
         <label for="others_more_true">Yes, others would be more likely to classify it as true</label>
