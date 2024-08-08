@@ -48,9 +48,9 @@ var current_distance
 var reporter_count = 6
 
 const dvs = {
-    manip_check: ["No", "Yes"],
+    manip_check: ["Lower", "They were equal", "Higher"],
     truth_bn: ["False", "True"],
-    truth_lk: ["Completely false", "Mostly false", "Somewhat false", "Neither true nor false", "Somewhat true", "Mostly true", "Completely true"],
+    truth_lk: ["1", "2", "3", "4", "5", "6", "7"],
 }
 
 // trials
