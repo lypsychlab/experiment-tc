@@ -48,6 +48,20 @@ const consent_html = `
         If you agree to the statements above and agree to participate in this study, please select the "Consent given" button below to continue.
     </p>
 `
+const no_ai_preamble = `
+    <p style="text-align:left;">
+        Thank you so much for participating in this study!
+    </p>
+    <p style="text-align: left;">
+        We have one request: please complete all parts of this study using only your own thoughts and words, without the help of AI tools or assistants. 
+    </p>
+    <p style="text-align: left;">
+        AI-assisted responses can invalidate our data. After all, your authentic perspective is what makes this research valuable. We're genuinely interested in your thinking, not an AI's.
+    </p>
+    <p style="text-align: left;">
+        Thank you for understanding!
+    </p>
+`
 
 const instructions_page1 = `
     <div class="instructions-box">
@@ -60,7 +74,34 @@ const instructions_page1 = `
     </p>
 `
 
+const instructions_page1_norep = `
+    <div class="instructions-box">
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        In this study you will be playing a betting game with another research participant and answering questions about information from the game. 
+        You will not be playing live with the other participant. 
+        They have already made their decisions in the game.
+    </p>
+`
+
 const instructions_page2 = `
+    <div class="instructions-box">
+        <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
+            <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen 60%, black 0);"><div id="pin"></div></div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        The game involves spinning a wheel with black and green sections. 
+        Players win when the wheel lands with the arrow on green, but they lose when it lands with the arrow on black. 
+        <br>
+        <br>
+        So, the chance of winning is equal to the percentage of the wheel that is green. 
+        For example, if you spin a wheel that is 60% green and 40% black, the probability of you winning is 60%. 
+    </p>
+`
+
+const instructions_page2_norep = `
     <div class="instructions-box">
         <div><span style="font-weight: bolder; font-size: 30px;">&darr;</span></div>
             <div id="wheel" class="has-pin" style="background-image: conic-gradient(lightgreen 60%, black 0);"><div id="pin"></div></div>
@@ -108,6 +149,39 @@ const instructions_page3 = `
     </p>
 `
 
+const instructions_page3_norep = `
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="reporter-avatar" class="avatar">
+            <div class="head"></div>
+            <div class="shoulders">
+                <br>
+                <br>
+                Reporter
+            </div>
+        </div>
+        <div id="decider-avatar" class="avatar">
+            <div class="head"></div>
+            <div class="shoulders">
+                <br>
+                <br>
+                Decider
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        There are two roles in the game: the Reporter and the Decider. 
+        You will play the role of the Decider. 
+        But before you do that, we will first explain the role of the Reporter, so that you understand the full game.
+    </p>
+`
+
 const instructions_page4 = `
     <div class="instructions-box">
         <br>
@@ -148,6 +222,45 @@ const instructions_page4 = `
     </p>
 `
 
+const instructions_page4_norep = `
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="reporter-inst-wheel-container">
+            <div class="small-wheel" style="background-image: conic-gradient(lightgreen 55%, black 0);"></div>
+        </div>
+        <div class="reporter-inst-spacer"></div>
+        <div class="reporter-inst-arrow">
+            &rarr;
+        </div>
+        <div class="reporter-inst-spacer"></div>
+        <div class="reporter-inst-text-container">
+            What is the chance of winning with the wheel that you just saw?
+        </div>
+        <br>
+        <div style="display: inline-block; width: 250px; text-align: center;">
+            1 second
+        </div>
+        <div style="display: inline-block; width: 50px;"></div>
+        <div style="display: inline-block; width: 50px;"></div>
+        <div style="display: inline-block; width: 50px;"></div>
+        <div style="display: inline-block; width: 250px; text-align: center;"></div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        The Reporter gets to see the wheel for 1 second. 
+        After 1 second, the wheel disappears and the Reporter needs to estimate the chance of winning when that wheel is spun 
+        (remember, this is the same number as the percentage of the wheel that is green). 
+        <br>
+        <br>
+        The participant who played as the Reporter was given a bonus depending on how accurate their estimate was.
+    </p>
+`
+
 const instructions_page5 = `
     <div class="instructions-box">
         <br>
@@ -172,29 +285,52 @@ const instructions_page5 = `
 `
 
 const instructions_page6 = `
-<div class="instructions-box">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div id="decider-avatar" class="avatar">
-        <div class="head"></div>
-        <div class="shoulders">
-            <br>
-            <br>
-            Decider
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="decider-avatar" class="avatar">
+            <div class="head"></div>
+            <div class="shoulders">
+                <br>
+                <br>
+                Decider
+            </div>
         </div>
     </div>
-</div>
-<hr>
-<p style="text-align: left;">
-    This completes your practice Reporter rounds.
-    <br>
-    <br>
-    Now let's learn how to play the role of the Decider.
-</p>
+    <hr>
+    <p style="text-align: left;">
+        This completes your practice Reporter rounds.
+        <br>
+        <br>
+        Now let's learn how to play the role of the Decider.
+    </p>
+`
+
+const instructions_page6_norep = `
+    <div class="instructions-box">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div id="decider-avatar" class="avatar">
+            <div class="head"></div>
+            <div class="shoulders">
+                <br>
+                <br>
+                Decider
+            </div>
+        </div>
+    </div>
+    <hr>
+    <p style="text-align: left;">
+        Now let's learn how to play the role of the Decider.
+    </p>
 `
 
 const instructions_page7 = `
@@ -301,7 +437,7 @@ const instructions_page8 = `
         Once you enter your threshold, you will learn two new pieces of information. 
         <br>
         <br>
-        First, you will see a previous Reporter's estimate of the chance of winning. 
+        First, you will see the Reporter's estimate of the chance of winning. 
         If the Reporter's estimate is greater than or equal to your threshold (as in the example above), 
         the amount at stake will be on the line when the wheel is spun. This means that you will win or lose depending on the outcome of the spin.
         <br>
@@ -743,11 +879,18 @@ function reporter_feedback_stimulus(percent) {
 }
 
 function move_to_decider_stimulus() {
-    let string = `
-        You have finished playing as the Reporter. Overall, you earned ${earnings}&#162; for the accuracy of your estimates.
-        <br>
-        <br>
-        Next, you will play as the Decider for 8 rounds.
+    let string = ``
+
+    if (do_reporter) {
+        string += `
+            You have finished playing as the Reporter. Overall, you earned ${earnings}&#162; for the accuracy of your estimates.
+            <br>
+            <br>
+        `
+    }
+
+    string += `
+        Now, you will play as the Decider for 8 rounds.
         <br>
         <br>
         If you forget any of the rules or find something confusing, try hovering over the &#9432; icons on the left side of the screen.
@@ -765,7 +908,7 @@ function set_global_vars(minimum, bet, outcome, cons, error) {
     outcome = Boolean(outcome)
     cons = Boolean(cons)
 
-    let report_diff = Math.floor(Math.random() * 3) + 1
+    let report_diff = Math.floor(Math.random() * (error - 1)) + 1
 
     if (bet) {
         current_report = minimum + report_diff
@@ -1056,18 +1199,18 @@ function outcome_stimulus(buyin, bet, outcome) {
         <hr>
         <div class="number-line">
             <div class="point-number middle">${current_minimum}</div>
-            <div class="point-number" style="left: ${50 - 5 * (current_minimum - current_report)}%;">${current_report}</div>
-            <div class="point-number" style="left: ${50 - 5 * (current_minimum - current_truth)}%;">${current_truth}</div>
+            <div class="point-number" style="left: ${50 - 4 * (current_minimum - current_report)}%;">${current_report}</div>
+            <div class="point-number" style="left: ${50 - 4 * (current_minimum - current_truth)}%;">${current_truth}</div>
         </div>
         <div class="number-line">
             <div class="point middle"></div>
-            <div class="point" style="left: ${50 - 5 * (current_minimum - current_report)}%;"></div>
-            <div class="point" style="left: ${50 - 5 * (current_minimum - current_truth)}%;"></div>
+            <div class="point" style="left: ${50 - 4 * (current_minimum - current_report)}%;"></div>
+            <div class="point" style="left: ${50 - 4 * (current_minimum - current_truth)}%;"></div>
         </div>
         <div class="number-line">
             <div class="point-label" style="left: calc(50% - 105px); rotate: 315deg;"><span style="font-weight: bold">Your Threshold</span></div>
-            <div class="point-label" style="left: calc(${50 - 5 * (current_minimum - current_report)}% - 105px); rotate: 315deg;">Reporter's Estimate</div>
-            <div class="point-label" style="left: calc(${50 - 5 * (current_minimum - current_truth)}% - 105px); rotate: 315deg;">Exact chance of winning</div>
+            <div class="point-label" style="left: calc(${50 - 4 * (current_minimum - current_report)}% - 105px); rotate: 315deg;">Reporter's Estimate</div>
+            <div class="point-label" style="left: calc(${50 - 4 * (current_minimum - current_truth)}% - 105px); rotate: 315deg;">Exact chance of winning</div>
         </div>
         <div class="number-line-visual"></div>
     `
@@ -1082,62 +1225,121 @@ function update_pot(buyin, bet, outcome) {
     pot += buyin * bet * (outcome * 2 - 1)
 }
 
-function outcome_questions() {
-    let questions = [
-        {
-            prompt: `
-                Was the exact chance of winning lower or higher than your threshold?
-            `,
-            options: [
-                "Lower",
-                "They were equal",
-                "Higher"
-            ],
-            name: "manip_check",
-            required: true
-        },
-        {
-            prompt: `
-                Would you consider the information provided by the reporter to be true or false?
-            `,
-            options: [
-                "False",
-                "True"
-            ],
-            name: "truth_bn",
-            required: true
-        },
-        {
-            prompt: `
-                How true or false would you consider the information provided by the reporter to be?
-            `,
-            options: [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7"
-            ],
-            name: "truth_lk",
-            horizontal: true,
-            required: true
-        }
-    ]
+const q_manip_check = `
+    Was the exact chance of winning lower or higher than your threshold?
+    <br>
+    <label for="manip_check_low">
+        <div class="vmulti">
+            <input name="manip_check" type="radio" value="lower" id="manip_check_low" required />
+            Lower
+        </div>
+    </label>
+    <label for="manip_check_equal">
+        <div class="vmulti">
+            <input name="manip_check" type="radio" value="equal" id="manip_check_equal" required />
+            They were equal
+        </div>
+    </label>
+    <label for="manip_check_higher">
+        <div class="vmulti">
+            <input name="manip_check" type="radio" value="higher" id="manip_check_higher" required />
+            Higher
+        </div>
+    </label>
+    <br>  
+`
 
-    return questions
-}
+const q_truth_lk = `
+    How true or false would you consider the information provided by the reporter to be?
+    <br>
+    <div class="hlikert-container">
+        <label class="hlikert-label" for="truth_lk_0">
+            <div class="hlikert">
+                1
+                <br>
+                Completely false
+                <br>
+                <input name="truth_lk" type="radio" value="0" id="truth_lk_0" required />
+            </div>
+        </label>
+        <label class="hlikert-label" for="truth_lk_1">
+            <div class="hlikert">
+                2
+                <br>
+                <input name="truth_lk" type="radio" value="1" id="truth_lk_1" required />
+            </div>
+        </label>
+        <label class="hlikert-label" for="truth_lk_2">
+            <div class="hlikert">
+                3
+                <br>
+                <input name="truth_lk" type="radio" value="2" id="truth_lk_2" required />
+            </div>
+        </label>
+        <label class="hlikert-label" for="truth_lk_3">
+            <div class="hlikert">
+                4
+                <br>
+                <input name="truth_lk" type="radio" value="3" id="truth_lk_3" required />
+            </div>
+        </label>
+        <label class="hlikert-label" for="truth_lk_4">
+            <div class="hlikert">
+                5
+                <br>
+                <input name="truth_lk" type="radio" value="4" id="truth_lk_4" required />
+            </div>
+        </label>
+        <label class="hlikert-label" for="truth_lk_5">
+            <div class="hlikert">
+                6
+                <br>
+                <input name="truth_lk" type="radio" value="5" id="truth_lk_5" required />
+            </div>
+        </label>
+        <label class="hlikert-label" for="truth_lk_6">
+            <div class="hlikert">
+                7
+                <br>
+                Completely true
+                <br>
+                <input name="truth_lk" type="radio" value="6" id="truth_lk_6" required />
+            </div>
+        </label>
+    </div>
+    <br>
+`
+
+const outcome_questions = [`
+    <div class="prevent-select" style="text-align: left;">
+        <br>
+        ${q_manip_check}
+        ${q_truth_lk}
+    </div>
+`]
 
 function bonus_report_stimulus() {
-    let string = `
-        This concludes your Decider rounds. The final amount in your wallet was ${pot}&#162;.
-        <br>
-        <br>
-        Adding this to your Reporter score of ${earnings}&#162;, your bonus for this experiment will be ${pot + earnings}&#162;.
-        <br>
-        <br>
-    `
+    let string = ""
+
+    if (do_reporter) {
+        string += `
+            This concludes your Decider rounds. The final amount in your wallet was ${pot}&#162;.
+            <br>
+            <br>
+            Adding this to your Reporter score of ${earnings}&#162;, your bonus for this experiment will be ${pot + earnings}&#162;.
+            <br>
+            <br>
+        `
+    } else {
+        string += `
+            This concludes your Decider rounds. The final amount in your wallet was ${pot}&#162;.
+            <br>
+            <br>
+            Your bonus for this experiment will be ${pot}&#162;.
+            <br>
+            <br>
+        `
+    }
 
     return string
 }
@@ -1263,18 +1465,18 @@ const truth_survey_specific_questions = `
         <label for="self_not_understand">I don't understand the question</label>
     </div>
     <br>
-    Do you think that when the inaccuracy changed the outcome of the game, it would influence how <strong>other people</strong> classify the truth of the Reporter's estimate?
+    Do you think that when the inaccuracy changed the outcome of the game, it would influence how <strong>most other people</strong> classify the truth of the Reporter's estimate?
     <div>
         <input name="others_cons" type="radio" value="0" id="others_more_true" required="true" />
-        <label for="others_more_true">Yes, others would be more likely to classify it as true</label>
+        <label for="others_more_true">Yes, most others would be more likely to classify it as true</label>
     </div>
     <div>
         <input name="others_cons" type="radio" value="1" id="others_more_false" />
-        <label for="others_more_false">Yes, others would be more likely to classify it as false</label>
+        <label for="others_more_false">Yes, most others would be more likely to classify it as false</label>
     </div>
     <div>
         <input name="others_cons" type="radio" value="2" id="others_unaffect" />
-        <label for="others_unaffect">No, it would not affect how others classify it</label>
+        <label for="others_unaffect">No, it would not affect how most others classify it</label>
     </div>
     <div>
         <input name="others_cons" type="radio" value="3" id="others_unsure" />
@@ -1305,6 +1507,31 @@ const truth_survey_specific_questions = `
     <div>
         <input name="should_cons" type="radio" value="4" id="should_not_understand" />
         <label for="should_not_understand">I don't understand the question</label>
+    </div>
+    <br>
+    Outside of the context of the game you just played, imagine someone said something that was close to the truth, but was not perfectly accurate.
+    <br>
+    <br>
+    In general, do you think that if this inaccuracy changed the outcome of the situation, it <strong>should</strong> (in an ideal world) influence how people classify the truth of the person's statement?
+    <div>
+        <input name="should_cons_general" type="radio" value="0" id="should_more_gen_true" required="true" />
+        <label for="should_more_gen_true">Yes, people should be more likely to classify it as true</label>
+    </div>
+    <div>
+        <input name="should_cons_general" type="radio" value="1" id="should_more_gen_false" />
+        <label for="should_more_gen_false">Yes, people should be more likely to classify it as false</label>
+    </div>
+    <div>
+        <input name="should_cons_general" type="radio" value="2" id="should_gen_unaffect" />
+        <label for="should_gen_unaffect">No, it should not affect how people classify it</label>
+    </div>
+    <div>
+        <input name="should_cons_general" type="radio" value="3" id="should_gen_unsure" />
+        <label for="should_gen_unsure">Unsure</label>
+    </div>
+    <div>
+        <input name="should_cons_general" type="radio" value="4" id="should_gen_not_understand" />
+        <label for="should_gen_not_understand">I don't understand the question</label>
     </div>
     <br>
 </div>
@@ -1626,26 +1853,18 @@ const demographics_questions = `
 const feedback_questions = `
     <div style="text-align: left; max-width: 800px">
         <br>
-        How easy or hard was it to understand the game you played in this study?
+        In this study, did you understand the rules for playing the role of the Decider?
         <div>
-            <input name="understandable" type="radio" value="0" id="easy" />
-            <label for="easy">Easy</label>
+            <input name="understand" type="radio" value="0" id="no" />
+            <label for="no">No</label>
         </div>
         <div>
-            <input name="understandable" type="radio" value="1" id="some_easy" />
-            <label for="some_easy">Somewhat easy</label>
+            <input name="understand" type="radio" value="1" id="yes" />
+            <label for="yes">Yes</label>
         </div>
         <div>
-            <input name="understandable" type="radio" value="2" id="not_easy_not_hard" />
-            <label for="not_easy_not_hard">Neither easy nor hard</label>
-        </div>
-        <div>
-            <input name="understandable" type="radio" value="3" id="some_hard" />
-            <label for="some_hard">Somewhat hard</label>
-        </div>
-        <div>
-            <input name="understandable" type="radio" value="4" id="hard" />
-            <label for="hard">Hard</label>
+            <input name="understand" type="radio" value="2" id="unsure" />
+            <label for="unsure">Unsure</label>
         </div>
         <br>
         Did you find anything in this study confusing?

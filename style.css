@@ -255,3 +255,54 @@
 .jspsych-survey-multi-choice-horizontal label.jspsych-survey-multi-choice-text input[type='radio'] {
     margin-right: 5px;
 }
+
+.prevent-select {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+.vmulti {
+    text-align: left;
+    vertical-align: top;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 18px;
+    transition: background-color 300ms;
+    border-radius: 10px;
+}
+
+.vmulti:hover {
+    background-color: whitesmoke;
+}
+
+.hlikert-container {
+    display: flex;
+    font-size: 0;
+    justify-content: center;
+}
+
+.hlikert {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    width: 114px;
+    flex: 1 1 auto;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 10px 5px;
+    font-size: 18px;
+    transition: background-color 300ms;
+    background-color: snow;
+    border-radius: 10px;
+}
+
+.hlikert:hover {
+    background-color: whitesmoke;
+}
+
+.hlikert-label {
+    display: flex;
+}

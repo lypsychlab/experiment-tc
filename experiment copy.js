@@ -1,22 +1,8 @@
 // initialize jsPsych
-const jsPsych = initJsPsych({
-    on_finish: function() {
-        jsPsych.data.displayData()
-        jsPsych.data.get().localSave('csv', `${subject_id}.csv`)
-    }
-})
+const jsPsych = initJsPsych({})
 
-// subject level constants
+// data pipe variables
 const subject_id = jsPsych.randomization.randomID(10);
-const url_pid = jsPsych.data.getURLVariable("PROLIFIC_PID")
-
-const do_reporter = Math.random() > 0.5 ? true : false
-
-jsPsych.data.addProperties({
-    subject_id: subject_id, 
-    prolific_id: url_pid,
-    did_reporter: do_reporter
-})
 
 // experiment variables
 var earnings = 0
@@ -63,6 +49,7 @@ var reporter_count = 6
 
 const dvs = {
     manip_check: ["Lower", "They were equal", "Higher"],
+    truth_bn: ["False", "True"],
     truth_lk: ["1", "2", "3", "4", "5", "6", "7"],
 }
 
@@ -74,7 +61,7 @@ const consent = {
     stimulus: consent_html,
     choices: ["Consent not given", "Consent given"],
     button_html: [
-        `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=CCLL7J9G', '_blank')">%choice%</button>`,
+        `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=C1I9FHR3', '_blank')">%choice%</button>`,
         `<button class="jspsych-btn">%choice%</button>`
     ],
     on_finish: function(data) {
@@ -83,27 +70,13 @@ const consent = {
             document.getElementById("jspsych-content").style.margin = "auto"
 
             jsPsych.endExperiment(
-                "You chose not to consent to participate.<br>If you were not automatically directed back to Prolific, please go back and enter the completion code CCLL7J9G"
+                "You chose not to consent to participate.<br>If you were not automatically directed back to Prolific, please go back and enter the completion code C1I9FHR3"
             )
         }
     },
     data: {
-        type_of_trial: "consent"
-    }
-}
-
-// no ai agreement
-const no_ai = {
-    type: jsPsychSurveyMultiSelect,
-    preamble: no_ai_preamble,
-    questions: [
-        {
-            prompt: "",
-            options: ["I agree not to use AI for any part of this study."]
-        }
-    ],
-    data: {
-        type_of_trial: "no_ai"
+        type_of_trial: "consent",
+        subject_id: subject_id
     }
 }
 
@@ -118,21 +91,16 @@ const prolific_id = {
         }
     ],
     data: {
-        type_of_trial: "prolific"
+        type_of_trial: "prolific",
+        subject_id: subject_id
     },
     on_load: function() {
         document.getElementById("jspsych-content").style.margin = "auto"
-
-        if (url_pid) {
-            jsPsych.finishTrial()
-        }
     },
     on_finish: function(data) {
         document.getElementById("jspsych-content").style.margin = "50px auto"
 
-        if (data.response) {
-            data.prolific_id_man = data.response["prolific_id"]
-        }
+        data.prolific_id = data.response["prolific_id"]
     }
 }
 
@@ -141,77 +109,21 @@ const first_instructions = {
     pages: function() {
         var instructions_pages = []
 
-        if (do_reporter) {
-            instructions_pages.push(
-                instructions_page1,
-                instructions_page2,
-                instructions_page3,
-                instructions_page4,
-                instructions_page5
-            )
-        } else {
-            instructions_pages.push(
-                instructions_page1_norep,
-                instructions_page2_norep,
-                instructions_page3_norep,
-                instructions_page4_norep,
-                instructions_page6_norep,
-                instructions_page7,
-                instructions_page8,
-                instructions_page9,
-                instructions_page10,
-                instructions_page11,
-                instructions_page12,
-                instructions_page13,
-                instructions_page14
-            )
-        }
+        instructions_pages.push(
+            instructions_page1,
+            instructions_page2,
+            instructions_page3,
+            instructions_page4,
+            instructions_page5
+        )
 
         return instructions_pages
     },
     allow_keys: false,
     show_clickable_nav: true,
-    show_page_number: true,
     data: {
-        type_of_trial: "instructions"
-    },
-    on_load: function() {
-        document.getElementById("jspsych-content").style.margin = "50px auto"
-        
-        // Select the node that you want to observe
-        const targetNode = document.getElementById('jspsych-content')
-        
-        // Options for the observer (which mutations to observe)
-        const config = { attributes: true, childList: true, subtree: true, characterData: true }
-        
-        // Callback function to execute when mutations are observed
-        const callback = function(mutationsList, observer) {
-            if (document.querySelector(".jspsych-instructions-pagenum")) {
-                if (!(typeof change_inst_box === "undefined")) {
-                    clearTimeout(change_inst_box)
-                }
-
-                if (document.querySelector(".jspsych-instructions-pagenum").textContent == "Page 11/13" && !document.querySelector(".number-line")) {
-                    setTimeout(function() {
-                        document.getElementById("wheel").style.transition = "rotate 4000ms ease-out"
-                        document.getElementById("wheel").style.rotate = `${num_spins * 360 + 340}deg`
-                    }, 1)
-
-                    change_inst_box = setTimeout(function() {
-                        document.querySelector(".instructions-box").outerHTML = instructions_page12_full_box
-                    }, 4001)
-                }
-            } else {
-                // Stop observing
-                observer.disconnect()
-            }
-        }
-        
-        // Create an observer instance linked to the callback function
-        const observer = new MutationObserver(callback)
-        
-        // Start observing the target node for configured mutations
-        observer.observe(targetNode, config)
+        type_of_trial: "instructions",
+        subject_id: subject_id
     }
 }
 
@@ -238,7 +150,8 @@ const second_instructions = {
     show_clickable_nav: true,
     show_page_number: true,
     data: {
-        type_of_trial: "instructions"
+        type_of_trial: "instructions",
+        subject_id: subject_id
     },
     on_load: function() {
         document.getElementById("jspsych-content").style.margin = "50px auto"
@@ -285,7 +198,7 @@ const comprehension = {
     preamble: `
         We know there were a lot of rules for this game. 
         To make sure you remember them, please answer the following questions. 
-        If you need to reference the rules, you can find them <a href="instructions.html?do_reporter=${do_reporter}" target="_blank">here</a>.
+        If you need to reference the rules, you can find them <a href="instructions.html" target="_blank">here</a>.
     `,
     questions: [
         {
@@ -333,7 +246,8 @@ const comprehension = {
         }
     },
     data: {
-        type_of_trial: "comprehension"
+        type_of_trial: "comprehension",
+        subject_id: subject_id
     }
 }
 
@@ -344,7 +258,8 @@ const incorrect_response = {
     },
     choices: ["Answer the questions again"],
     data: {
-        type_of_trial: "incorrect_response"
+        type_of_trial: "incorrect_response",
+        subject_id: subject_id
     }
 }
 
@@ -361,7 +276,7 @@ const comprehension_loop = {
 // REPORTER TASK
 const move_to_experiment_reporter = {
     type: jsPsychHtmlKeyboardResponse,
-    choices: [" "],
+    choices: " ",
     stimulus: `
         You answered all the questions correctly.
         <br>
@@ -377,26 +292,28 @@ const move_to_experiment_reporter = {
         reporter_count = 0
     },
     data: {
-        type_of_trial: "begin_reporter"
+        type_of_trial: "begin_reporter",
+        subject_id: subject_id
     }
 
 }
 
 const begin_reporter = {
     type: jsPsychHtmlKeyboardResponse,
-    choices: [" "],
+    choices: " ",
     stimulus: `Press the space bar to see the first wheel.`,
     on_load: function() {
         document.getElementById("jspsych-content").style.margin = "auto"
     },
     data: {
-        type_of_trial: "begin_reporter"
+        type_of_trial: "begin_reporter",
+        subject_id: subject_id
     }
 }
 
 const fixation = {
     type: jsPsychHtmlKeyboardResponse,
-    choices: ["NO_KEYS"],
+    choices: "NO_KEYS",
     trial_duration: 1000,
     stimulus: `
         <div style="font-size: 30px;">
@@ -413,19 +330,21 @@ const fixation = {
         document.getElementById("jspsych-content").style.margin = "auto"
     },
     data: {
-        type_of_trial: "fixation"
+        type_of_trial: "fixation",
+        subject_id: subject_id
     }
 }
 
 const show_wheel = {
     type: jsPsychHtmlKeyboardResponse,
-    choices: [" "],
+    choices: " ",
     trial_duration: 1000,
     stimulus: function() {
         return show_wheel_stimulus(jsPsych.timelineVariable("percent"))
     },
     data: {
-        type_of_trial: "show_wheel"
+        type_of_trial: "show_wheel",
+        subject_id: subject_id
     }
 }
 
@@ -453,13 +372,14 @@ const estimate_wheel = {
     },
     data: {
         type_of_trial: "estimate_wheel",
-        percent: jsPsych.timelineVariable("percent")
+        percent: jsPsych.timelineVariable("percent"),
+        subject_id: subject_id
     }
 }
 
 const reporter_feedback = {
     type: jsPsychHtmlKeyboardResponse,
-    choices: [" "],
+    choices: " ",
     stimulus: function() {
         return reporter_feedback_stimulus(jsPsych.timelineVariable("percent"))
     },
@@ -469,7 +389,8 @@ const reporter_feedback = {
         reporter_count += 1
     },
     data: {
-        type_of_trial: "reporter_feedback"
+        type_of_trial: "reporter_feedback",
+        subject_id: subject_id
     }
 }
 
@@ -499,7 +420,8 @@ const estimate_wheel_prac = {
     },
     data: {
         type_of_trial: "estimate_wheel_prac",
-        percent: jsPsych.timelineVariable("percent")
+        percent: jsPsych.timelineVariable("percent"),
+        subject_id: subject_id
     }
 }
 
@@ -544,14 +466,15 @@ const attention = {
         data.response = data.response.Q0
     },
     data: {
-        type_of_trial: "attention"
+        type_of_trial: "attention",
+        subject_id: subject_id
     }
 }
 
 // DECIDER TASK
 const move_to_experiment_decider = {
     type: jsPsychHtmlKeyboardResponse,
-    choices: [" "],
+    choices: " ",
     stimulus: function() {
         return move_to_decider_stimulus()
     },
@@ -563,7 +486,8 @@ const move_to_experiment_decider = {
         pot = 100
     },
     data: {
-        type_of_trial: "begin_reporter"
+        type_of_trial: "begin_reporter",
+        subject_id: subject_id
     }
 
 }
@@ -583,7 +507,8 @@ const enter_minimum = {
         }
     },
     data: {
-        type_of_trial: "enter_minimum"
+        type_of_trial: "enter_minimum",
+        subject_id: subject_id
     }
 }
 
@@ -594,7 +519,8 @@ const see_report = {
         return see_report_stimulus(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"))
     },
     data: {
-        type_of_trial: "see_report"
+        type_of_trial: "see_report",
+        subject_id: subject_id
     }
 }
 
@@ -605,13 +531,14 @@ const see_wheel = {
         return see_wheel_stimulus(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"))
     },
     data: {
-        type_of_trial: "see_wheel"
+        type_of_trial: "see_wheel",
+        subject_id: subject_id
     }
 }
 
 const spin_wheel = {
     type: jsPsychHtmlKeyboardResponse,
-    choices: [" "],
+    choices: " ",
     stimulus: function() {
         return spin_stimulus(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"))
     },
@@ -623,21 +550,45 @@ const spin_wheel = {
         }, 1)
     },
     data: {
-        type_of_trial: "spin_wheel"
+        type_of_trial: "spin_wheel",
+        subject_id: subject_id
     }
 }
 
 const see_outcome = {
-    type: jsPsychSurveyHtmlForm,
+    type: jsPsychSurveyMultiChoice,
     preamble: function() {
         return outcome_stimulus(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"))
     },
-    html: outcome_questions,
+    questions: function() {
+        return outcome_questions()
+    },
+    on_start: function() {
+        setTimeout(() => {
+            for (let i = 0; i < 7; i ++) {
+                let label = document.querySelector("#jspsych-survey-multi-choice-option-2-" + i + " label")
+                let br = document.createElement("br")
+    
+                label.insertBefore(br, label.childNodes[1])
+
+                if (i == 0) {
+                    label.appendChild(document.createElement("br"))
+                    label.appendChild(document.createTextNode("Completely false"))
+                }
+
+                if (i == 6) {
+                    label.appendChild(document.createElement("br"))
+                    label.appendChild(document.createTextNode("Completely true"))
+                }
+            }
+        }, 1)
+    },
     on_finish: function(data) {
         update_pot(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"))
 
-        data.manip_check = data.response.manip_check
-        data.truth_lk = data.response.truth_lk
+        data.manip_check = dvs.manip_check.indexOf(data.response.manip_check)
+        data.truth_bn = dvs.truth_bn.indexOf(data.response.truth_bn)
+        data.truth_lk = dvs.truth_lk.indexOf(data.response.truth_lk)
         data.minimum = current_minimum
         data.report = current_report
         data.truth = current_truth
@@ -649,28 +600,52 @@ const see_outcome = {
         bet: jsPsych.timelineVariable("bet"),
         result: jsPsych.timelineVariable("outcome"),
         cons: jsPsych.timelineVariable("cons"),
-        outcome_valence: jsPsych.timelineVariable("valence"),
-        error: jsPsych.timelineVariable("error")
+        outcome_valence: jsPsych.timelineVariable("outcome_valence"),
+        error: jsPsych.timelineVariable("error"),
+        subject_id: subject_id
     }
 }
 
 const decider_task = {
     timeline: [enter_minimum, see_report, see_wheel, spin_wheel, see_outcome],
     timeline_variables: decider_conditions,
-    randomize_order: true
+    // randomize_order: true
 }
 
 const see_outcome_prac = {
-    type: jsPsychSurveyHtmlForm,
+    type: jsPsychSurveyMultiChoice,
     preamble: function() {
         return outcome_stimulus(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"))
     },
-    html: outcome_questions,
+    questions: function() {
+        return outcome_questions()
+    },
+    on_start: function() {
+        setTimeout(() => {
+            for (let i = 0; i < 7; i ++) {
+                let label = document.querySelector("#jspsych-survey-multi-choice-option-2-" + i + " label")
+                let br = document.createElement("br")
+    
+                label.insertBefore(br, label.childNodes[1])
+
+                if (i == 0) {
+                    label.appendChild(document.createElement("br"))
+                    label.appendChild(document.createTextNode("Completely false"))
+                }
+
+                if (i == 6) {
+                    label.appendChild(document.createElement("br"))
+                    label.appendChild(document.createTextNode("Completely true"))
+                }
+            }
+        }, 1)
+    },
     on_finish: function(data) {
         update_pot(jsPsych.timelineVariable("buyin"), jsPsych.timelineVariable("bet"), jsPsych.timelineVariable("outcome"))
 
-        data.manip_check = data.response.manip_check
-        data.truth_lk = data.response.truth_lk
+        data.manip_check = dvs.manip_check.indexOf(data.response.manip_check)
+        data.truth_bn = dvs.truth_bn.indexOf(data.response.truth_bn)
+        data.truth_lk = dvs.truth_lk.indexOf(data.response.truth_lk)
         data.minimum = current_minimum
         data.report = current_report
         data.truth = current_truth
@@ -679,10 +654,12 @@ const see_outcome_prac = {
         type_of_trial: "measures_prac",
         buyin: jsPsych.timelineVariable("buyin"),
         bet: jsPsych.timelineVariable("bet"),
-        result: jsPsych.timelineVariable("outcome"),
+        outcome: jsPsych.timelineVariable("outcome"),
         cons: jsPsych.timelineVariable("cons"),
-        outcome_valence: jsPsych.timelineVariable("valence"),
-        error: jsPsych.timelineVariable("error")
+        valence: jsPsych.timelineVariable("valence"),
+        error: jsPsych.timelineVariable("error"),
+        gain_loss: jsPsych.timelineVariable("gainloss"),
+        subject_id: subject_id
     }
 }
 
@@ -729,7 +706,8 @@ const bonus_report = {
         data.bonus = pot + earnings
     },
     data: {
-        type_of_trial: "bonus_report"
+        type_of_trial: "bonus_report",
+        subject_id: subject_id
     }
 }
 
@@ -740,7 +718,8 @@ const demographics = {
         return demographics_questions
     },
     data: {
-        type_of_trial: "demographics"
+        type_of_trial: "demographics",
+        subject_id: subject_id
     },
     on_finish: function(data) {
         // populate data
@@ -778,7 +757,8 @@ const debrief = {
     },
     choices: ["Continue"],
     data: {
-        type_of_trial: "debrief"
+        type_of_trial: "debrief",
+        subject_id: subject_id
     }
 }
 
@@ -788,16 +768,53 @@ const feedback = {
     html: feedback_questions,
     on_finish: function(data) {
         // populate data
-        data.understand = data.response.understand
+        data.understand = data.response.understandable
         data.confusing = data.response.confusing
         data.annoying = data.response.annoying
         data.issues = data.response.issues
         data.other_feedback = data.response.other_feedback
     },
     data: {
-        type_of_trial: "feedback"
+        type_of_trial: "feedback",
+        subject_id: subject_id
     }
 }
+
+// const truth_survey_general = {
+//     type: jsPsychSurveyHtmlForm,
+//     preamble: "Please answer the following questions honestly.",
+//     html: truth_survey_general_questions,
+//     on_finish: function(data) {
+//         // populate data
+//         data.gen_self_cons = data.response.self_cons
+//         data.gen_other_cons = data.response.other_cons
+//         data.gen_should_cons = data.response.should_cons
+//     },
+//     data: {
+//         type_of_trial: "truth_survey",
+//         subject_id: subject_id
+//     }
+// }
+
+const truth_survey_specific = {
+    type: jsPsychSurveyHtmlForm,
+    preamble: "Please answer the following questions honestly.",
+    html: truth_survey_specific_questions,
+    on_finish: function(data) {
+        // populate data
+        data.spec_self_cons = data.response.self_cons
+        data.spec_other_cons = data.response.other_cons
+        data.spec_should_cons = data.response.should_cons
+    },
+    data: {
+        type_of_trial: "truth_survey",
+        subject_id: subject_id
+    }
+}
+
+// const truth_survey = {
+//     timeline: Math.random() > 0.5 ? [truth_survey_specific, truth_survey_general] : [truth_survey_general, truth_survey_specific]
+// }
 
 const less_than_half = {
     type: jsPsychSurveyHtmlForm,
@@ -817,23 +834,7 @@ const less_than_half = {
         }
     },
     data: {
-        type_of_trial: "less_than_half"
-    }
-}
-
-const truth_survey = {
-    type: jsPsychSurveyHtmlForm,
-    preamble: "Please answer the following questions honestly.",
-    html: truth_survey_specific_questions,
-    on_finish: function(data) {
-        // populate data
-        data.self_cons = data.response.self_cons
-        data.other_cons = data.response.others_cons
-        data.should_cons = data.response.should_cons
-        data.should_cons_general = data.response.should_cons_general
-    },
-    data: {
-        type_of_trial: "truth_survey",
+        type_of_trial: "less_than_half",
         subject_id: subject_id
     }
 }
@@ -844,45 +845,60 @@ const back_to_prolific = {
         Thank you for participating in this study. Your response has been recorded.
         <br>
         <br>
-        If the button below does not automatically enter your completion code, please copy and paste this code into Prolific: C1F07MCQ
+        If the button below does not automatically enter your completion code, please copy and paste this code into Prolific: CS3EJJ9B
         <br>
         <br>
     `,
     choices: ["Back to Prolific"],
-    button_html: `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=C1F07MCQ', '_blank')">%choice%</button>`,
+    button_html: `<button class="jspsych-btn" onclick="window.open('https://app.prolific.com/submissions/complete?cc=CCCYIGU3', '_blank')">%choice%</button>`,
     on_load: function() {
         document.getElementById("jspsych-content").style.margin = "auto"
     },
     on_finish: function() {
         jsPsych.endExperiment(
-            "Thank you for your participation!.<br>Your completion code is C1F07MCQ"
+            "Thank you for your participation!.<br>Your completion code is CCCYIGU3"
         )
     },
     data: {
-        type_of_trial: "back_to_prolific"
+        type_of_trial: "back_to_prolific",
+        subject_id: subject_id
     }
 }
 
 // data pipe
+const save_data_reporter = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "JcVrcc15Vyhc",
+    filename: `${subject_id}_reporter.csv`,
+    data_string: () => jsPsych.data.get().csv(),
+    data: {
+        type_of_trial: "data_pipe",
+        subject_id: subject_id
+    }
+}
+
 const save_data_decider = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "H3pJf5mODOyD",
+    experiment_id: "JcVrcc15Vyhc",
     filename: `${subject_id}_decider.csv`,
     data_string: () => jsPsych.data.get().csv(),
     data: {
-        type_of_trial: "data_pipe"
+        type_of_trial: "data_pipe",
+        subject_id: subject_id
     }
 }
 
 const save_data_final = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "H3pJf5mODOyD",
+    experiment_id: "JcVrcc15Vyhc",
     filename: `${subject_id}_final.csv`,
     data_string: () => jsPsych.data.get().csv(),
     data: {
-        type_of_trial: "data_pipe"
+        type_of_trial: "data_pipe",
+        subject_id: subject_id
     }
 }
 
@@ -890,40 +906,24 @@ const save_data_final = {
 var experiment = []
 
 experiment.push(
-    consent,
-    no_ai,
-    prolific_id,
-    first_instructions
-)
-
-if (do_reporter) {
-    experiment.push(
-        begin_reporter,
-        reporter_task_prac,
-        second_instructions
-    )
-}
-
-experiment.push(
-    decider_task_prac,
-    comprehension_loop
-)
-
-if (do_reporter) {
-    experiment.push(
-        move_to_experiment_reporter,
-        begin_reporter,
-        reporter_task
-    )
-}
-
-experiment.push(
-    attention,
-    move_to_experiment_decider,
+    // consent,
+    // prolific_id,
+    // first_instructions,
+    // begin_reporter,
+    // reporter_task_prac,
+    // second_instructions,
+    // decider_task_prac,
+    // comprehension_loop,
+    // move_to_experiment_reporter,
+    // begin_reporter,
+    // reporter_task,
+    // attention,
+    // save_data_reporter,
+    // move_to_experiment_decider,
     decider_task,
     save_data_decider,
     bonus_report,
-    truth_survey,
+    truth_survey_specific,
     less_than_half,
     demographics,
     debrief,

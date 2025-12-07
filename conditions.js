@@ -29,105 +29,79 @@ const reporter_conditions = [
 // DECIDER
 var decider_conditions = [
     {
-        "bet": 0,
-        "outcome": 0,
         "cons": 0,
-        "valence": "neutral",
-        "gainloss": 0,
-        "error": 6,
-        "stake_bin": "s"
+        "magnitude": "low",
+        "valence": "negative"
     },
     {
-        "bet": 0,
-        "outcome": 0,
-        "cons": 1,
-        "valence": "positive",
-        "gainloss": 0,
-        "error": 4,
-        "stake_bin": "l"
-    },
-    {
-        "bet": 0,
-        "outcome": 1,
         "cons": 0,
-        "valence": "neutral",
-        "gainloss": 0,
-        "error": 4,
-        "stake_bin": "s"
+        "magnitude": "low",
+        "valence": "positive"
     },
     {
-        "bet": 0,
-        "outcome": 1,
-        "cons": 1,
-        "valence": "negative",
-        "gainloss": 0,
-        "error": 6,
-        "stake_bin": "l"
-    },
-    {
-        "bet": 1,
-        "outcome": 0,
         "cons": 0,
-        "valence": "neutral",
-        "gainloss": -1,
-        "error": 6,
-        "stake_bin": "l"
+        "magnitude": "high",
+        "valence": "negative"
     },
     {
-        "bet": 1,
-        "outcome": 0,
-        "cons": 1,
-        "valence": "negative",
-        "gainloss": -1,
-        "error": 4,
-        "stake_bin": "s"
-    },
-    {
-        "bet": 1,
-        "outcome": 1,
         "cons": 0,
-        "valence": "neutral",
-        "gainloss": 1,
-        "error": 4,
-        "stake_bin": "l"
+        "magnitude": "high",
+        "valence": "positive"
     },
     {
-        "bet": 1,
-        "outcome": 1,
         "cons": 1,
-        "valence": "positive",
-        "gainloss": 1,
-        "error": 6,
-        "stake_bin": "s"
+        "magnitude": "low",
+        "valence": "negative"
+    },
+    {
+        "cons": 1,
+        "magnitude": "low",
+        "valence": "positive"
+    },
+    {
+        "cons": 1,
+        "magnitude": "high",
+        "valence": "negative"
+    },
+    {
+        "cons": 1,
+        "magnitude": "high",
+        "valence": "positive"
     }
 ]
 
-const ranges = {
-    s: {
-        min: 1,
-        max: 15
-    },
-    l: {
-        min: 16,
-        max: 30
+var error_array1 = [4, 4, 6, 6]
+var error_array2 = [4, 4, 6, 6]
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1))
+        let temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
     }
+    return array
 }
 
-// var range_array = ["s", "s", "s", "m", "m", "l", "l", "l"]
+shuffleArray(error_array1)
+shuffleArray(error_array2)
 
-// function shuffleArray(array) {
-//     for (let i = array.length - 1; i > 0; i--) {
-//         let j = Math.floor(Math.random() * (i + 1))
-//         let temp = array[i]
-//         array[i] = array[j]
-//         array[j] = temp
-//     }
-//     return array
-// }
+error_array = error_array1.concat(error_array2)
 
-// shuffleArray(range_array)
+var bet_array = [0, 0, 0, 0, 1, 1, 1, 1]
+
+shuffleArray(bet_array)
 
 for (let i = 0; i < decider_conditions.length; i++) {
     let condition = decider_conditions[i]
-    condition.buyin = Math.floor(Math.random() * (ranges[condition.stake_bin].max - ranges[condition.stake_bin].min + 1)) + ranges[condition.stake_bin].min
+
+    // assign random high or low value of magnitude
+    condition.buyin = condition.magnitude == "low" ? Math.floor(Math.random() * 15) + 1 : Math.floor(Math.random() * 15) + 16
+
+    // assign random error 4 or 6
+    condition.error = error_array[i]
+
+    condition.bet = bet_array[i]
+
+    condition.outcome = condition.valence == "positive" ? condition.bet : (condition.bet * (-1)) + 1
 }
