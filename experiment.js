@@ -1,10 +1,5 @@
 // initialize jsPsych
-const jsPsych = initJsPsych({
-    on_finish: function() {
-        jsPsych.data.displayData()
-        jsPsych.data.get().localSave('csv', `${subject_id}.csv`)
-    }
-})
+const jsPsych = initJsPsych({})
 
 // subject level constants
 const subject_id = jsPsych.randomization.randomID(10);
@@ -855,7 +850,7 @@ const back_to_prolific = {
     },
     on_finish: function() {
         jsPsych.endExperiment(
-            "Thank you for your participation!.<br>Your completion code is C1F07MCQ"
+            "Thank you for your participation!<br>Your completion code is C1F07MCQ"
         )
     },
     data: {
