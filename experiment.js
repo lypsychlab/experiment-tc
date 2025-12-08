@@ -97,6 +97,9 @@ const no_ai = {
             options: ["I agree not to use AI for any part of this study."]
         }
     ],
+    on_finish: function(data) {
+        data.agree_no_ai = data.response.Q0.length == 1
+    },
     data: {
         type_of_trial: "no_ai"
     }

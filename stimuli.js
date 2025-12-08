@@ -10,7 +10,7 @@ const consent_html = `
         The survey should take you about <span style="font-weight: bold;">20 minutes</span> to complete. 
         There are no direct benefits to you, 
         but you may feel gratified knowing that you helped further the scholarly work in this research area, 
-        and you will be compensated <span style="font-weight: bold;">$3.60</span> (with up to <span style="font-weight: bold;">$1.98 bonus available</span> as well) for your participation. 
+        and you will be compensated <span style="font-weight: bold;">$3.35</span> (with up to <span style="font-weight: bold;">$2.30 bonus available</span> as well) for your participation. 
         There are no costs to you associated with your participation.
     </p>
     <p style="text-align: left;">
