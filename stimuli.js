@@ -10,7 +10,7 @@ const consent_html = `
         The survey should take you about <span style="font-weight: bold;">20 minutes</span> to complete. 
         There are no direct benefits to you, 
         but you may feel gratified knowing that you helped further the scholarly work in this research area, 
-        and you will be compensated <span style="font-weight: bold;">$3.35</span> (with up to <span style="font-weight: bold;">$2.30 bonus available</span> as well) for your participation. 
+        and you will be compensated <span style="font-weight: bold;">$3.17</span> (with up to <span style="font-weight: bold;">$2.30 bonus available</span> as well) for your participation. 
         There are no costs to you associated with your participation.
     </p>
     <p style="text-align: left;">
@@ -879,17 +879,10 @@ function reporter_feedback_stimulus(percent) {
 }
 
 function move_to_decider_stimulus() {
-    let string = ``
-
-    if (do_reporter) {
-        string += `
-            You have finished playing as the Reporter. Overall, you earned ${earnings}&#162; for the accuracy of your estimates.
-            <br>
-            <br>
-        `
-    }
-
-    string += `
+    let string = `
+        You have finished playing as the Reporter. Overall, you earned ${earnings}&#162; for the accuracy of your estimates.
+        <br>
+        <br>
         Now, you will play as the Decider for 8 rounds.
         <br>
         <br>
@@ -1319,27 +1312,14 @@ const outcome_questions = [`
 `]
 
 function bonus_report_stimulus() {
-    let string = ""
-
-    if (do_reporter) {
-        string += `
-            This concludes your Decider rounds. The final amount in your wallet was ${pot}&#162;.
-            <br>
-            <br>
-            Adding this to your Reporter score of ${earnings}&#162;, your bonus for this experiment will be ${pot + earnings}&#162;.
-            <br>
-            <br>
-        `
-    } else {
-        string += `
-            This concludes your Decider rounds. The final amount in your wallet was ${pot}&#162;.
-            <br>
-            <br>
-            Your bonus for this experiment will be ${pot}&#162;.
-            <br>
-            <br>
-        `
-    }
+    let string = `
+        This concludes your Decider rounds. The final amount in your wallet was ${pot}&#162;.
+        <br>
+        <br>
+        Adding this to your Reporter score of ${earnings}&#162;, your bonus for this experiment will be ${pot + earnings}&#162;.
+        <br>
+        <br>
+    `
 
     return string
 }

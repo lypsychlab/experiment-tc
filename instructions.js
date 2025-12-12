@@ -6,9 +6,6 @@ const jsPsych = initJsPsych(
         }
     }
 )
-
-const params = new URLSearchParams(window.location.search)
-const do_reporter = params.get("do_reporter") === "true"
 const num_spins = 5
 
 const first_instructions = {
@@ -16,31 +13,13 @@ const first_instructions = {
     pages: function() {
         var instructions_pages = []
 
-        if (do_reporter) {
-            instructions_pages.push(
-                instructions_page1,
-                instructions_page2,
-                instructions_page3,
-                instructions_page4,
-                instructions_page5
-            )
-        } else {
-            instructions_pages.push(
-                instructions_page1_norep,
-                instructions_page2_norep,
-                instructions_page3_norep,
-                instructions_page4_norep,
-                instructions_page6_norep,
-                instructions_page7,
-                instructions_page8,
-                instructions_page9,
-                instructions_page10,
-                instructions_page11,
-                instructions_page12,
-                instructions_page13,
-                instructions_page14
-            )
-        }
+        instructions_pages.push(
+            instructions_page1,
+            instructions_page2,
+            instructions_page3,
+            instructions_page4,
+            instructions_page5
+        )
 
         return instructions_pages
     },
@@ -155,18 +134,49 @@ const second_instructions = {
     }
 }
 
-var experiment = []
-
-if (!do_reporter) {
-  // 100 copies of first_instructions
-  experiment = Array.from({ length: 100 }, () => first_instructions)
-
-} else {
-  // 100 cycles of [first_instructions, second_instructions]
-  experiment = Array.from({ length: 100 }, () => [
+var experiment = [
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
+    first_instructions,
+    second_instructions,
     first_instructions,
     second_instructions
-  ]).flat()
-}
+]
 
 jsPsych.run(experiment)

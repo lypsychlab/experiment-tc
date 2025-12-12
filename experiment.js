@@ -5,12 +5,9 @@ const jsPsych = initJsPsych({})
 const subject_id = jsPsych.randomization.randomID(10);
 const url_pid = jsPsych.data.getURLVariable("PROLIFIC_PID")
 
-const do_reporter = Math.random() > 0.5 ? true : false
-
 jsPsych.data.addProperties({
     subject_id: subject_id, 
-    prolific_id: url_pid,
-    did_reporter: do_reporter
+    prolific_id: url_pid
 })
 
 // experiment variables
@@ -139,31 +136,13 @@ const first_instructions = {
     pages: function() {
         var instructions_pages = []
 
-        if (do_reporter) {
-            instructions_pages.push(
-                instructions_page1,
-                instructions_page2,
-                instructions_page3,
-                instructions_page4,
-                instructions_page5
-            )
-        } else {
-            instructions_pages.push(
-                instructions_page1_norep,
-                instructions_page2_norep,
-                instructions_page3_norep,
-                instructions_page4_norep,
-                instructions_page6_norep,
-                instructions_page7,
-                instructions_page8,
-                instructions_page9,
-                instructions_page10,
-                instructions_page11,
-                instructions_page12,
-                instructions_page13,
-                instructions_page14
-            )
-        }
+        instructions_pages.push(
+            instructions_page1,
+            instructions_page2,
+            instructions_page3,
+            instructions_page4,
+            instructions_page5
+        )
 
         return instructions_pages
     },
@@ -283,7 +262,7 @@ const comprehension = {
     preamble: `
         We know there were a lot of rules for this game. 
         To make sure you remember them, please answer the following questions. 
-        If you need to reference the rules, you can find them <a href="instructions.html?do_reporter=${do_reporter}" target="_blank">here</a>.
+        If you need to reference the rules, you can find them <a href="instructions.html" target="_blank">here</a>.
     `,
     questions: [
         {
@@ -865,7 +844,7 @@ const back_to_prolific = {
 const save_data_decider = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "H3pJf5mODOyD",
+    experiment_id: "5voJcfucQX6z",
     filename: `${subject_id}_decider.csv`,
     data_string: () => jsPsych.data.get().csv(),
     data: {
@@ -876,7 +855,7 @@ const save_data_decider = {
 const save_data_final = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "H3pJf5mODOyD",
+    experiment_id: "5voJcfucQX6z",
     filename: `${subject_id}_final.csv`,
     data_string: () => jsPsych.data.get().csv(),
     data: {
@@ -891,31 +870,15 @@ experiment.push(
     consent,
     no_ai,
     prolific_id,
-    first_instructions
-)
-
-if (do_reporter) {
-    experiment.push(
-        begin_reporter,
-        reporter_task_prac,
-        second_instructions
-    )
-}
-
-experiment.push(
+    first_instructions,
+    begin_reporter,
+    reporter_task_prac,
+    second_instructions,
     decider_task_prac,
-    comprehension_loop
-)
-
-if (do_reporter) {
-    experiment.push(
-        move_to_experiment_reporter,
-        begin_reporter,
-        reporter_task
-    )
-}
-
-experiment.push(
+    comprehension_loop,
+    move_to_experiment_reporter,
+    begin_reporter,
+    reporter_task,
     attention,
     move_to_experiment_decider,
     decider_task,
